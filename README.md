@@ -1,22 +1,25 @@
 # painel-fundos
 
-Robô que atualiza, todo dia útil, o comparativo de fundos de ações (Relatório Peers) a partir de **dados públicos**:
+Robôs que mantêm o painel atualizado sozinho, só com **dados públicos**. Tudo roda no GitHub Actions (grátis para repositório público); o painel lê os resultados ao abrir.
 
-- **CVM**: informe diário de fundos (cota, patrimônio, captação e resgate) — https://dados.cvm.gov.br/dataset/fi-doc-inf_diario
-- **Banco Central**: CDI (SGS 12)
-- **Yahoo Finance**: Ibovespa
+| Robô (aba Actions) | Quando roda | O que faz | Onde publica |
+|---|---|---|---|
+| **Atualiza peers (CVM)** | seg-sáb 7h17 e seg-sex 19h47 | informe diário da CVM: retornos, PL e captação dos peers; ficha de cada fundo (cadastro, lâmina, risco); panorama da indústria; radar de concorrentes; Focus; histórico próprio; avisos por e-mail | `data/` |
+| **Cotações (a cada minuto)** | o tempo todo (1 min em pregão, 5 min fora) | bolsas, câmbio, commodities, juros, ações do Ibovespa e curva DI (TradingView) | ramo `cotacoes` |
+| **Espelho das fontes do painel** | a cada hora, revisitando a cada 10 min | abre o próprio painel (`painel/painel.html`) num navegador e guarda as respostas de Banco Central, Tesouro, IBGE, ANBIMA, B3, notícias, GDELT etc. | ramo `espelho` |
+| **Carteira dos peers (CDA da CVM)** | toda segunda | composição das carteiras (olhando através dos fundos master), mudanças e consolidado | `data/carteiras.json` |
+| **Avisos de mercado** | a cada 30 min, 10h-18h30 | dólar e Ibovespa contra os limites de `alertas.json` | issues (e-mail) |
 
-Arquivos:
+## Arquivos que você pode editar
 
-- `fundos.json`: lista de fundos (nome e CNPJ). Para incluir ou tirar um fundo, edite este arquivo.
-- `scripts/atualiza.py`: baixa e calcula.
-- `data/peers.json`: resultado (lido pelo painel).
-- `data/cvm/`: cópia enxuta do informe da CVM, só com os fundos da lista.
+- `fundos.json`: lista de peers (nome e CNPJ).
+- `alertas.json`: limites dos avisos por e-mail (troque por `null` para desligar).
 
-Para rodar na hora: aba **Actions** → *Atualiza peers (CVM)* → **Run workflow**.
+## Avisos por e-mail
 
-Retornos calculados pela cota (líquidos de taxas). Mesma convenção do Comdinheiro: mês e ano contra a última cota do período anterior; 12 a 60 meses contra a primeira cota depois da data de N meses atrás (conferido em 19/11/2026: 310 de 312 números idênticos). Fundo sem cota há mais de 5 dias fica sem retorno. Captação = captação − resgates desde 1º de janeiro.
+Os robôs abrem uma *issue* marcando o dono da conta; o GitHub manda e-mail. O resumo diário sai de manhã em dias úteis.
 
-## Cotações a cada minuto
+## Fontes
 
-`scripts/cotacoes.py` (workflow *Cotações*) busca no Yahoo Finance as cotações do dia dos ativos de `cotacoes/simbolos.txt` e publica `cotacoes.json` no ramo **cotacoes** (sempre um único commit, substituído a cada minuto). Em pregão (seg-sex, 7h-21h de Brasília) atualiza a cada 60 s; fora dele, a cada 5 min. O painel lê esse arquivo primeiro e só tenta a fonte direta se ele estiver velho.
+CVM (dados abertos: informe diário, cadastro, lâmina, CDA), Banco Central (SGS, Focus), TradingView (cotações e DI), Yahoo Finance e demais fontes que o painel já usa.
+Retornos dos fundos calculados pela cota (líquidos de taxas). Mesma convenção do Comdinheiro para as janelas (conferido em 19/11/2026).
