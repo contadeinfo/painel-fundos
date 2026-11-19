@@ -1,0 +1,32 @@
+name: Atualiza peers (CVM)
+
+on:
+  schedule:
+    - cron: '17 10 * * 1-6'   # 07:17 de Brasília, segunda a sábado
+    - cron: '47 22 * * 1-5'   # 19:47 de Brasília (pega o informe do dia, quando já saiu)
+  workflow_dispatch: {}        # botão "Run workflow" para rodar na hora
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualiza
+  cancel-in-progress: false
+
+jobs:
+  atualiza:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Baixa CVM e calcula
+        run: python scripts/atualiza.py
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "dados $(date -u +%F)" && git push)

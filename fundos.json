@@ -1,0 +1,308 @@
+[
+ {
+  "nome": "Set FIFA Resp Limitada",
+  "cnpj": "02444266000159",
+  "nome_cvm": "SET FIF AÇÕES RL",
+  "conferencia": "ok"
+ },
+ {
+  "nome": "Forpus Ações FICFIFA - Resp Limitada",
+  "cnpj": "21917184000129",
+  "nome_cvm": "FORPUS AÇÕES FIC FIF AÇÕES RL",
+  "conferencia": "ok (PL ~139 mi)"
+ },
+ {
+  "nome": "Brasil Capital 30 Advisory FICFIFA - Resp Limitada",
+  "cnpj": "34430477000129",
+  "nome_cvm": "BRASIL CAPITAL 30 ADVISORY FIC FIF AÇÕES RL",
+  "conferencia": "ok (PL 107,7 mi)"
+ },
+ {
+  "nome": "Selection Ações FIC de Ações",
+  "cnpj": "31403572000145",
+  "nome_cvm": "SELECTION AÇÕES FIC FIA (XP Advisory)",
+  "conferencia": "ok (PL ~42 mi)"
+ },
+ {
+  "nome": "Indie FIF em Cotas de FIA",
+  "cnpj": "17335646000122",
+  "nome_cvm": "INDIE FIF EM COTAS DE FIA",
+  "conferencia": "ok (PL ~108 mi)"
+ },
+ {
+  "nome": "Equitas Selection FICFIFA - Resp Limitada",
+  "cnpj": "12004203000135",
+  "nome_cvm": "EQUITAS SELECTION FIC FIF AÇÕES RL",
+  "conferencia": "ok (PL 133 mi)"
+ },
+ {
+  "nome": "Spx Patriot FIF CIC em Ações Resp Limitada",
+  "cnpj": "15334585000153",
+  "nome_cvm": "SPX PATRIOT FIF CIC AÇÕES RL",
+  "conferencia": "ok (PL 392 mi)"
+ },
+ {
+  "nome": "Guepardo Institucional FIF em Cotas de FIA",
+  "cnpj": "08830947000131",
+  "nome_cvm": "GUEPARDO INSTITUCIONAL FIF COTAS FIA",
+  "conferencia": "ok (~2,37 bi)"
+ },
+ {
+  "nome": "Jgp Long Only FICFIFA Resp Limitada",
+  "cnpj": "11228311000129",
+  "nome_cvm": "JGP LONG ONLY FIC FIF AÇÕES RL",
+  "conferencia": "ok (PL 11,8 mi)"
+ },
+ {
+  "nome": "Leblon Ações II Institucional FICFIF",
+  "cnpj": "26768800000140",
+  "nome_cvm": "LEBLON AÇÕES II INSTITUCIONAL FIC FIF",
+  "conferencia": "ok (PL 72,6 mi)"
+ },
+ {
+  "nome": "Miles Virtus Advisory FICFIFA Resp Limitada",
+  "cnpj": "32236915000197",
+  "nome_cvm": "MILES VIRTUS ADVISORY FIC FIF AÇÕES RL",
+  "conferencia": "provável (sem dados no Comdinheiro; PL ~2,9 mi jul/25)"
+ },
+ {
+  "nome": "Occam FIF - CIC em Ações - Resp Limitada",
+  "cnpj": "11628883000103",
+  "nome_cvm": "OCCAM FIF CIC AÇÕES RL",
+  "conferencia": "provável (PL fonte 518 mi vs 417 mi)"
+ },
+ {
+  "nome": "Navi Institucional FIF - CIC em Ações - Resp Limitada",
+  "cnpj": "14113340000133",
+  "nome_cvm": "NAVI INSTITUCIONAL FIF CIC AÇÕES RL",
+  "conferencia": "provável (PL fonte 410 mi vs 315 mi)"
+ },
+ {
+  "nome": "Moat Capital FIF da CIC em Ações Resp Limitada",
+  "cnpj": "20658576000158",
+  "nome_cvm": "MOAT CAPITAL FIF DA CIC AÇÕES RL",
+  "conferencia": "ok (~33 mi)"
+ },
+ {
+  "nome": "Alaska Black FIF em Cotas de FIA",
+  "cnpj": "12987743000186",
+  "nome_cvm": "ALASKA BLACK FIF COTAS FIA",
+  "conferencia": "ok (~476 mi)"
+ },
+ {
+  "nome": "Alaska Institucional Long Only FIFA",
+  "cnpj": "26673556000132",
+  "nome_cvm": "ALASKA INSTITUCIONAL LONG ONLY FIF AÇÕES",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Constellation Institucional Advisory FIF em Cotas de FI em Ações",
+  "cnpj": "34462109000162",
+  "nome_cvm": "CONSTELLATION INSTITUCIONAL ADVISORY FIF COTAS FIA",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Dahlia Ações Advisory FIF em Cotas de FIA",
+  "cnpj": "33755672000166",
+  "nome_cvm": "DAHLIA AÇÕES ADVISORY FIF COTAS FIA",
+  "conferencia": "ok (~13,4 mi)"
+ },
+ {
+  "nome": "Real Investor FICFIFA - Resp Limitada",
+  "cnpj": "10500884000105",
+  "nome_cvm": "REAL INVESTOR FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "IP Participações Ipg FICFIFA - Resp Limitada",
+  "cnpj": "12082452000149",
+  "nome_cvm": "IP PARTICIPAÇÕES IPG FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Encore Ações Advisory FIC de Ações Resp Limitada",
+  "cnpj": "37487547000173",
+  "nome_cvm": "ENCORE AÇÕES ADVISORY FIC AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Vinci Mosaico Advisory FIF - CIA - Resp Limitada",
+  "cnpj": "40226014000142",
+  "nome_cvm": "VINCI MOSAICO ADVISORY FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Kiron Institucional FIFA - Resp Limitada",
+  "cnpj": "29054793000103",
+  "nome_cvm": "KIRON INSTITUCIONAL FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Hix Capital Institucional FIF em Cotas de FIA",
+  "cnpj": "22662135000155",
+  "nome_cvm": "HIX CAPITAL INSTITUCIONAL FIF COTAS FIA",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Perfin Foresight Institucional FIF - CIC de Ações - Resp Limitada",
+  "cnpj": "10608762000129",
+  "nome_cvm": "PERFIN FORESIGHT INSTITUCIONAL FIF CIC AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Porto Alisios FIF em Cotas de FIA",
+  "cnpj": "00398561000190",
+  "nome_cvm": "PORTO ALISIOS FIF COTAS FIA",
+  "conferencia": "provável (última carteira ago/25; sem dados no Comdinheiro)"
+ },
+ {
+  "nome": "Franklin Valor E Liquidez Fvl FIFA - Resp Limitada",
+  "cnpj": "02895694000106",
+  "nome_cvm": "FRANKLIN VALOR E LIQUIDEZ FVL FIF AÇÕES RL",
+  "conferencia": "provável (há versão Ágora/FIC)"
+ },
+ {
+  "nome": "Alphakey Institucional FIF em Cotas de FIA",
+  "cnpj": "36352721000108",
+  "nome_cvm": "ALPHAKEY INSTITUCIONAL FIF COTAS FIA",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Vinland Long Only FIF da CIC em Ações Resp Limitada",
+  "cnpj": "30593403000152",
+  "nome_cvm": "VINLAND LONG ONLY FIF CIC AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Reach FIA",
+  "cnpj": "20468028000165",
+  "nome_cvm": "REACH FIA",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Quantitas FIFA Montecristo Resp Limitada",
+  "cnpj": "11451917000129",
+  "nome_cvm": "QUANTITAS FIF AÇÕES MONTECRISTO BDR NÍVEL I RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Atlas One FIF em Cotas de FIA",
+  "cnpj": "13083227000190",
+  "nome_cvm": "ATLAS ONE FIC FIA",
+  "conferencia": "ok (PL 38 mi)"
+ },
+ {
+  "nome": "Kinea Gama FIF da CIC em Ações Resp Limitada",
+  "cnpj": "35495418000100",
+  "nome_cvm": "KINEA GAMA FIF CIC AÇÕES RL",
+  "conferencia": "provável (sem dados no Comdinheiro; há versões PVT)"
+ },
+ {
+  "nome": "Opportunity Selection FICFIFA - Resp Limitada",
+  "cnpj": "13106983000197",
+  "nome_cvm": "OPPORTUNITY SELECTION FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Sul América Equities FIF - CIA - Resp Limitada",
+  "cnpj": "11458144000102",
+  "nome_cvm": "SUL AMÉRICA EQUITIES FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Bahia AM Valuation FIF - CIC em Ações - Resp Limitada",
+  "cnpj": "09635172000106",
+  "nome_cvm": "BAHIA AM VALUATION FIF CIC AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Arx Long Term FICFIFA - Resp Limitada",
+  "cnpj": "10237480000162",
+  "nome_cvm": "ARX LONG TERM FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Classe Única do Western Asset Valuation Fundode Investimento Financeiro em Ações - Resp Limitada",
+  "cnpj": "09087523000191",
+  "nome_cvm": "WESTERN ASSET VALUATION FIA",
+  "conferencia": "ok (PL 39,7 mi)"
+ },
+ {
+  "nome": "Apex Ações 30 FICFIFA - Resp Limitada",
+  "cnpj": "15862830000103",
+  "nome_cvm": "APEX AÇÕES 30 FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Neo Navitas B FIF da CIC em Ações Resp Limitada",
+  "cnpj": "26218614000138",
+  "nome_cvm": "NEO NAVITAS B FIF CIC AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Joule Value FIF em Cotas de FIA",
+  "cnpj": "08545330000174",
+  "nome_cvm": "JOULE VALUE FIF COTAS FIA",
+  "conferencia": "ok (~1,3 mi)"
+ },
+ {
+  "nome": "Suno FIF em Cotas de FIA",
+  "cnpj": "46331231000189",
+  "nome_cvm": "SUNO FIC FIA",
+  "conferencia": "nome confere (não confundir com Suno Ações FIC FIA)"
+ },
+ {
+  "nome": "Porto Sfa FIF em Cotas de FIA",
+  "cnpj": "07187517000180",
+  "nome_cvm": "PORTO SFA FIF COTAS FIA",
+  "conferencia": "ok (PL 335 mi)"
+ },
+ {
+  "nome": "Gti Haifa FIFA",
+  "cnpj": "28408121000196",
+  "nome_cvm": "GTI HAIFA FIF AÇÕES",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Oceana Valor A3 FICFIFA - Resp Limitada",
+  "cnpj": "50324325000106",
+  "nome_cvm": "OCEANA VALOR A3 FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Charles River FIFA",
+  "cnpj": "14438229000117",
+  "nome_cvm": "CHARLES RIVER FIF AÇÕES",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Atmos Ações FIF em Cotas de FIA",
+  "cnpj": "11145320000156",
+  "nome_cvm": "ATMOS AÇÕES FIF COTAS FIA",
+  "conferencia": "ok (~550 mi)"
+ },
+ {
+  "nome": "Dynamo Cougar FIF",
+  "cnpj": "73232530000139",
+  "nome_cvm": "DYNAMO COUGAR FIF",
+  "conferencia": "nome confere"
+ },
+ {
+  "nome": "Trígono Verbier FIF em Cotas de FIA",
+  "cnpj": "08968733000126",
+  "nome_cvm": "TRÍGONO VERBIER FIF COTAS FIA",
+  "conferencia": "provável (há versão Institucional)"
+ },
+ {
+  "nome": "Tarpon Gt FIF em Cotas de FIA",
+  "cnpj": "22232927000190",
+  "nome_cvm": "TARPON GT FIF COTAS FIA",
+  "conferencia": "provável (há GT Institucional/90)"
+ },
+ {
+  "nome": "Bogari Value FICFIFA - Resp Limitada",
+  "cnpj": "08323402000139",
+  "nome_cvm": "BOGARI VALUE FIC FIF AÇÕES RL",
+  "conferencia": "nome confere"
+ }
+]
