@@ -55,6 +55,17 @@ def tradingview():
                 out[row['s']] = dict(zip(COLS, row['d']))
         except Exception as e:
             erros.append(f'{mk}: {e!r}'[:120])
+    falta = [t for tks in por_mercado.values() for t in tks if t not in out]
+    for mk in ('bond', 'global'):   # juros americanos e outros que não estão no mercado esperado
+        if not falta:
+            break
+        try:
+            j = post(f'https://scanner.tradingview.com/{mk}/scan', {'symbols': {'tickers': falta}, 'columns': COLS})
+            for row in j.get('data', []):
+                out[row['s']] = dict(zip(COLS, row['d']))
+        except Exception as e:
+            erros.append(f'{mk}: {e!r}'[:120])
+        falta = [t for t in falta if t not in out]
     return out, erros
 
 
