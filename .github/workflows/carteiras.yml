@@ -1,0 +1,26 @@
+name: Carteira dos peers (CDA da CVM)
+
+on:
+  schedule:
+    - cron: '23 9 * * 1'     # toda segunda, 6h23 de Brasília (a CVM publica a CDA uma vez por mês)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  carteiras:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/carteiras.py
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "carteiras $(date -u +%F)" && git pull --rebase -q && git push)

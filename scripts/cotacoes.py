@@ -75,6 +75,34 @@ def tradingview():
 SEM_VARIACAO = {'BRL=X'}
 
 
+MESCOD = {'F': 1, 'G': 2, 'H': 3, 'J': 4, 'K': 5, 'M': 6, 'N': 7, 'Q': 8, 'U': 9, 'V': 10, 'X': 11, 'Z': 12}
+
+
+def curva_di():
+    """Curva de juros futuros (DI1 na B3) pelo TradingView: taxa atual, há 1 semana e há 1 mês."""
+    y = dt.date.today().year
+    tks = [f'BMFBOVESPA:DI1{c}{a}' for a in range(y, y + 12) for c in ('F', 'N')]
+    for cols in (['close', 'Perf.W', 'Perf.1M', 'change'], ['close', 'change']):
+        try:
+            j = post('https://scanner.tradingview.com/brazil/scan', {'symbols': {'tickers': tks}, 'columns': cols})
+            out = []
+            for r in j.get('data', []):
+                d = dict(zip(cols, r['d']))
+                cod = r['s'].split('DI1')[-1]
+                if d.get('close') is None:
+                    continue
+                venc = f'{cod[1:]}-{MESCOD[cod[0]]:02d}'
+                tx = float(d['close'])
+                f = lambda p: round(tx / (1 + p / 100), 4) if p is not None else None
+                out.append({'venc': venc, 'taxa': tx, 'semana': f(d.get('Perf.W')), 'mes': f(d.get('Perf.1M')),
+                            'ontem': f(d.get('change'))})
+            if out:
+                return sorted(out, key=lambda x: x['venc'])
+        except Exception:
+            continue
+    return None
+
+
 def yahoo_dia(s):
     """Gráfico de 5 em 5 min do Yahoo (quando o Yahoo aceita)."""
     try:
@@ -111,6 +139,7 @@ def main():
                   'mudou': v.get('m', {}).get('regularMarketTime'), 'prev': v.get('m', {}).get('chartPreviousClose')}
               for s, v in Q.items()}
     tentou_yahoo = False
+    di = None
     ini = time.time()
     primeiro = subprocess.run(['git', '-C', PASTA, 'rev-parse', '--verify', 'HEAD'], capture_output=True).returncode != 0
     while True:
@@ -160,8 +189,12 @@ def main():
                 if pts and s in Q and len(pts) > len(Q[s]['t']):
                     ESTADO[s]['serie'] = pts[-199:] + ([[agora, Q[s]['m']['regularMarketPrice']]] if pts[-1][0] < agora - 300 else [])
                     Q[s]['t'] = [p[0] for p in ESTADO[s]['serie']]; Q[s]['c'] = [p[1] for p in ESTADO[s]['serie']]
+        try:
+            di = curva_di() or di
+        except Exception:
+            pass
         now = dt.datetime.now(dt.timezone.utc)
-        dados = {'gerado_em': now.strftime('%Y-%m-%dT%H:%M:%SZ'), 'ok': ok, 'total': len(SIMB),
+        dados = {'di': di, 'gerado_em': now.strftime('%Y-%m-%dT%H:%M:%SZ'), 'ok': ok, 'total': len(SIMB),
                  'falhas': sorted(s for s in SIMB if not (aw.get(s) or tv.get(TV.get(s, '')))), 'q': Q}
         try:
             publica(dados, primeiro)
