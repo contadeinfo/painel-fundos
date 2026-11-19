@@ -170,6 +170,9 @@ async def main():
             except subprocess.CalledProcessError as x:
                 print('aviso git', x.stderr.decode()[-300:], flush=True)
             print(f'{dt.datetime.now():%H:%M:%S} {s} respostas salvas, {e} falhas, {len(indice)} no índice ({time.time()-t0:.0f}s)', flush=True)
+            brt = dt.datetime.utcnow() - dt.timedelta(hours=3)
+            if brt.weekday() >= 5 or not 7 <= brt.hour < 22:
+                break        # fim de semana e madrugada: uma passada só
             if time.time() - ini + CICLO > DURACAO:
                 break
             await asyncio.sleep(max(10, CICLO - (time.time() - t0)))

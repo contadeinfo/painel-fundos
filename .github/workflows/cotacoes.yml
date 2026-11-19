@@ -2,7 +2,8 @@ name: Cotações (a cada minuto)
 
 on:
   schedule:
-    - cron: '*/30 * * * *'   # a cada 30 min; cada rodada trabalha ~40 min e a seguinte assume
+    - cron: '*/30 12-21 * * 1-5'   # dias úteis, 9h às 19h de Brasília: rodadas de ~40 min, busca a cada minuto
+    - cron: '41 * * * *'           # fora disso: uma foto por hora (bitcoin, Ásia, fim de semana)
   workflow_dispatch: {}
 
 permissions:

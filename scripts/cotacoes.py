@@ -116,8 +116,9 @@ def yahoo_dia(s):
 
 
 def pregao(agora):
+    """Horário em que o painel costuma ser usado: dias úteis, 9h às 19h de Brasília."""
     brt = agora - dt.timedelta(hours=3)
-    return brt.weekday() < 5 and 7 <= brt.hour < 21
+    return brt.weekday() < 5 and 9 <= brt.hour < 19
 
 
 def publica(dados, primeiro):
@@ -202,7 +203,9 @@ def main():
             print(f'{now:%H:%M:%S} {ok}/{len(SIMB)} ok', erros[:3] or '', dados['falhas'][:8] or '', flush=True)
         except subprocess.CalledProcessError as e:
             print('aviso git', e.stderr.decode()[-300:], flush=True)
-        passo = 60 if pregao(now) else 300
+        if not pregao(now):
+            break            # fora do horário: uma foto só por rodada (o agendamento é de hora em hora)
+        passo = 60
         if time.time() - ini + passo > DURACAO:
             break
         time.sleep(max(5, passo - (time.time() - t0)))
