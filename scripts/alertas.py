@@ -7,6 +7,7 @@ Modo 'mercado' (durante o pregão): dólar acima/abaixo de um valor e Ibovespa c
 Configuração: alertas.json. Memória do que já foi avisado: data/alertas_estado.json.
 """
 import json, os, sys, urllib.request, datetime as dt, glob
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO = os.environ.get('GITHUB_REPOSITORY', 'contadeinfo/painel-fundos')
 DONO = REPO.split('/')[0]
@@ -19,31 +20,17 @@ NOMEJ = {'dia': 'dia', 'mes': 'mês', 'ano': 'ano', 'm12': '12 meses', 'm24': '2
 PAINEL = 'Detalhes no painel.'
 
 
-def gh(metodo, caminho, corpo=None):
-    if not TOKEN:
-        print('(sem token) ', metodo, caminho, (corpo or {}).get('title'))
-        return {}
-    req = urllib.request.Request(f'https://api.github.com/repos/{REPO}{caminho}', method=metodo,
-                                 data=json.dumps(corpo).encode() if corpo else None,
-                                 headers={'Authorization': f'Bearer {TOKEN}', 'Accept': 'application/vnd.github+json',
-                                          'Content-Type': 'application/json'})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)
+import email_bonito as EB  # noqa: E402
+from email_bonito import Msg, envia, grafico_barras, grafico_linhas, AZUL, OURO, VERDE, VERM, CINZA  # noqa: E402
 
 
 def avisa(titulo, texto, fechar=True, rotulo='aviso'):
-    corpo = f'@{DONO}\n\n{texto}\n\n---\n_Aviso automático do robô ({dt.datetime.utcnow():%d/%m/%Y %H:%M} UTC). Configuração em `alertas.json`._'
-    try:
-        gh('POST', '/labels', {'name': rotulo, 'color': 'b08a3e'})
-    except Exception:
-        pass
-    try:
-        i = gh('POST', '/issues', {'title': titulo, 'body': corpo, 'labels': [rotulo]})
-        if fechar and i.get('number'):
-            gh('PATCH', f"/issues/{i['number']}", {'state': 'closed', 'state_reason': 'completed'})
-        print('aviso:', titulo)
-    except Exception as e:
-        print('falha ao abrir aviso', titulo, e)
+    """Aviso simples (só texto) — usado pelos avisos de mercado."""
+    envia(Msg(titulo, tom='info', rotulo=rotulo).texto(texto.replace('**', '')))
+
+
+def fmt(v, d=2):
+    return '—' if v is None else f'{v:,.{d}f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
 
 
 def quartil(pos, de):
@@ -82,9 +69,15 @@ def completo(E):
             q = quartil(set_row[i + 1], de)
             ant = E.setdefault('quartil', {}).get(j)
             if q and ant and q != ant:
-                avisa(f'Fundo de referência mudou do {ant}º para o {q}º quartil ({NOMEJ[j]})',
-                      f'Na janela de **{NOMEJ[j]}**, o fundo de referência passou do **{ant}º** para o **{q}º quartil** entre os {de} peers '
-                      f'(posição {set_row[i + 1]}º, retorno {sg(set_row[i])}), com dados da CVM de {ref}.\n\n{PAINEL}')
+                melhor = q < ant
+                m = Msg(f"Fundo de referência {'subiu' if melhor else 'caiu'} para o {q}º quartil ({NOMEJ[j]})",
+                        f'Peers de fundos de ações · dados da CVM de {ref}', tom='bom' if melhor else 'alerta', rotulo='aviso')
+                m.kpis([('Quartil agora', f'{q}º', f'antes: {ant}º', VERDE if melhor else VERM),
+                        ('Posição', f'{set_row[i + 1]}º de {de}', NOMEJ[j], None),
+                        ('Retorno na janela', sg(set_row[i]), 'pela cota, líquido de taxas', VERDE if (set_row[i] or 0) >= 0 else VERM)])
+                m.secao('Todas as janelas').tabela(['Janela', 'Retorno', 'Posição', 'Quartil'],
+                        [[NOMEJ[x], sg(set_row[COLS[x]]), f"{set_row[COLS[x] + 1] or '—'}º", f"{quartil(set_row[COLS[x] + 1], sum(1 for r in fundos if r[COLS[x]] is not None)) or '—'}º"] for x in ('dia', 'mes', 'ano', 'm12', 'm24', 'm36')])
+                envia(m)
             if q:
                 E['quartil'][j] = q
     # 2) captação e resgate do dia (fichas)
@@ -108,16 +101,22 @@ def completo(E):
         eh_set = F['cnpj'] == REF
         lim_r = CFG.get('referencia_resgate_pct_pl') if eh_set else CFG.get('resgate_peer_pct_pl')
         lim_c = None if eh_set else CFG.get('captacao_peer_pct_pl')
-        if lim_r and pct <= -lim_r:
+        if (lim_r and pct <= -lim_r) or (lim_c and pct >= lim_c):
             vistos[k] = 1
-            avisa(f"Resgate de {abs(pct):.1f}% do patrimônio em {F['nome'][:60]}",
-                  f"Em {d[8:]}/{d[5:7]}/{d[:4]}, **{F['nome']}** teve saída líquida estimada de **{mi(-fluxo)}** "
-                  f"({abs(pct):.1f}% do patrimônio). Patrimônio agora: {mi(p1)}.\n\n{PAINEL}")
-        elif lim_c and pct >= lim_c:
-            vistos[k] = 1
-            avisa(f"Captação de {pct:.1f}% do patrimônio em {F['nome'][:60]}",
-                  f"Em {d[8:]}/{d[5:7]}/{d[:4]}, **{F['nome']}** teve entrada líquida estimada de **{mi(fluxo)}** "
-                  f"({pct:.1f}% do patrimônio). Patrimônio agora: {mi(p1)}.\n\n{PAINEL}")
+            saida = pct < 0
+            dd = f'{d[8:]}/{d[5:7]}/{d[:4]}'
+            m = Msg(f"{'Resgate' if saida else 'Captação'} de {abs(pct):.1f}% do patrimônio em {F['nome'][:60]}".replace('.', ','),
+                    f'Movimento estimado em {dd}, pelo informe diário da CVM', tom='alerta' if saida else 'bom')
+            m.kpis([('Saída líquida' if saida else 'Entrada líquida', mi(abs(fluxo)), f'em {dd}', VERM if saida else VERDE),
+                    ('% do patrimônio', f'{abs(pct):.1f}%'.replace('.', ','), 'do dia anterior', VERM if saida else VERDE),
+                    ('Patrimônio agora', mi(p1), f"CNPJ {F['cnpj'][:2]}.{F['cnpj'][2:5]}.{F['cnpj'][5:8]}/{F['cnpj'][8:12]}-{F['cnpj'][12:]}", None)])
+            n = min(90, len(S['d']))
+            g = grafico_linhas(f"pl_{F['cnpj']}", [x[8:] + '/' + x[5:7] for x in S['d'][-n:]],
+                               [('Patrimônio (R$ mi)', [v / 1e6 if v else None for v in S['pl'][-n:]], OURO, '-')], 'Patrimônio nos últimos meses', unidade=' mi', area=True)
+            m.grafico(g, 'Patrimônio líquido diário (R$ milhões), informe diário da CVM')
+            m.lista(['Estimativa: variação do patrimônio que não se explica pela variação da cota.',
+                     'Pode incluir come-cotas, amortização ou ajuste do administrador; confirme no painel antes de comentar com alguém.'])
+            envia(m)
     E['fluxo'] = {k: v for k, v in vistos.items() if k.split(':')[1] >= (dt.date.today() - dt.timedelta(days=30)).isoformat()}
     # 3) concorrentes novos no radar
     lim = CFG.get('novo_concorrente_pl_min')
@@ -128,9 +127,11 @@ def completo(E):
         conhecidos = set(E.get('radar', []))
         novos = [f for c, f in grandes.items() if c not in conhecidos]
         if conhecidos and novos:
-            linhas = '\n'.join(f"- **{f['nome']}** ({f['anbima']}): PL {mi(f['pl'])}, 12 meses {sg(f.get('m12'))}" for f in novos[:15])
-            avisa(f'{len(novos)} fundo(s) novo(s) no radar de concorrentes',
-                  f'Fundos de ações livres com patrimônio acima de {mi(lim)} que entraram no radar:\n\n{linhas}\n\nSe quiser incluir algum nos peers, peça ou edite `fundos.json`.')
+            m = Msg(f'{len(novos)} fundo(s) novo(s) no radar de concorrentes', f'Ações livres e valor/crescimento com patrimônio acima de {mi(lim)}', tom='info')
+            m.tabela(['Fundo', 'PL', 'Mês', 'Ano', '12 meses'], [[f['nome'][:48], mi(f['pl']), sg(f.get('mes')), sg(f.get('ano')), sg(f.get('m12'))] for f in novos[:15]],
+                     ['left', 'right', 'right', 'right', 'right'])
+            m.texto('Para incluir algum nos peers, peça ou edite o arquivo fundos.json do repositório.')
+            envia(m)
         E['radar'] = sorted(set(grandes) | conhecidos)
     # 4) resumo diário (só na rodada da manhã)
     agora_br = dt.datetime.utcnow() - dt.timedelta(hours=3)
@@ -141,44 +142,58 @@ def completo(E):
 
 
 def resumo(P, set_row, fundos):
-    L = [f"**Dados de fundos (CVM) de {P['data']}**", '']
+    hoje = dt.date.today()
+    m = Msg(f'Resumo de {hoje:%d/%m/%Y}', f"Fundos de ações (CVM) até {P['data']} · mercado pelo robô de cotações", tom='resumo', rotulo='resumo')
+    bench = {r[0]: r for r in P['rows'] if r[0] in ('IBOV', 'CDI')}
+    jan = ('dia', 'mes', 'ano', 'm12', 'm24', 'm36')
+    med = lambda i: (lambda v: v[len(v) // 2] if v else None)(sorted(r[i] for r in fundos if r[i] is not None))
     if set_row:
-        L.append('| Janela | Fundo de referência | Posição | Ibovespa | CDI |')
-        L.append('|---|---|---|---|---|')
-        bench = {r[0]: r for r in P['rows'] if r[0] in ('IBOV', 'CDI')}
-        for j in ('dia', 'mes', 'ano', 'm12', 'm24', 'm36'):
-            i = COLS[j]
-            de = sum(1 for r in fundos if r[i] is not None)
-            L.append(f"| {NOMEJ[j]} | {sg(set_row[i])} | {set_row[i + 1] or '—'}º de {de} ({quartil(set_row[i + 1], de) or '—'}º quartil) | "
-                     f"{sg(bench.get('IBOV', [None] * 20)[i])} | {sg(bench.get('CDI', [None] * 20)[i])} |")
-        L += ['', f"Patrimônio do fundo de referência: {mi(set_row[17])} · captação líquida no ano: {mi(set_row[19])}", '']
+        q12 = quartil(set_row[8], sum(1 for r in fundos if r[7] is not None))
+        m.kpis([('Fundo de referência no mês', sg(set_row[3]), f"{set_row[4]}º de {sum(1 for r in fundos if r[3] is not None)} peers", VERDE if (set_row[3] or 0) >= 0 else VERM),
+                ('No ano', sg(set_row[5]), f"Ibovespa {sg(bench.get('IBOV', [None]*20)[5])} · CDI {sg(bench.get('CDI', [None]*20)[5])}", VERDE if (set_row[5] or 0) >= 0 else VERM),
+                ('12 meses', sg(set_row[7]), f'{q12 or "—"}º quartil entre os peers', VERDE if (q12 or 4) <= 2 else VERM),
+                ('Patrimônio', mi(set_row[17]), f'captação no ano {mi(set_row[19])}', None)])
+        g = grafico_barras('resumo_janelas', [NOMEJ[j] for j in jan],
+                           [('Fundo de referência', [set_row[COLS[j]] for j in jan], OURO), ('Mediana dos peers', [med(COLS[j]) for j in jan], '#94a3b8'),
+                            ('Ibovespa', [bench.get('IBOV', [None]*20)[COLS[j]] for j in jan], AZUL), ('CDI', [bench.get('CDI', [None]*20)[COLS[j]] for j in jan], VERDE)])
+        m.secao('Fundo de referência contra os pares').grafico(g, 'Retorno por janela (%), pela cota, líquido de taxas')
+        m.tabela(['Janela', 'Fundo', 'Posição', 'Quartil', 'Ibovespa', 'CDI'],
+                 [[NOMEJ[j], sg(set_row[COLS[j]]), f"{set_row[COLS[j] + 1] or '—'}º de {sum(1 for r in fundos if r[COLS[j]] is not None)}",
+                   f"{quartil(set_row[COLS[j] + 1], sum(1 for r in fundos if r[COLS[j]] is not None)) or '—'}º", sg(bench.get('IBOV', [None]*20)[COLS[j]]), sg(bench.get('CDI', [None]*20)[COLS[j]])] for j in jan])
     mes = sorted((r for r in fundos if r[3] is not None), key=lambda r: -r[3])
     if mes:
-        L.append('**Melhores do mês:** ' + '; '.join(f'{r[0][:40]} {sg(r[3])}' for r in mes[:3]))
-        L.append('**Piores do mês:** ' + '; '.join(f'{r[0][:40]} {sg(r[3])}' for r in mes[-3:]))
-        L.append('')
+        m.secao('Destaques do mês entre os peers')
+        m.lista([f'▲ {r[0][:46]}: {sg(r[3])}' for r in mes[:3]] + [f'▼ {r[0][:46]}: {sg(r[3])}' for r in mes[-3:][::-1]])
     Q = cotacoes()
     if Q and Q.get('q'):
-        L.append('**Mercado (último dado do robô de cotações)**')
-        L.append('')
-        nomes = [('^BVSP', 'Ibovespa'), ('BRL=X', 'Dólar'), ('^GSPC', 'S&P 500'), ('BZ=F', 'Brent'), ('GC=F', 'Ouro'), ('BTC-USD', 'Bitcoin')]
-        for s, n in nomes:
-            q = Q['q'].get(s)
+        m.secao('Mercado')
+        it = []
+        for s_, n in [('^BVSP', 'Ibovespa'), ('BRL=X', 'Dólar'), ('^GSPC', 'S&P 500'), ('BZ=F', 'Petróleo Brent'), ('GC=F', 'Ouro'), ('BTC-USD', 'Bitcoin')]:
+            q = Q['q'].get(s_)
             if q:
-                m = q['m']
-                v = (m['regularMarketPrice'] / m['chartPreviousClose'] - 1) * 100 if m.get('chartPreviousClose') else None
-                L.append(f"- {n}: {m['regularMarketPrice']:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.') + (f' ({sg(v)})' if v is not None else ''))
-        if Q.get('di'):
-            L.append('- Juros futuros (DI): ' + ' · '.join(f"{d['venc'][5:]}/{d['venc'][2:4]} {d['taxa']:.2f}%".replace('.', ',') for d in Q['di'][::3][:6]))
-        L.append('')
+                mm = q['m']
+                v = (mm['regularMarketPrice'] / mm['chartPreviousClose'] - 1) * 100 if mm.get('chartPreviousClose') else None
+                d = 4 if s_ == 'BRL=X' else 0 if s_ in ('^BVSP', 'BTC-USD') else 2
+                it.append((n, ('R$ ' if s_ == 'BRL=X' else 'US$ ' if s_ in ('BZ=F', 'GC=F', 'BTC-USD') else '') + fmt(mm['regularMarketPrice'], d),
+                           sg(v) + ' no dia' if v is not None else 'variação: ver painel', VERDE if (v or 0) > 0 else VERM if (v or 0) < 0 else None))
+        m.kpis(it)
+        D = [x for x in (Q.get('di') or []) if x.get('taxa') is not None]
+        if D:
+            lab = [x['venc'][5:] + '/' + x['venc'][2:4] for x in D]
+            g = grafico_linhas('resumo_di', lab, [('Hoje', [x['taxa'] for x in D], OURO, '-'), ('Há 1 semana', [x.get('semana') for x in D], AZUL, '--'),
+                                                  ('Há 1 mês', [x.get('mes') for x in D], VERDE, ':')], 'Curva de juros futuros (DI1)')
+            m.grafico(g, 'Taxa de cada vencimento, % ao ano (TradingView, atraso de até 15 min)')
     fo = os.path.join(RAIZ, 'data', 'focus.json')
     if os.path.exists(fo):
         F = json.load(open(fo, encoding='utf-8'))
         a = F['anos'][0]
-        ult = lambda ind: (F['series'].get(ind, {}).get(a) or [[None, None]])[-1][1]
-        f2 = lambda v: '—' if v is None else f'{v:.2f}'.replace('.', ',')
-        L.append(f"**Focus ({a}):** IPCA {f2(ult('IPCA'))}% · Selic {f2(ult('Selic'))}% · câmbio R$ {f2(ult('Câmbio'))} · PIB {f2(ult('PIB Total'))}%")
-    avisa(f"Resumo do dia {dt.date.today():%d/%m/%Y}", '\n'.join(L), rotulo='resumo')
+        def ult(ind, k=-1):
+            s_ = F['series'].get(ind, {}).get(a) or []
+            return s_[k][1] if len(s_) >= abs(k) else None
+        m.secao(f'Boletim Focus · expectativas para {a}')
+        m.kpis([(n, fmt(ult(ind)) + u, (lambda x: f"{'+' if x > 0 else ''}{fmt(x)} em 4 semanas" if x is not None else '')(None if ult(ind) is None or ult(ind, -5) is None else ult(ind) - ult(ind, -5)), None)
+                for ind, n, u in [('IPCA', 'IPCA', '%'), ('Selic', 'Selic', '%'), ('Câmbio', 'Câmbio', ''), ('PIB Total', 'PIB', '%')]])
+    envia(m)
 
 
 def mercado(E):

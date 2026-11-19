@@ -34,7 +34,12 @@ jobs:
       - name: Avisos por e-mail
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python scripts/alertas.py completo || echo "aviso - alertas falharam"
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: |
+          pip install -q matplotlib
+          python scripts/alertas.py completo || echo "aviso - alertas falharam"
       - name: Publica
         run: |
           git config user.name  "robo-peers"
