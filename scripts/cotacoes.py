@@ -82,9 +82,9 @@ def curva_di():
     """Curva de juros futuros (DI1 na B3) pelo TradingView: taxa atual, há 1 semana e há 1 mês."""
     y = dt.date.today().year
     tks = [f'BMFBOVESPA:DI1{c}{a}' for a in range(y, y + 12) for c in ('F', 'N')]
-    for cols in (['close', 'Perf.W', 'Perf.1M', 'change'], ['close', 'change']):
+    for mk, cols in [(m, c) for m in ('futures', 'brazil', 'global') for c in (['close', 'Perf.W', 'Perf.1M', 'change'], ['close', 'change'])]:
         try:
-            j = post('https://scanner.tradingview.com/brazil/scan', {'symbols': {'tickers': tks}, 'columns': cols})
+            j = post(f'https://scanner.tradingview.com/{mk}/scan', {'symbols': {'tickers': tks}, 'columns': cols})
             out = []
             for r in j.get('data', []):
                 d = dict(zip(cols, r['d']))
