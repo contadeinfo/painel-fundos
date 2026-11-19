@@ -82,8 +82,8 @@ async def ciclo(pw, indice):
             return await route.continue_()
         if any(x in u for x in NAO):
             return await route.abort()
-        if r.method not in ('GET', 'POST'):
-            return await route.continue_()
+        if r.method not in ('GET', 'POST') or r.resource_type not in ('fetch', 'xhr') or r.frame != pg.main_frame:
+            return await route.abort() if r.resource_type in ('image', 'font', 'media') else await route.continue_()
         orig, via = desembrulha(u)
         try:
             resp = await route.fetch(timeout=40000)
@@ -108,8 +108,8 @@ async def ciclo(pw, indice):
             except Exception:
                 pass
 
-    await ctx.route('**/*', rota)
     pg = await ctx.new_page()
+    await ctx.route('**/*', rota)
     for v in VIEWS:
         try:
             await pg.goto(f'http://127.0.0.1:8799/painel.html#{v}', timeout=60000)
