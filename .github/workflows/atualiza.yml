@@ -26,15 +26,15 @@ jobs:
       - name: Baixa CVM e calcula
         run: python scripts/atualiza.py
       - name: Panorama da indústria e radar de concorrentes
-        run: python scripts/industria.py || echo "aviso: indústria falhou"
+        run: python scripts/industria.py || echo "aviso - indústria falhou"
       - name: Focus
-        run: python scripts/focus.py || echo "aviso: Focus falhou"
+        run: python scripts/focus.py || echo "aviso - Focus falhou"
       - name: Histórico próprio
-        run: python scripts/historico.py || echo "aviso: histórico falhou"
+        run: python scripts/historico.py || echo "aviso - histórico falhou"
       - name: Avisos por e-mail
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: python scripts/alertas.py completo || echo "aviso: alertas falharam"
+        run: python scripts/alertas.py completo || echo "aviso - alertas falharam"
       - name: Publica
         run: |
           git config user.name  "robo-peers"
