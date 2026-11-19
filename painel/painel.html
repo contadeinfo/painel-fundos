@@ -1268,6 +1268,17 @@ table th{letter-spacing:.06em}
 .mk-pill{border-color:var(--brand-line);background:rgba(255,255,255,.04)}
 .ghost{border-radius:8px}
 /* @@EXTRA-CSS@@ */
+.fi-ch-box{position:relative;height:360px}
+.fi-tp{display:inline-block;font:600 10.5px/1 var(--sans,inherit);padding:3px 7px;border-radius:999px;white-space:nowrap}
+.fi-tij{background:color-mix(in srgb,#b08a3e 18%,transparent);color:#8a6a2a}.fi-pap{background:color-mix(in srgb,#1d4f91 15%,transparent);color:#1d4f91}
+.fi-fun{background:color-mix(in srgb,#0e7f57 15%,transparent);color:#0e7f57}.fi-híb,.fi-hib{background:color-mix(in srgb,#8a5ab8 15%,transparent);color:#7a4aa8}
+#view-fii .b3-tbl td.fi-nm{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#fiDrawer .b3-dpanel{width:min(820px,100%)}
+#fiDrawer .pf-ch{position:relative;height:250px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px}
+#fiDrawer .pf-bars{display:grid;gap:6px}#fiDrawer .pf-bars div{display:grid;grid-template-columns:minmax(120px,40%) 1fr 64px;align-items:center;gap:8px;font-size:12.5px}
+#fiDrawer .pf-bars i{display:block;height:10px;border-radius:5px;background:var(--gold,#b08a3e)}#fiDrawer .pf-bars b{text-align:right;font-family:var(--mono);font-weight:500}
+#fiDrawer .pf-num td,#fiDrawer .pf-num th{text-align:right;white-space:nowrap}#fiDrawer .pf-num th:first-child{text-align:left;white-space:normal}
+#fiDrawer .pf-kv th{text-align:left;color:var(--muted);font-weight:500;width:38%}#fiDrawer .pf-kv td{text-align:left;word-break:break-word}
 /* ===== Extras: resumo do dia, favoritos, alertas, agenda, comparador, simulador, triagem, exportar ===== */
 .hs{margin:0 0 26px;display:grid;gap:12px}
 .hs-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -2033,10 +2044,19 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="card b3-provs"><div class="head"><div class="name">Próximos rendimentos</div><span class="b3-liq">FIIs · data com ou pagamento nos próximos 60 dias · clique para abrir a ficha</span></div><p class="status" id="st-fiprov">aguardando</p><div id="fiProv"></div></section>
   <h2 class="sec">Segmentos <span class="os-sub">variação média do dia, ponderada pelo valor de mercado · clique para filtrar</span></h2>
   <div class="b3-heat" id="fiHeat"></div>
+  <h2 class="sec">Panorama <span class="os-sub">FIIs com liquidez · clique num ponto para abrir a ficha</span></h2>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Rendimento e preço por segmento</div><span class="b3-liq">mediana do segmento · DY em dourado, P/VP em azul</span></div><div class="fi-ch-box"><canvas id="fi-ch-seg" aria-label="DY e P/VP por segmento"></canvas></div></section>
+    <section class="card"><div class="head"><div class="name">Mapa DY × P/VP</div><span class="b3-liq">cada bolha é um FII · tamanho = valor de mercado</span></div><div class="fi-ch-box"><canvas id="fi-ch-sc" aria-label="Mapa de DY e P/VP"></canvas></div></section>
+  </div>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Por tipo de carteira</div><span class="b3-liq">todos os FIIs com cotação</span></div><div class="b3-scroll" id="fi-tipos"></div></section>
+    <section class="card"><div class="head"><div class="name">Maiores FIIs em número de cotistas</div><span class="b3-liq">clique para abrir a ficha</span></div><div class="b3-scroll" id="fi-top"></div></section>
+  </div>
   <div class="b3-filt" id="fiFilt" role="group" aria-label="Filtros de triagem"><span class="bf-t">Triagem:</span><label>DY mínimo <input type="number" step="0.5" min="0" data-f="dy" placeholder="—"> %</label><label>P/VP até <input type="number" step="0.05" min="0" data-f="pvp" placeholder="—"></label><label>Vacância até <input type="number" step="1" min="0" data-f="vac" placeholder="—"> %</label><label>Liquidez mínima R$ <input type="number" step="100" min="0" data-f="liq" placeholder="—"> mil/dia</label><button type="button" class="ghost sm" data-fclear>Limpar</button></div>
   <div class="b3-tools"><label class="b3-chk"><input type="checkbox" id="fiLiq" checked> Só FIIs com liquidez (giro médio acima de R$ 500 mil por dia)</label><span id="fiCount" class="b3-liq"></span></div>
   <div id="fiSectors"><div class="nw-empty">Carregando os fundos…</div></div>
-  <div class="mk-foot"><div class="fn"><b>Notas de leitura</b><ul><li><span class="fn-t a">Atualiza sozinho</span> lista, DY, P/VP, liquidez, imóveis e vacância: Fundamentus (fechamento do último pregão). Cotação do dia: TradingView, a cada 5 minutos.</li><li><span class="fn-t e">Estimado / calculado</span> rendimento por cota, média mensal e valor patrimonial por cota da ficha são estimados a partir do DY e do P/VP. Variações de 24, 36 e 48 meses são aproximadas pelo fechamento mensal.</li><li><span class="fn-t w">Atenção</span> todas as variações são só de preço, sem os rendimentos distribuídos; o retorno total foi maior.</li><li><span class="fn-t e">Estimado / calculado</span> "Somar os proventos" nas maiores altas e baixas dos FIIs: soma à variação de preço o dividend yield de 12 meses proporcional à janela (ex.: 6 meses = metade do DY). É uma aproximação; o retorno exato com proventos reinvestidos aparece na ficha de cada FII (Yahoo Finance, preço ajustado).</li><li><span class="fn-t a">Atualiza sozinho</span> próximos rendimentos e rendimentos da ficha: Status Invest, consultado ao abrir o painel (a cada 6 h). Triagem: usa os indicadores da tabela (Fundamentus; TradingView quando faltar) e vale para a lista por segmento, não para as maiores altas e baixas.</li><li><span class="fn-t w">Atenção</span> Status Invest e preço ajustado do Yahoo não foram testados com dados reais daqui; se não carregarem, a ficha mostra os proventos do Yahoo ou o aviso de indisponível. A estrela ☆ na ficha adiciona o FII a "Meus ativos", na página inicial.</li></ul></div><p><b>Fontes:</b> lista de FIIs, segmento, dividend yield, P/VP, valor de mercado, liquidez, imóveis e vacância do Fundamentus (dados de fechamento, atualizados uma vez por dia); cotações do dia e variações de 1 a 60 meses do scanner público do TradingView (atraso de cerca de 15 minutos); histórico mensal e gráfico de 6 meses do Yahoo Finance. Dividend yield = rendimentos pagos nos últimos 12 meses ÷ cotação. Material informativo, não é recomendação de investimento.</p></div>
+  <div class="mk-foot"><div class="fn"><b>Notas de leitura</b><ul><li><span class="fn-t a">Atualiza sozinho</span> lista oficial de FIIs, segmento, patrimônio, valor patrimonial da cota, cotistas, taxa de administração, rendimentos mês a mês, composição do ativo, imóveis (área, vacância, inadimplência), inquilinos, vencimento dos contratos e ativos financeiros: CVM (informes mensal e trimestral), lidos por um robô no GitHub todo dia útil às 7h37. DY 12 meses: Fundamentus quando responde; senão TradingView (sobre o preço); senão estimado pela CVM. Cotação do dia: TradingView, a cada 5 minutos. Só entram FIIs (ETFs e units de ações ficam de fora).</li><li><span class="fn-t e">Calculado</span> P/VP = preço ÷ valor patrimonial da cota informado à CVM. Rendimento por cota = DY do mês informado à CVM × valor patrimonial (aproximado). Valor de mercado = preço × cotas emitidas. Tipo: Tijolo (60%+ do ativo em imóveis e sociedades imobiliárias), Papel (60%+ em CRI, LCI e similares), Fundo de fundos (60%+ em cotas de FII), Híbrido (o resto). Vacância e inadimplência médias ponderadas pela área dos imóveis para renda. Quando a CVM só diz "Multicategoria" ou "Outros", o segmento mostrado vem do tipo.</li><li><span class="fn-t w">Atenção</span> o informe mensal sai até o fim do mês seguinte e o trimestral cerca de 2 meses após o trimestre; cada administrador preenche do seu jeito (há erros de digitação e de unidade, como vacância em fração ou em %). Confira no relatório gerencial do fundo.</li><li><span class="fn-t e">Estimado / calculado</span> rendimento por cota, média mensal e valor patrimonial por cota da ficha são estimados a partir do DY e do P/VP. Variações de 24, 36 e 48 meses são aproximadas pelo fechamento mensal.</li><li><span class="fn-t w">Atenção</span> todas as variações são só de preço, sem os rendimentos distribuídos; o retorno total foi maior.</li><li><span class="fn-t e">Estimado / calculado</span> "Somar os proventos" nas maiores altas e baixas dos FIIs: soma à variação de preço o dividend yield de 12 meses proporcional à janela (ex.: 6 meses = metade do DY). É uma aproximação; o retorno exato com proventos reinvestidos aparece na ficha de cada FII (Yahoo Finance, preço ajustado).</li><li><span class="fn-t a">Atualiza sozinho</span> próximos rendimentos e rendimentos da ficha: Status Invest, consultado ao abrir o painel (a cada 6 h). Triagem: usa os indicadores da tabela (Fundamentus; TradingView quando faltar) e vale para a lista por segmento, não para as maiores altas e baixas.</li><li><span class="fn-t w">Atenção</span> Status Invest e preço ajustado do Yahoo não foram testados com dados reais daqui; se não carregarem, a ficha mostra os proventos do Yahoo ou o aviso de indisponível. A estrela ☆ na ficha adiciona o FII a "Meus ativos", na página inicial.</li></ul></div><p><b>Fontes:</b> lista de FIIs, segmento, dividend yield, P/VP, valor de mercado, liquidez, imóveis e vacância do Fundamentus (dados de fechamento, atualizados uma vez por dia); cotações do dia e variações de 1 a 60 meses do scanner público do TradingView (atraso de cerca de 15 minutos); histórico mensal e gráfico de 6 meses do Yahoo Finance. Dividend yield = rendimentos pagos nos últimos 12 meses ÷ cotação. Material informativo, não é recomendação de investimento.</p></div>
 </div>
 <div class="b3-drawer" id="fiDrawer" hidden role="dialog" aria-modal="true" aria-labelledby="fidTitle">
   <div class="b3-dback" data-close></div>
@@ -4436,18 +4456,39 @@ const PCX = (() => {
     else { const j = await PCX.post(TV, body(validCols)); data = j.data || []; }
     return data.map(r => { const o = {}; validCols.forEach((c, i) => o[c] = r.d[i]); o.tk = String(o.name || r.s.split(':')[1]); return o; }).filter(o => /^[A-Z]{4}11$/.test(o.tk) && o.close > 0);
   }
+  // 0) lista oficial de FIIs com dados da CVM (robô do GitHub: informe mensal e trimestral)
+  const RAWF = 'https://raw.githubusercontent.com/contadeinfo/painel-fundos/main/data/';
+  let CVMF = {}, cvmAt = null, cvmRef = null;
+  async function loadCVM() {
+    const r = await fetch(RAWF + 'fii.json?t=' + Math.floor(Date.now() / 9e5), {cache: 'no-store'}); if (!r.ok) throw new Error(r.status);
+    const j = await r.json(), out = {}; (j.fundos || []).forEach(f => out[f.tk] = f);
+    if (Object.keys(out).length < 50) throw new Error('lista curta');
+    cvmAt = new Date(j.gerado_em.replace('Z', ':00Z')); cvmRef = (j.fundos.map(f => f.ref).sort().pop() || '');
+    try { localStorage.setItem('fii-cvm', JSON.stringify({t: Date.now(), at: j.gerado_em, f: j.fundos})); } catch (e) {}
+    return out;
+  }
   async function load() {
     document.getElementById('fiUpd').textContent = 'carregando…';
+    if (!cvmAt || Date.now() - cvmAt > 6 * 3600e3) {
+      try { CVMF = await loadCVM(); } catch (e) { try { const c = JSON.parse(localStorage.getItem('fii-cvm') || 'null'); if (c && c.f) { c.f.forEach(f => CVMF[f.tk] = f); cvmAt = new Date(c.at.replace('Z', ':00Z')); } } catch (x) {} }
+    }
     try { if (!fundAt || Date.now() - fundAt > 6 * 3600e3) LISTA = await loadLista(); } catch (e) {}
+    const base = Object.keys(CVMF).length ? Object.keys(CVMF) : Object.keys(LISTA);
     let tv = [];
-    try { tv = await loadTV(Object.keys(LISTA)); mode = 'tv'; } catch (e) { mode = ''; }
+    try { tv = await loadTV(base); mode = 'tv'; } catch (e) { mode = ''; }
+    if (!tv.length) { try { const set = new Set(base); tv = (await loadTV()).filter(o => !set.size || set.has(o.tk)); if (tv.length) mode = 'tv'; } catch (e) {} }
     const byTk = {}; tv.forEach(o => byTk[o.tk] = o);
-    const tks = new Set([...Object.keys(LISTA), ...(Object.keys(LISTA).length ? [] : Object.keys(byTk))]);
+    const tks = new Set(base.length ? base : Object.keys(byTk));
     ROWS = [...tks].map(tk => {
-      const f = LISTA[tk] || {}, t = byTk[tk] || {};
-      const close = t.close || f.cot || null;
-      return Object.assign({}, t, {tk, f, description: t.description || '', setor: f.setor || 'Outros', close, change: t.change != null ? t.change : null,
-        giro: t.volume && t.close ? t.volume * t.close : null, liqMed: f.liq || null, vm: f.vm || null, dy: f.dy != null ? f.dy : t.dividends_yield_current, pvp: f.pvp});
+      const f0 = LISTA[tk] || {}, c = CVMF[tk] || {}, t = byTk[tk] || {};
+      const close = t.close || f0.cot || null;
+      const f = Object.assign({}, f0, {imov: f0.imov || c.imoveis || null, vac: f0.vac != null && f0.imov ? f0.vac : c.vacancia, inad: c.inadimplencia});
+      const vmCVM = close && c.cotas ? close * c.cotas : null;
+      const dyTV = t.dividends_yield_current > 0 && t.dividends_yield_current < 40 ? t.dividends_yield_current : null;
+      return Object.assign({}, t, {tk, f, c, description: t.description || c.nome || '', setor: c.segmento_painel || f0.setor || 'Outros', tipo: c.tipo || null, close, change: t.change != null ? t.change : null,
+        giro: t.volume && t.close ? t.volume * t.close : null, liqMed: f0.liq || null, vm: f0.vm || vmCVM,
+        dy: f0.dy != null ? f0.dy : dyTV != null ? dyTV : (c.rend12 && close ? c.rend12 / close * 100 : null), dyFonte: f0.dy != null ? 'Fundamentus' : dyTV != null ? 'TradingView' : c.rend12 ? 'CVM' : '',
+        pvp: f0.pvp || (c.vp && close ? close / c.vp : null), pl: c.pl || null, cotistas: c.cotistas || null, taxa: c.taxa_adm_aa, rendMes: c.ult_rend});
     }).filter(o => o.close > 0);
     at = new Date();
     document.getElementById('fiUpd').textContent = ROWS.length ? PCX.hm(at) + ' · próxima ' + PCX.hm(PCX.plus(at, 5)) + (mode !== 'tv' ? ' (sem cotação do dia)' : '') : 'indisponível';
@@ -4490,7 +4531,7 @@ const PCX = (() => {
   }
   function rowBtn(o, v = o.change) { return `<button type="button" class="b3-row" data-tk="${o.tk}"><span class="b3-tk">${o.tk}</span><span class="b3-nm">${PCX.esc(o.description || o.setor || '')}</span><span class="b3-px">R$ ${n2(o.close)}</span><span class="b3-ch ${cl(v)}">${pct(v, Math.abs(v) >= 100 ? 0 : Math.abs(v) >= 10 ? 1 : 2)}</span></button>`; }
   const quando = () => at ? `cotações de ${PCX.hm(at)} (atraso de ~15 min) · próxima atualização às ${PCX.hm(PCX.plus(at, 5))}` : 'carregando';
-  const quandoF = () => fundAt ? `DY, P/VP, liquidez, vacância e imóveis do Fundamentus (fechamento do último pregão), consultados às ${PCX.hm(fundAt)}` : 'indicadores do Fundamentus: carregando';
+  const quandoF = () => (cvmAt ? `cadastro, patrimônio, valor patrimonial, cotistas, rendimentos, imóveis e vacância da CVM (informes mensal e trimestral, robô de ${cvmAt.toLocaleDateString('pt-BR')})` : 'dados da CVM: carregando') + (fundAt ? ` · DY, P/VP e liquidez do Fundamentus (${PCX.hm(fundAt)})` : ' · DY do TradingView (12 meses, sobre o preço); P/VP = preço ÷ valor patrimonial da CVM');
   function render() {
     const wTV = win === '1D' ? mode === 'tv' : temTV(win);
     const fonteW = win === '1D' ? quando() : wTV ? `variação ${WIN[win].lab} até a cotação de ${at ? PCX.hm(at) : '—'} (TradingView, só preço, sem os rendimentos distribuídos) · próxima atualização às ${at ? PCX.hm(PCX.plus(at, 5)) : '—'}`
@@ -4510,8 +4551,8 @@ const PCX = (() => {
     const med = arr => { if (!arr.length) return null; const a = [...arr].sort((x, y) => x - y); return a[Math.floor(a.length / 2)]; };
     const wq = at ? `<small class="upd">Última: ${PCX.hm(at)} · Próxima: ${PCX.hm(PCX.plus(at, 5))}</small>` : '';
     const k = (t, v, sub, extra, upd) => `<div class="ct-k"><span>${t}</span><b>${v}</b><small>${sub || ''}</small>${extra || ''}${upd != null ? upd : wq}</div>`;
-    const wf = fundAt ? `<small class="upd">Fundamentus, ${PCX.hm(fundAt)} · atualiza a cada pregão</small>` : '';
-    document.getElementById('fiKpis').innerHTML = ROWS.length ? k('FIIs acompanhados', ROWS.length, 'todos os listados na B3', '', wf)
+    const wf = cvmAt ? `<small class="upd">CVM (robô, ${cvmAt.toLocaleDateString('pt-BR')})${fundAt ? ' e Fundamentus' : ''}</small>` : fundAt ? `<small class="upd">Fundamentus, ${PCX.hm(fundAt)} · atualiza a cada pregão</small>` : '';
+    document.getElementById('fiKpis').innerHTML = ROWS.length ? k('FIIs acompanhados', ROWS.length, Object.keys(CVMF).length ? 'lista oficial da CVM, com cotação na B3' : 'listados na B3', '', wf)
       + k('Subiram / caíram', act.length ? `${nUp} / ${nDn}` : '—', act.length ? `entre os líquidos · ${nFl} estáveis` : 'sem cotação do dia', act.length ? `<div class="b3-breadth"><i style="width:${nUp / act.length * 100}%;background:var(--up)"></i><i style="width:${nFl / act.length * 100}%;background:var(--line)"></i><i style="width:${nDn / act.length * 100}%;background:var(--down)"></i></div>` : '')
       + k('Giro financeiro', giro ? 'R$ ' + big(giro) : '—', 'soma de volume × preço no dia')
       + k('Dividend yield mediano', med(comDY.map(o => o.dy)) != null ? n2(med(comDY.map(o => o.dy)), 1) + '%' : '—', 'últimos 12 meses, FIIs com liquidez', '', wf)
@@ -4526,10 +4567,38 @@ const PCX = (() => {
     const html = secs.filter(x => !sector || x.s === sector).map(x => {
       const list = x.arr.filter(o => (!onlyLiq || (giroDe(o) || 0) >= 5e5) && passF(o) && (!q || o.tk.includes(q) || String(o.description || '').toUpperCase().includes(q))).sort((a, b) => (b.vm || giroDe(b) || 0) - (a.vm || giroDe(a) || 0));
       if (!list.length) return ''; shownN += list.length;
-      return `<div class="b3-sec"><h3>${PCX.esc(x.s)} <span class="${cl(x.avg)}" style="color:var(--${(x.avg || 0) >= 0 ? 'up' : 'down'})">${x.avg == null ? '' : pct(x.avg)}</span></h3><div class="b3-scroll"><table class="b3-tbl"><caption>${quando()}. ${quandoF()}.</caption><thead><tr><th>FII</th><th>Nome</th><th>Preço (R$)</th><th>Dia</th><th>DY 12m</th><th>P/VP</th><th>Liquidez/dia (R$)</th><th>Valor de mercado (R$)</th><th>Vacância</th><th>Imóveis</th></tr></thead><tbody>${list.map(o => `<tr data-tk="${o.tk}"><td><b>${o.tk}</b></td><td>${PCX.esc(o.description || '')}</td><td>${n2(o.close)}</td><td class="${cl(o.change)}">${pct(o.change)}</td><td>${o.dy != null ? n2(o.dy, 1) + '%' : '—'}</td><td>${n2(o.pvp, 2)}</td><td>${big(giroDe(o))}</td><td>${big(o.vm)}</td><td>${o.f.vac != null && o.f.imov ? n2(o.f.vac, 1) + '%' : '—'}</td><td>${o.f.imov ? n2(o.f.imov, 0) : '—'}</td></tr>`).join('')}</tbody></table></div></div>`;
+      return `<div class="b3-sec"><h3>${PCX.esc(x.s)} <span class="${cl(x.avg)}" style="color:var(--${(x.avg || 0) >= 0 ? 'up' : 'down'})">${x.avg == null ? '' : pct(x.avg)}</span></h3><div class="b3-scroll"><table class="b3-tbl"><caption>${quando()}. ${quandoF()}.</caption><thead><tr><th>FII</th><th>Nome</th><th>Tipo</th><th>Preço (R$)</th><th>Dia</th><th>DY 12m</th><th>Último rend. (R$)</th><th>P/VP</th><th>Liquidez/dia (R$)</th><th>Valor de mercado (R$)</th><th>Patrimônio (R$)</th><th>Cotistas</th><th>Vacância</th><th>Imóveis</th><th>Taxa adm.</th></tr></thead><tbody>${list.map(o => `<tr data-tk="${o.tk}"><td><b>${o.tk}</b></td><td class="fi-nm">${PCX.esc(o.description || '')}</td><td>${o.tipo ? `<span class="fi-tp fi-${o.tipo.slice(0, 3).toLowerCase()}">${o.tipo}</span>` : '—'}</td><td>${n2(o.close)}</td><td class="${cl(o.change)}">${pct(o.change)}</td><td>${o.dy != null ? n2(o.dy, 1) + '%' : '—'}</td><td>${o.rendMes != null ? n2(o.rendMes, 2) : '—'}</td><td class="${o.pvp ? (o.pvp < 0.95 ? 'up' : o.pvp > 1.05 ? 'down' : '') : ''}">${n2(o.pvp, 2)}</td><td>${big(giroDe(o))}</td><td>${big(o.vm)}</td><td>${big(o.pl)}</td><td>${o.cotistas ? big(o.cotistas) : '—'}</td><td>${o.f.vac != null && o.f.imov ? n2(o.f.vac, 1) + '%' : '—'}</td><td>${o.f.imov ? n2(o.f.imov, 0) : '—'}</td><td>${o.taxa != null ? n2(o.taxa, 2) + '%' : '—'}</td></tr>`).join('')}</tbody></table></div></div>`;
     }).join('');
     document.getElementById('fiSectors').innerHTML = html || `<div class="nw-empty">${ROWS.length ? 'Nenhum FII com esse filtro.' : 'Não foi possível carregar os fundos agora.'}</div>`;
     document.getElementById('fiCount').textContent = ROWS.length ? shownN + ' FIIs na lista' + (Object.keys(FLT).length ? ' (com triagem)' : '') : '';
+    try { panorama(); } catch (e) {}
+  }
+  // ---- panorama: DY e P/VP por segmento, mapa DY × P/VP, tipos e maiores fundos
+  let chSeg = null, chSc = null;
+  function panorama() {
+    const L = ROWS.filter(o => (giroDe(o) || 0) >= 5e5);
+    if (!L.length || typeof Chart === 'undefined') return;
+    const med = a => { a = a.filter(v => v != null && isFinite(v)).sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : null; };
+    const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim(), fg = cv('--muted'), line = cv('--line'), gold = cv('--gold') || '#b08a3e', azul = cv('--mk1') || '#1d4f91';
+    const by = {}; L.forEach(o => (by[o.setor] = by[o.setor] || []).push(o));
+    const seg = Object.entries(by).filter(([, a]) => a.length >= 3).map(([s, a]) => ({s, n: a.length, dy: med(a.map(o => o.dy > 0 && o.dy < 40 ? o.dy : null)), pvp: med(a.map(o => o.pvp > 0 && o.pvp < 3 ? o.pvp : null))})).sort((a, b) => (b.dy || 0) - (a.dy || 0));
+    const d1 = {labels: seg.map(x => x.s + ' (' + x.n + ')'), datasets: [{label: 'DY 12m mediano (%)', data: seg.map(x => x.dy), backgroundColor: gold, xAxisID: 'x'}, {label: 'P/VP mediano', data: seg.map(x => x.pvp), backgroundColor: azul, xAxisID: 'x1'}]};
+    const o1 = {indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {color: fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.dataset.label}: ${n2(c.raw, c.datasetIndex ? 2 : 1)}`}}},
+      scales: {x: {position: 'bottom', ticks: {color: gold, callback: v => v + '%'}, grid: {color: line}}, x1: {position: 'top', ticks: {color: azul}, grid: {display: false}, min: 0}, y: {ticks: {color: fg, font: {size: 11}}, grid: {display: false}}}};
+    if (chSeg) { chSeg.data = d1; chSeg.update('none'); } else chSeg = new Chart(document.getElementById('fi-ch-seg'), {type: 'bar', data: d1, options: o1});
+    const cores = {Tijolo: gold, Papel: azul, 'Fundo de fundos': '#0e7f57', 'Híbrido': '#8a5ab8'};
+    const pts = t => L.filter(o => (o.tipo || 'Outros') === t && o.dy > 0 && o.dy < 25 && o.pvp > 0.3 && o.pvp < 1.8).map(o => ({x: o.pvp, y: o.dy, tk: o.tk, r: Math.max(3, Math.min(14, Math.sqrt((o.vm || 1e8) / 1e8) * 3))}));
+    const tipos = ['Tijolo', 'Papel', 'Híbrido', 'Fundo de fundos'];
+    const d2 = {datasets: tipos.map(t => ({label: t, data: pts(t), backgroundColor: (cores[t] || '#999') + 'aa', borderColor: cores[t] || '#999'}))};
+    const o2 = {responsive: true, maintainAspectRatio: false, onClick: (e, el) => { if (el && el[0]) { const p = d2.datasets[el[0].datasetIndex].data[el[0].index]; if (p) open(p.tk); } },
+      plugins: {legend: {labels: {color: fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.raw.tk}: DY ${n2(c.raw.y, 1)}% · P/VP ${n2(c.raw.x, 2)}`}}},
+      scales: {x: {title: {display: true, text: 'P/VP (preço ÷ valor patrimonial)', color: fg}, ticks: {color: fg}, grid: {color: line}}, y: {title: {display: true, text: 'DY 12 meses (%)', color: fg}, ticks: {color: fg}, grid: {color: line}}}};
+    if (chSc) { chSc.data = d2; chSc.update('none'); } else chSc = new Chart(document.getElementById('fi-ch-sc'), {type: 'bubble', data: d2, options: o2});
+    const T = {}; ROWS.forEach(o => { const t = o.tipo || 'Sem classificação'; const x = T[t] = T[t] || {n: 0, pl: 0, cot: 0, dy: [], pvp: []}; x.n++; x.pl += o.pl || 0; x.cot += o.cotistas || 0; if (o.dy > 0 && o.dy < 40 && (giroDe(o) || 0) >= 5e5) x.dy.push(o.dy); if (o.pvp > 0 && o.pvp < 3 && (giroDe(o) || 0) >= 5e5) x.pvp.push(o.pvp); });
+    const tot = Object.values(T).reduce((a, x) => ({n: a.n + x.n, pl: a.pl + x.pl, cot: a.cot + x.cot}), {n: 0, pl: 0, cot: 0});
+    document.getElementById('fi-tipos').innerHTML = `<table class="b3-tbl"><thead><tr><th>Tipo (pela carteira)</th><th>FIIs</th><th>Patrimônio</th><th>% do total</th><th>Cotistas*</th><th>DY mediano</th><th>P/VP mediano</th></tr></thead><tbody>${Object.entries(T).sort((a, b) => b[1].pl - a[1].pl).map(([t, x]) => `<tr><td>${t !== 'Sem classificação' ? `<span class="fi-tp fi-${t.slice(0, 3).toLowerCase()}">${t}</span>` : t}</td><td>${x.n}</td><td>R$ ${big(x.pl)}</td><td>${n2(x.pl / tot.pl * 100, 1)}%</td><td>${big(x.cot)}</td><td>${med(x.dy) != null ? n2(med(x.dy), 1) + '%' : '—'}</td><td>${n2(med(x.pvp), 2)}</td></tr>`).join('')}<tr><td><b>Total</b></td><td><b>${tot.n}</b></td><td><b>R$ ${big(tot.pl)}</b></td><td>100%</td><td><b>${big(tot.cot)}</b></td><td></td><td></td></tr></tbody></table><p class="upd">Tijolo: 60% ou mais do ativo em imóveis · Papel: 60% ou mais em CRI, LCI e similares · Fundo de fundos: 60% ou mais em cotas de FII · Híbrido: o resto. * A mesma pessoa pode ser cotista de vários fundos.</p>`;
+    const top = [...ROWS].filter(o => o.cotistas).sort((a, b) => b.cotistas - a.cotistas).slice(0, 12);
+    document.getElementById('fi-top').innerHTML = `<table class="b3-tbl"><thead><tr><th>#</th><th>FII</th><th>Cotistas</th><th>Var. 12 meses</th><th>Patrimônio</th><th>DY</th></tr></thead><tbody>${top.map((o, i) => { const v = o.c && o.c.cotistas_12m ? (o.cotistas / o.c.cotistas_12m - 1) * 100 : null; return `<tr data-tk="${o.tk}" style="cursor:pointer"><td>${i + 1}</td><td><b>${o.tk}</b> <small class="upd">${PCX.esc((o.description || '').slice(0, 28))}</small></td><td>${n2(o.cotistas, 0)}</td><td class="${cl(v)}">${pct(v, 1)}</td><td>R$ ${big(o.pl)}</td><td>${o.dy != null ? n2(o.dy, 1) + '%' : '—'}</td></tr>`; }).join('')}</tbody></table>`;
   }
   // ficha do fundo
   async function fundDetail(tk) {
@@ -4561,18 +4630,64 @@ const PCX = (() => {
       <div class="b3d-sec"><h4>Rendimentos <span class="b3d-upd">${quandoF()}</span></h4><div class="b3d-grid">${kk('Dividend yield', o.dy != null ? n2(o.dy, 2) + '%' : '—', 'rendimentos dos últimos 12 meses ÷ cotação')}${kk('Rendimento por cota (12 meses)', rend != null ? 'R$ ' + n2(rend) : '—', 'estimado: DY × cotação')}${kk('Média mensal', rend != null ? 'R$ ' + n2(rend / 12) : '—', 'por cota, estimada')}${kk('FFO yield', f.ffo != null ? n2(f.ffo, 2) + '%' : '—', 'geração de caixa ÷ valor de mercado')}</div></div>
       <div class="b3d-sec"><h4>Preço e patrimônio</h4><div class="b3d-grid">${kk('P/VP', n2(o.pvp, 2), o.pvp ? (o.pvp < 1 ? 'cota abaixo do valor patrimonial' : 'cota acima do valor patrimonial') : '')}${kk('Valor patrimonial por cota', o.pvp ? 'R$ ' + n2(o.close / o.pvp) : '—', 'estimado: cotação ÷ P/VP')}${kk('Valor de mercado', 'R$ ' + big(o.vm))}${kk('Liquidez média diária', 'R$ ' + big(o.liqMed), 'últimos 2 meses')}</div></div>
       ${f.imov ? `<div class="b3d-sec"><h4>Imóveis</h4><div class="b3d-grid">${kk('Quantidade de imóveis', n2(f.imov, 0))}${kk('Vacância média', f.vac != null ? n2(f.vac, 1) + '%' : '—', 'área vaga ÷ área total')}${kk('Cap rate', f.cap != null ? n2(f.cap, 2) + '%' : '—', 'renda anual ÷ valor dos imóveis')}${kk('Aluguel por m²', f.alug ? 'R$ ' + n2(f.alug) : '—')}${kk('Preço do m²', f.m2 ? 'R$ ' + n2(f.m2) : '—')}</div></div>` : '<p class="b3d-note">Fundo sem imóveis físicos informados (por exemplo, fundo de papel / recebíveis ou fundo de fundos).</p>'}
+      <div id="fidCvm"><div class="b3-liq">Carregando os dados da CVM…</div></div>
       <div class="b3d-sec"><h4>Ficha completa (Fundamentus)</h4><div class="b3d-grid" id="fidFicha"><div class="b3-liq">Carregando…</div></div></div>
       <div class="b3d-sec"><h4>Saiba mais</h4><div class="b3d-links"><a class="open-inline" href="https://www.fundamentus.com.br/detalhes.php?papel=${tk}" target="_blank" rel="noopener">Fundamentus ↗</a><a class="open-inline" href="https://statusinvest.com.br/fundos-imobiliarios/${tk.toLowerCase()}" target="_blank" rel="noopener">Status Invest ↗</a><a class="open-inline" href="https://www.fundsexplorer.com.br/funds/${tk.toLowerCase()}" target="_blank" rel="noopener">Funds Explorer ↗</a></div>
       <p class="b3d-note">Dados de terceiros, sujeitos a atraso e erro. Confira no relatório gerencial do fundo e no site da B3 / CVM. Não é recomendação de investimento.</p></div>`;
     d.hidden = false; document.body.style.overflow = 'hidden';
     b.parentElement.scrollTop = 0; d.querySelector('.b3-dclose').focus();
     window.trDrawer && window.trDrawer(tk, 'fii', 'fid');
+    cvmFicha(tk, o);
     const [h, fd] = await Promise.all([history(tk), fundDetail(tk)]);
     const sp = document.getElementById('fidSpark'); if (sp) sp.innerHTML = h ? sparkSVG(h) : '<div class="b3-liq">Gráfico indisponível agora.</div>';
     const fi = document.getElementById('fidFicha');
     if (fi) fi.innerHTML = fd && fd.length ? fd.filter(([k0]) => !/^(Papel|FII|Cotação)$/i.test(k0)).slice(0, 40).map(([k0, v0]) => kk(PCX.esc(k0), PCX.esc(v0))).join('') : '<div class="b3-liq">Ficha indisponível agora.</div>';
   }
-  function close() { document.getElementById('fiDrawer').hidden = true; document.body.style.overflow = ''; }
+  // ---- ficha da CVM (robô): cadastro, rendimentos mês a mês, composição, imóveis, inquilinos, contratos e ativos
+  let fch = [];
+  const dBR = s => s ? String(s).slice(0, 10).split('-').reverse().join('/') : '—';
+  const mesL = s => { const [a, m] = String(s).split('-'); return ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][+m - 1] + '/' + a.slice(2); };
+  const barras = (L, fmt) => `<div class="pf-bars">${L.map(([t, v]) => `<div><span>${PCX.esc(t)}</span><i style="width:${Math.max(1, Math.min(100, v))}%"></i><b>${fmt ? fmt(v) : n2(v, 1) + '%'}</b></div>`).join('')}</div>`;
+  async function cvmFicha(tk, o) {
+    const box = document.getElementById('fidCvm'); if (!box) return;
+    fch.forEach(c => c && c.destroy()); fch = [];
+    let F = null;
+    try { const r = await fetch(RAWF + 'fii/' + tk + '.json?t=' + Math.floor(Date.now() / 9e5), {cache: 'no-store'}); if (r.ok) F = await r.json(); } catch (e) {}
+    if (!document.getElementById('fidCvm')) return;
+    if (!F) { box.innerHTML = '<div class="b3d-sec"><h4>Dados da CVM</h4><div class="b3-liq">Este FII não está no informe mensal da CVM que o robô leu, ou o robô não respondeu agora.</div></div>'; return; }
+    const I = F.info || {}, G = F.geral || {}, C = F.complemento || {}, H = F.historico || [];
+    const kk = (t, v, sub) => `<div class="b3d-k"><span>${t}</span><b>${v}</b>${sub ? `<small>${sub}</small>` : ''}</div>`;
+    const cnpj = I.cnpj ? `${I.cnpj.slice(0, 2)}.${I.cnpj.slice(2, 5)}.${I.cnpj.slice(5, 8)}/${I.cnpj.slice(8, 12)}-${I.cnpj.slice(12)}` : '—';
+    const pf = num => num != null ? num : null, cot = I.cotistas, cotPF = pf(+C.Numero_Cotistas_Pessoa_Fisica);
+    const v12 = I.cotistas_12m ? (cot / I.cotistas_12m - 1) * 100 : null;
+    let html = `<div class="b3d-sec"><h4>Números da CVM <span class="b3d-upd">informe mensal de ${mesL(I.ref)}</span></h4><div class="b3d-grid">
+      ${kk('Patrimônio líquido', 'R$ ' + big(I.pl))}${kk('Valor patrimonial por cota', I.vp ? 'R$ ' + n2(I.vp) : '—', o.close && I.vp ? 'P/VP ' + n2(o.close / I.vp, 2) : '')}
+      ${kk('Cotistas', cot ? n2(cot, 0) : '—', (v12 != null ? pct(v12, 1) + ' em 12 meses' : '') + (cotPF && cot ? ` · ${n2(cotPF / cot * 100, 0)}% pessoas físicas` : ''))}
+      ${kk('Cotas emitidas', I.cotas ? n2(I.cotas, 0) : '—')}${kk('Último rendimento por cota', I.ult_rend != null ? 'R$ ' + n2(I.ult_rend, 2) : '—', o.close && I.ult_rend ? n2(I.ult_rend / o.close * 100, 2) + '% sobre o preço de hoje' : 'estimado: DY do mês × valor patrimonial')}
+      ${kk('Rendimentos em 12 meses', I.rend12 != null ? 'R$ ' + n2(I.rend12, 2) : '—', o.close && I.rend12 ? n2(I.rend12 / o.close * 100, 1) + '% sobre o preço de hoje' : '')}
+      ${kk('DY patrimonial 12 meses', I.dy12_pat != null ? n2(I.dy12_pat, 1) + '%' : '—', 'rendimentos ÷ valor patrimonial')}${kk('Taxa de administração', I.taxa_adm_aa != null ? n2(I.taxa_adm_aa, 2) + '% a.a.' : '—', 'despesa do mês × 12, sobre o patrimônio')}
+      ${I.imoveis ? kk('Imóveis', n2(I.imoveis, 0), I.area ? n2(I.area, 0) + ' m² no total' : '') + kk('Vacância média', I.vacancia != null ? n2(I.vacancia, 1) + '%' : '—', 'ponderada pela área (informe trimestral)') + kk('Inadimplência média', I.inadimplencia != null ? n2(I.inadimplencia, 1) + '%' : '—') : ''}
+      </div></div>`;
+    if (H.length > 1) html += `<div class="b3d-sec"><h4>Rendimento por cota, mês a mês <span class="b3d-upd">R$ por cota · e DY do mês sobre o valor patrimonial</span></h4><div class="pf-ch"><canvas id="fid-c1"></canvas></div></div>
+      <div class="b3d-sec"><h4>Patrimônio, valor da cota e cotistas</h4><div class="pf-ch"><canvas id="fid-c2"></canvas></div></div>`;
+    const cp = Object.entries(I.composicao || {}); if (cp.length) html += `<div class="b3d-sec"><h4>Composição do ativo <span class="b3d-upd">${I.tipo ? 'classificado como <b>' + I.tipo + '</b>' : ''}</span></h4>${barras(cp)}</div>`;
+    const inq = (F.inquilinos || {}).setores || []; if (inq.length) html += `<div class="b3d-sec"><h4>Inquilinos por setor <span class="b3d-upd">% da receita · trimestre de ${dBR(F.inquilinos.ref)}</span></h4>${barras(inq)}</div>`;
+    const vc = (F.vencimentos || {}).faixas || []; if (vc.length) html += `<div class="b3d-sec"><h4>Vencimento dos contratos <span class="b3d-upd">% da receita do fundo por prazo</span></h4>${barras(vc.map(([t, v]) => [t.replace('Ate', 'Até').replace(/(\d+)a(\d+)Meses/, '$1 a $2 meses').replace('Meses', ' meses'), v]))}</div>`;
+    const im = ((F.imoveis || {}).lista || []); if (im.length) html += `<div class="b3d-sec"><h4>Imóveis <span class="b3d-upd">${im.length} no informe de ${dBR(F.imoveis.ref)}</span></h4><div class="b3-scroll" style="max-height:340px"><table class="b3-tbl pf-num"><thead><tr><th>Imóvel</th><th>Área (m²)</th><th>Vacância</th><th>Inadimpl.</th><th>% receita</th></tr></thead><tbody>${im.slice(0, 80).map(x => `<tr><th title="${PCX.esc(x.endereco + (x.outras ? ' · ' + x.outras : ''))}">${PCX.esc(x.nome || x.endereco).slice(0, 48)}<small class="upd" style="display:block">${PCX.esc(x.classe).slice(0, 40)}</small></th><td>${x.area ? n2(x.area, 0) : '—'}</td><td>${x.vac != null ? n2(x.vac, 1) + '%' : '—'}</td><td>${x.inad != null ? n2(x.inad, 1) + '%' : '—'}</td><td>${x.receita != null ? n2(x.receita, 1) + '%' : '—'}</td></tr>`).join('')}</tbody></table></div></div>`;
+    const at = F.ativos || {}; if ((at.top || []).length) html += `<div class="b3d-sec"><h4>Ativos financeiros <span class="b3d-upd">${at.n} no informe de ${dBR(at.ref)}</span></h4>${barras(at.por_tipo || [])}<div class="b3-scroll" style="max-height:300px;margin-top:8px"><table class="b3-tbl pf-num"><thead><tr><th>Ativo</th><th>Tipo</th><th>Vencimento</th><th>% dos ativos</th></tr></thead><tbody>${at.top.map(x => `<tr><th>${PCX.esc(x.nome || x.emissor).slice(0, 44)}${x.codigo ? ` <small class="upd">${PCX.esc(x.codigo)}</small>` : ''}</th><td>${PCX.esc(x.tipo)}</td><td>${x.venc ? dBR(x.venc) : '—'}</td><td>${n2(x.pct, 1)}%</td></tr>`).join('')}</tbody></table></div></div>`;
+    const cad = [['CNPJ', cnpj], ['Nome na CVM', I.nome], ['ISIN', I.isin], ['Segmento (CVM)', I.segmento], ['Mandato', G.Mandato], ['Gestão', I.gestao], ['Público-alvo', I.publico], ['Início', dBR(G.Data_Funcionamento)], ['Prazo', G.Prazo_Duracao], ['Fim do exercício', G.Encerramento_Exercicio_Social], ['Administrador', I.admin], ['Site', G.Site], ['E-mail do administrador', G.Email], ['Telefone', G.Telefone1]].filter(x => x[1]);
+    html += `<div class="b3d-sec"><h4>Cadastro na CVM</h4><table class="b3-tbl pf-kv"><tbody>${cad.map(([k, v]) => `<tr><th>${k}</th><td>${/^www\.|^https?:/i.test(v) ? `<a href="${/^http/i.test(v) ? v : 'https://' + v}" target="_blank" rel="noopener">${PCX.esc(v)}</a>` : PCX.esc(v)}</td></tr>`).join('')}</tbody></table></div>`;
+    box.innerHTML = html;
+    if (H.length > 1 && typeof Chart !== 'undefined') {
+      const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim(), fg = cv('--muted'), line = cv('--line'), gold = cv('--gold') || '#b08a3e', azul = cv('--mk1') || '#1d4f91';
+      const lab = H.map(x => mesL(x.d));
+      fch.push(new Chart(document.getElementById('fid-c1'), {data: {labels: lab, datasets: [{type: 'bar', label: 'Rendimento (R$/cota)', data: H.map(x => x.rend_cota), backgroundColor: gold, yAxisID: 'y'}, {type: 'line', label: 'DY do mês (% do VP)', data: H.map(x => x.dy), borderColor: azul, pointRadius: 2, yAxisID: 'y1'}]},
+        options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {color: fg, boxWidth: 12}}}, scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true}, grid: {display: false}}, y: {ticks: {color: fg}, grid: {color: line}}, y1: {position: 'right', ticks: {color: azul, callback: v => v + '%'}, grid: {display: false}}}}}));
+      fch.push(new Chart(document.getElementById('fid-c2'), {type: 'line', data: {labels: lab, datasets: [{label: 'Patrimônio (R$ mi)', data: H.map(x => x.pl ? x.pl / 1e6 : null), borderColor: gold, backgroundColor: 'rgba(176,138,62,.12)', fill: true, pointRadius: 0, yAxisID: 'y'}, {label: 'Valor patrimonial da cota (R$)', data: H.map(x => x.vp), borderColor: azul, pointRadius: 0, yAxisID: 'y1'}, {label: 'Cotistas (mil)', data: H.map(x => x.cotistas ? x.cotistas / 1e3 : null), borderColor: '#0e7f57', borderDash: [4, 3], pointRadius: 0, yAxisID: 'y2'}]},
+        options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {labels: {color: fg, boxWidth: 12}}}, scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true}, grid: {display: false}}, y: {ticks: {color: gold}, grid: {color: line}}, y1: {position: 'right', ticks: {color: azul}, grid: {display: false}}, y2: {display: false}}}}));
+    }
+  }
+  function close() { document.getElementById('fiDrawer').hidden = true; document.body.style.overflow = ''; fch.forEach(c => c && c.destroy()); fch = []; }
   function bind() {
     const v = document.getElementById('view-fii');
     v.addEventListener('click', e => {
