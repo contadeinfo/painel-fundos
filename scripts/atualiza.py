@@ -70,6 +70,7 @@ def filtra_zip(conteudo, alvo):
                 isub = cab.index('ID_SUBCLASSE') if 'ID_SUBCLASSE' in cab else None
                 idt, iq, ipl = cab.index('DT_COMPTC'), cab.index('VL_QUOTA'), cab.index('VL_PATRIM_LIQ')
                 icap, ires = cab.index('CAPTC_DIA'), cab.index('RESG_DIA')
+                icot = cab.index('NR_COTST') if 'NR_COTST' in cab else None
                 for r in rd:
                     if len(r) <= ires:
                         continue
@@ -78,14 +79,14 @@ def filtra_zip(conteudo, alvo):
                         continue
                     if isub is not None and r[isub].strip():
                         continue  # subclasse: usamos a linha da classe
-                    linhas.append([c, r[idt][:10], r[iq], r[ipl], r[icap], r[ires]])
+                    linhas.append([c, r[idt][:10], r[iq], r[ipl], r[icap], r[ires], r[icot] if icot is not None and len(r) > icot else ''])
     return linhas
 
 
 def atualiza_cache(alvo, hoje):
     os.makedirs(CACHE, exist_ok=True)
     marca = os.path.join(CACHE, 'cnpjs.txt')
-    lista = '\n'.join(sorted(alvo))
+    lista = 'v2\n' + '\n'.join(sorted(alvo))  # v2: inclui número de cotistas
     mudou = not os.path.exists(marca) or open(marca).read() != lista
     if mudou:
         print('  lista de fundos mudou: rebaixando todo o histórico')
@@ -102,7 +103,7 @@ def atualiza_cache(alvo, hoje):
         L = filtra_zip(z, alvo)
         with open(arq, 'w', encoding='utf-8', newline='') as f:
             w = csv.writer(f)
-            w.writerow(['cnpj', 'data', 'cota', 'pl', 'capt', 'resg'])
+            w.writerow(['cnpj', 'data', 'cota', 'pl', 'capt', 'resg', 'cotst'])
             w.writerows(sorted(L))
         print(f'  {am}: {len(L)} linhas, {len({l[0] for l in L})} fundos')
     with open(marca, 'w') as f:
@@ -116,7 +117,7 @@ def le_cache():
             continue
         with open(os.path.join(CACHE, arq), encoding='utf-8') as f:
             for r in csv.DictReader(f):
-                S.setdefault(r['cnpj'], {})[r['data']] = (num(r['cota']), num(r['pl']), num(r['capt']) or 0, num(r['resg']) or 0)
+                S.setdefault(r['cnpj'], {})[r['data']] = (num(r['cota']), num(r['pl']), num(r['capt']) or 0, num(r['resg']) or 0, num(r.get('cotst')))
     return S
 
 
@@ -240,9 +241,11 @@ def main():
         for r in rows:
             r[j + 1] = vals.index(r[j]) + 1 if r[j] is not None else None
 
+    IDX = {}
     for nome, serie in (('IBOV', lambda: ibov_serie()), ('CDI', lambda: cdi_completo(menos_meses(ref, 62), ref))):
         try:
-            J = janelas(serie(), ref)
+            IDX[nome] = serie()
+            J = janelas(IDX[nome], ref)
             r = [nome]
             for k in ('dia', 'mes', 'ano', 'm12', 'm24', 'm36', 'm48', 'm60'):
                 v = J.get(k)
@@ -254,6 +257,13 @@ def main():
     out = {'data': ref.strftime('%d/%m/%Y'), 'gerado_em': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'),
            'fonte': 'CVM (informe diário) · BCB · Yahoo', 'rows': rows, 'fundos': info}
     os.makedirs(os.path.dirname(SAIDA), exist_ok=True)
+    try:  # ficha completa de cada fundo (cadastro, lâmina, séries e risco); não impede o peers.json
+        import detalhe
+        detalhe.gera(fundos, S, IDX, ref, rows, os.path.join(RAIZ, 'data', 'fundos'), baixa, so_digitos)
+        out['detalhe'] = True
+    except Exception as e:
+        import traceback; traceback.print_exc()
+        print('aviso detalhe', e)
     with open(SAIDA, 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
     print(f'OK: {len(rows)} linhas em {SAIDA}')
