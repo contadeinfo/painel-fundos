@@ -71,8 +71,8 @@ def cadastro(alvo, baixa, dig):
     return out
 
 
-def lamina(alvo, baixa, dig, hoje, meses=12):
-    """Lâmina mais recente de cada fundo (procura até 12 meses para trás; nem todo fundo publica todo mês)."""
+def lamina(alvo, baixa, dig, hoje, meses=4):
+    """Lâmina mais recente de cada fundo (procura até 4 meses para trás; nem todo fundo publica todo mês)."""
     out = {c: {} for c in alvo}
     a, m = hoje.year, hoje.month
     for _ in range(meses):
