@@ -1,0 +1,1526 @@
+{
+"0777210d": [
+"GET https://cotacao.b3.com.br/mds/api/v1/DerivativeQuotation/DI1",
+18099
+],
+"b32992f0": [
+"GET https://news.google.com/rss/search?q=economia%20OR%20mercado%20OR%20Ibovespa%20OR%20d%C3%B3lar%20when%3A1d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+166894
+],
+"f5e55a4e": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados/ultimos/1?formato=json",
+39
+],
+"32fc4e33": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/2?formato=json",
+75
+],
+"b2235018": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4389/dados?formato=json&dataInicial=05/10/2026&dataFinal=19/11/2026",
+1179
+],
+"39890aec": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/CLP%3DX?range=1y&interval=1d&includePrePost=false",
+26772
+],
+"c618a8b5": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/BRL%3DX?range=1y&interval=1d&includePrePost=false",
+28100
+],
+"b2901a17": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/COP%3DX?range=1y&interval=1d&includePrePost=false",
+26104
+],
+"4d72e728": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/MXN%3DX?range=1y&interval=1d&includePrePost=false",
+28796
+],
+"e88d1ab0": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/ZAR%3DX?range=1y&interval=1d&includePrePost=false",
+28927
+],
+"90267a1e": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/INR%3DX?range=1y&interval=1d&includePrePost=false",
+27788
+],
+"e53910ec": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/IDR%3DX?range=1y&interval=1d&includePrePost=false",
+19194
+],
+"da52ca00": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/TRY%3DX?range=1y&interval=1d&includePrePost=false",
+28261
+],
+"ac129970": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.7478/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+558
+],
+"a1160aa8": [
+"GET https://www.dadosdemercado.com.br/fluxo",
+397025
+],
+"cb335f2b": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json&dataInicial=05/10/2026&dataFinal=19/11/2026",
+1749
+],
+"de5cb077": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.188/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+559
+],
+"dba37900": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+558
+],
+"d0175367": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+556
+],
+"6458a70a": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.189/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+562
+],
+"0c84ea6c": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.190/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+560
+],
+"0793dd27": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.29606/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+589
+],
+"c2b775de": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.28763/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+617
+],
+"aa15b540": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.24369/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+505
+],
+"30b982dc": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.5793/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+519
+],
+"9633e6e9": [
+"GET https://api-comexstat.mdic.gov.br/general/dates/updated",
+133
+],
+"e1e67009": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.24364/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+589
+],
+"7a8a9771": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.29604/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+589
+],
+"53455db5": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4513/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+533
+],
+"6fc04dbd": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+533
+],
+"d86fee35": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados?formato=json&dataInicial=05/10/2026&dataFinal=19/11/2026",
+1210
+],
+"db378b89": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13621/dados?formato=json&dataInicial=05/10/2026&dataFinal=19/11/2026",
+1210
+],
+"d40fecea": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.22707/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+547
+],
+"439d1380": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.22701/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+561
+],
+"88b6d91e": [
+"GET https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$top=5000&$format=json&$orderby=Data%20desc&$filter=(Indicador%20eq%20%27IPCA%27%20or%20Indicador%20eq%20%27PIB%20Total%27%20or%20Indicador%20eq%20%27Selic%27%20or%20Indicador%20eq%20%27Meta%20para%20",
+304412
+],
+"41e4bc6c": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.20714/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+533
+],
+"e9060741": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.20539/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+561
+],
+"58adfc70": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-10\"},\"details\":[\"country\"]}",
+15513
+],
+"25a42361": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.21082/dados?formato=json&dataInicial=16/08/2025&dataFinal=19/11/2026",
+519
+],
+"39afad92": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-01\",\"to\":\"2025-10\"},\"details\":[\"country\"]}",
+15818
+],
+"861eb0e3": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-10\"},\"details\":[\"country\"]}",
+15196
+],
+"37350b7d": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-01\",\"to\":\"2025-10\"},\"details\":[\"country\"]}",
+15300
+],
+"d72e8e3c": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-10\"},\"details\":[\"heading\"]}",
+255121
+],
+"7f30cccf": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-10\"},\"details\":[\"heading\"]}",
+254089
+],
+"3473d488": [
+"GET https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value_month=202611",
+22303
+],
+"3aa56800": [
+"GET https://www.ipeadata.gov.br/api/odata4/ValoresSerie(SERCODIGO='JPM366_EMBI366')",
+1294644
+],
+"82f3235e": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"details\":[],\"flow\":\"import\",\"monthDetail\":true,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"1997-01\",\"to\":\"2026-10\"}}",
+18277
+],
+"438d4a00": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"details\":[],\"flow\":\"export\",\"monthDetail\":true,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-11\",\"to\":\"2026-10\"}}",
+87
+],
+"6254a9bd": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"details\":[],\"flow\":\"import\",\"monthDetail\":true,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-11\",\"to\":\"2026-10\"}}",
+87
+],
+"8e4c1f2b": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"details\":[],\"flow\":\"export\",\"monthDetail\":true,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"1997-01\",\"to\":\"2026-10\"}}",
+18295
+],
+"df440fca": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"1997-01\",\"to\":\"1997-12\"}}",
+13399
+],
+"98080674": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"1998-01\",\"to\":\"1998-12\"}}",
+13349
+],
+"c768d72e": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2000-01\",\"to\":\"2000-12\"}}",
+13513
+],
+"64f0f4cc": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"details\":[\"section\"],\"flow\":\"import\",\"monthDetail\":true,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-11\",\"to\":\"2026-10\"}}",
+87
+],
+"42b0bc79": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"details\":[\"section\"],\"flow\":\"export\",\"monthDetail\":true,\"filters\":[],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-11\",\"to\":\"2026-10\"}}",
+87
+],
+"a3c0b3ae": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"1999-01\",\"to\":\"1999-12\"}}",
+13464
+],
+"d2dcd6d4": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2001-01\",\"to\":\"2001-12\"}}",
+13589
+],
+"9d19e4ea": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2002-01\",\"to\":\"2002-12\"}}",
+13668
+],
+"7535e439": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-12\",\"to\":\"2024-12\"}}",
+11344
+],
+"7421d49b": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-11\",\"to\":\"2024-11\"}}",
+11401
+],
+"773e5f66": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-12\",\"to\":\"2024-12\"}}",
+14032
+],
+"1f8c3193": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-01\",\"to\":\"2025-01\"}}",
+11831
+],
+"dadc3070": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-11\",\"to\":\"2024-11\"}}",
+13806
+],
+"adfe7d10": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-01\",\"to\":\"2025-01\"}}",
+13921
+],
+"019b24de": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2004-01\",\"to\":\"2004-12\"}}",
+14236
+],
+"760114c4": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2003-01\",\"to\":\"2003-12\"}}",
+14175
+],
+"5565bfff": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-03\",\"to\":\"2025-03\"}}",
+11435
+],
+"436206d6": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-02\",\"to\":\"2025-02\"}}",
+13638
+],
+"558ce008": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-03\",\"to\":\"2025-03\"}}",
+13818
+],
+"302aced9": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-04\",\"to\":\"2025-04\"}}",
+11508
+],
+"246256f1": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-02\",\"to\":\"2025-02\"}}",
+11589
+],
+"55b38e32": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2006-01\",\"to\":\"2006-12\"}}",
+15196
+],
+"f50642b0": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-05\",\"to\":\"2025-05\"}}",
+14129
+],
+"67e67dbb": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-05\",\"to\":\"2025-05\"}}",
+11214
+],
+"981ac6ec": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2005-01\",\"to\":\"2005-12\"}}",
+14886
+],
+"9a6a0a92": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-04\",\"to\":\"2025-04\"}}",
+14310
+],
+"70a48671": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-06\",\"to\":\"2025-06\"}}",
+12256
+],
+"393f168c": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2007-01\",\"to\":\"2007-12\"}}",
+14916
+],
+"7deb4816": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-06\",\"to\":\"2025-06\"}}",
+13991
+],
+"59a5521f": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-07\",\"to\":\"2025-07\"}}",
+11491
+],
+"407ce3f3": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-10\",\"to\":\"2025-10\"}}",
+11973
+],
+"1a0d5208": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-10\",\"to\":\"2025-10\"}}",
+13666
+],
+"0a2c067a": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-08\",\"to\":\"2025-08\"}}",
+13844
+],
+"a7e69228": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-07\",\"to\":\"2025-07\"}}",
+13914
+],
+"ecab8c14": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2009-01\",\"to\":\"2009-12\"}}",
+14731
+],
+"fe1a468e": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2008-01\",\"to\":\"2008-12\"}}",
+14634
+],
+"ef25db19": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-08\",\"to\":\"2025-08\"}}",
+12069
+],
+"6db94828": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2010-01\",\"to\":\"2010-12\"}}",
+14611
+],
+"e8a86d9b": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-12\",\"to\":\"2025-12\"}}",
+11744
+],
+"8b243e76": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-11\",\"to\":\"2025-11\"}}",
+13891
+],
+"ea623eb0": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-09\",\"to\":\"2025-09\"}}",
+13957
+],
+"992c7e63": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-09\",\"to\":\"2025-09\"}}",
+11878
+],
+"383b39cc": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-12\",\"to\":\"2025-12\"}}",
+13827
+],
+"71771fa5": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-11\",\"to\":\"2025-11\"}}",
+11581
+],
+"134de32e": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2011-01\",\"to\":\"2011-12\"}}",
+14659
+],
+"12afc59a": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-01\"}}",
+13740
+],
+"64707846": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2013-01\",\"to\":\"2013-12\"}}",
+14671
+],
+"f6570cbd": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-01\"}}",
+11556
+],
+"2cae9a60": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2014-01\",\"to\":\"2014-12\"}}",
+14710
+],
+"53e1b854": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2012-01\",\"to\":\"2012-12\"}}",
+14969
+],
+"77ee5f00": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-02\",\"to\":\"2026-02\"}}",
+13765
+],
+"861924e2": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-03\",\"to\":\"2026-03\"}}",
+13916
+],
+"23e70363": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-02\",\"to\":\"2026-02\"}}",
+11829
+],
+"60ed6801": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-03\",\"to\":\"2026-03\"}}",
+12111
+],
+"878a486b": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-04\",\"to\":\"2026-04\"}}",
+11891
+],
+"bc5ac466": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2015-01\",\"to\":\"2015-12\"}}",
+14979
+],
+"8f70c882": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-07\",\"to\":\"2026-07\"}}",
+13794
+],
+"fb29d494": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2016-01\",\"to\":\"2016-12\"}}",
+15116
+],
+"dfdd096a": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-05\",\"to\":\"2026-05\"}}",
+13559
+],
+"d69fed88": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-06\",\"to\":\"2026-06\"}}",
+13718
+],
+"f27cd93c": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-04\",\"to\":\"2026-04\"}}",
+14063
+],
+"d9cc02eb": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-08\",\"to\":\"2026-08\"}}",
+11731
+],
+"cadec73d": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-05\",\"to\":\"2026-05\"}}",
+11611
+],
+"571d2b09": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-07\",\"to\":\"2026-07\"}}",
+11363
+],
+"5b50cfe2": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-10\",\"to\":\"2026-10\"}}",
+14030
+],
+"2d82c803": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-06\",\"to\":\"2026-06\"}}",
+11750
+],
+"765d259c": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-08\",\"to\":\"2026-08\"}}",
+13950
+],
+"b594c358": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2018-01\",\"to\":\"2018-12\"}}",
+15822
+],
+"f5d0e82a": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-09\",\"to\":\"2026-09\"}}",
+14011
+],
+"b83a5285": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-10\",\"to\":\"2026-10\"}}",
+11565
+],
+"754f82fe": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2017-01\",\"to\":\"2017-12\"}}",
+15116
+],
+"e0f6131e": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2019-01\",\"to\":\"2019-12\"}}",
+15569
+],
+"982fa5dd": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"import\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-09\",\"to\":\"2026-09\"}}",
+11367
+],
+"a5ab8e06": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2020-01\",\"to\":\"2020-12\"}}",
+15725
+],
+"8d9f7082": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2022-01\",\"to\":\"2022-12\"}}",
+15844
+],
+"bb283754": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2023-01\",\"to\":\"2023-12\"}}",
+15695
+],
+"5e6014f4": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2021-01\",\"to\":\"2021-12\"}}",
+15454
+],
+"7b5b25d6": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2024-01\",\"to\":\"2024-12\"}}",
+15725
+],
+"39e14d9c": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2025-01\",\"to\":\"2025-12\"}}",
+15897
+],
+"9d2f9344": [
+"POST https://api-comexstat.mdic.gov.br/general?language=pt\n{\"flow\":\"export\",\"monthDetail\":false,\"filters\":[],\"details\":[\"country\"],\"metrics\":[\"metricFOB\"],\"period\":{\"from\":\"2026-01\",\"to\":\"2026-10\"}}",
+15513
+],
+"f3235f5e": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados?formato=json&dataInicial=01/01/2000",
+11943
+],
+"14341490": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4616/dados?formato=json&dataInicial=01/01/2015",
+5786
+],
+"42521a04": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4380/dados?formato=json&dataInicial=01/01/2015",
+5847
+],
+"b8ad36b6": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=01/01/2025&dataFinal=19/11/2026",
+799
+],
+"f11ef580": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados/ultimos/1?formato=json",
+38
+],
+"2231ccfd": [
+"GET https://www.imf.org/external/datamapper/api/v1/GGXWDG_NGDP/BRA/MEX/CHL/COL/IND/USA/ZAF/IDN/TUR",
+495
+],
+"8e618a1a": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4382/dados?formato=json&dataInicial=01/01/2015",
+6012
+],
+"b411be1f": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.5760/dados?formato=json&dataInicial=01/01/2015",
+5218
+],
+"2d85b56a": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=01/01/2015",
+5359
+],
+"58e7c8c0": [
+"GET https://www.imf.org/external/datamapper/api/v1/PCPIPCH/BRA/MEX/CHL/COL/IND/USA/ZAF/IDN/TUR",
+487
+],
+"9da99c65": [
+"GET https://www.anbima.com.br/informacoes/merc-sec/arqs/ms261118.txt",
+6656
+],
+"9466e52d": [
+"GET https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros",
+102633
+],
+"09185624": [
+"GET https://stats.bis.org/api/v1/data/WS_CBPOL/M.BR+MX+CL+CO+IN+US+ZA+ID+TR/all?lastNObservations=1&format=csv",
+4091
+],
+"0cedc482": [
+"GET https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$top=3000&$format=json&$orderby=Data%20desc&$filter=(Indicador%20eq%20%27PIB%20Total%27%20or%20Indicador%20eq%20%27IPCA%27%20or%20Indicador%20eq%20%27Selic%27%20or%20Indicador%20eq%20%27D%C3%ADvida%20",
+443361
+],
+"bea28611": [
+"GET https://www.tesourotransparente.gov.br/ckan/api/3/action/package_show?id=ab56485b-9c40-4efb-8563-9ce3e1973c4b",
+9993
+],
+"2d8cca91": [
+"GET https://www.tesourotransparente.gov.br/ckan/dataset/ab56485b-9c40-4efb-8563-9ce3e1973c4b/resource/527ccdb1-3059-42f3-bf23-b5e3ab4c6dc6/download/seriehistoricajul26.xlsx",
+4301280
+],
+"f6f1a87a": [
+"GET https://apisidra.ibge.gov.br/values/t/5932/n1/all/v/6561,6562,6564/p/last%2012/c11255/90707/d/v6561%201,v6562%201,v6564%201",
+13230
+],
+"9108c9d6": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"filter\":[{\"left\":\"type\",\"operation\":\"equal\",\"right\":\"stock\"}],\"markets\":[\"brazil\"],\"symbols\":{\"query\":{\"types\":[]},\"tickers\":[]},\"columns\":[\"industry\",\"price_earnings_ttm\",\"price_book_fq\",\"dividends_yield_current\",\"return_on_equity\",\"debt_to_equity\"",
+432
+],
+"9bf7b7fb": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"filter\":[{\"left\":\"type\",\"operation\":\"equal\",\"right\":\"stock\"}],\"markets\":[\"brazil\"],\"symbols\":{\"query\":{\"types\":[]},\"tickers\":[]},\"columns\":[\"name\",\"description\",\"close\",\"change\",\"volume\",\"market_cap_basic\",\"sector\",\"industry\",\"price_earnings_ttm\",\"p",
+378298
+],
+"4ceafb10": [
+"GET https://www.fundamentus.com.br/resultado.php",
+764859
+],
+"23bc8c07": [
+"GET https://www.fundamentus.com.br/fii_resultado.php",
+521281
+],
+"f5814767": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"symbols\":{\"tickers\":[\"BMFBOVESPA:HGLG11\"]},\"columns\":[\"Perf.1M\",\"Perf.6M\",\"Perf.YTD\",\"Perf.Y\",\"Perf.2Y\",\"Perf.3Y\",\"Perf.5Y\",\"dividends_yield_current\"]}",
+182
+],
+"92f9c163": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"symbols\":{\"tickers\":[\"BMFBOVESPA:AAZQ11\",\"BMFBOVESPA:ABCP11\",\"BMFBOVESPA:ADSH11\",\"BMFBOVESPA:AEFI11\",\"BMFBOVESPA:AERO11\",\"BMFBOVESPA:AFCR11\",\"BMFBOVESPA:AFHF11\",\"BMFBOVESPA:AFHI11\",\"BMFBOVESPA:AFOF11\",\"BMFBOVESPA:AGCX11\",\"BMFBOVESPA:AGRX11\",\"BMFBOVE",
+71067
+],
+"bd2a88ac": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"symbols\":{\"tickers\":[\"BMFBOVESPA:RBIV11\",\"BMFBOVESPA:RBLG11\",\"BMFBOVESPA:RBOP11\",\"BMFBOVESPA:RBRD11\",\"BMFBOVESPA:RBRF11\",\"BMFBOVESPA:RBRI11\",\"BMFBOVESPA:RBRL11\",\"BMFBOVESPA:RBRM11\",\"BMFBOVESPA:RBRP11\",\"BMFBOVESPA:RBRR11\",\"BMFBOVESPA:RBRS11\",\"BMFBOVE",
+31803
+],
+"18f2f180": [
+"GET https://www.infomoney.com.br/feed/",
+125608
+],
+"b05828f8": [
+"GET https://www.moneytimes.com.br/feed/",
+58077
+],
+"48f871c9": [
+"GET https://exame.com/feed/",
+46923
+],
+"ca78a615": [
+"GET https://www.seudinheiro.com/feed/",
+101624
+],
+"d1c2c394": [
+"GET https://news.google.com/rss/search?q=Ibovespa%20OR%20Selic%20OR%20%22mercado%20financeiro%22%20OR%20d%C3%B3lar%20when%3A1d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+143828
+],
+"6da67009": [
+"GET https://www.cnnbrasil.com.br/_next/static/media/8117a33218787fa7-s.p.woff2",
+57200
+],
+"52ce7ad3": [
+"GET https://www.cnnbrasil.com.br/_next/static/css/d4c873113e71a8ad.css",
+26729
+],
+"d8100998": [
+"GET https://www.cnnbrasil.com.br/_next/static/css/7604ba0f7bd155bd.css",
+891
+],
+"e68fbb8e": [
+"GET https://www.cnnbrasil.com.br/_next/static/media/adf4fb6ca97b7f48-s.p.woff2",
+57788
+],
+"270075e3": [
+"GET https://www.cnnbrasil.com.br/_next/static/media/dc0de1ec3c6f7186-s.p.woff2",
+57544
+],
+"b34d54c8": [
+"GET https://www.cnnbrasil.com.br/_next/static/media/b1fe131f39c57354-s.p.woff2",
+57552
+],
+"a462f41b": [
+"GET https://www.cnnbrasil.com.br/_next/static/css/f1153d0889bf9429.css",
+1355612
+],
+"89545755": [
+"GET https://news.google.com/rss/search?q=(recomenda%C3%A7%C3%A3o%20OR%20%22pre%C3%A7o-alvo%22%20OR%20rebaixa%20OR%20eleva)%20(BTG%20OR%20XP%20OR%20%22Ita%C3%BA%20BBA%22%20OR%20Safra%20OR%20Goldman%20OR%20%22JPMorgan%22%20OR%20%22Morgan%20Stanley%22%20OR%20Bradesco)%20a%C3%A7%C3%B5es%20when%3A2d&hl=p",
+46617
+],
+"435d05d9": [
+"GET https://news.google.com/rss/search?q=%22carteira%20recomendada%22%20when%3A7d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+45413
+],
+"bbac340f": [
+"GET https://www.cnbc.com/id/100003114/device/rss/rss.html",
+20445
+],
+"e0bd8884": [
+"GET https://www.cnbc.com/id/15839069/device/rss/rss.html",
+20594
+],
+"feaf032c": [
+"GET https://feeds.content.dowjones.io/public/rss/mw_topstories",
+8136
+],
+"1914d848": [
+"GET https://www.theguardian.com/world/rss",
+159636
+],
+"f5937002": [
+"GET https://feeds.bbci.co.uk/news/world/rss.xml",
+18883
+],
+"aa7246bf": [
+"GET https://www.aljazeera.com/xml/rss/all.xml",
+17367
+],
+"bb3b94b0": [
+"GET https://www.france24.com/en/rss",
+27590
+],
+"0e258219": [
+"GET https://news.google.com/rss/headlines/section/topic/WORLD?hl=pt-BR&gl=BR&ceid=BR:pt-419",
+247773
+],
+"cb47e742": [
+"GET https://news.google.com/rss/headlines/section/topic/WORLD?hl=en-US&gl=US&ceid=US:en",
+203018
+],
+"f8472167": [
+"GET https://deepstatemap.live/en",
+20504
+],
+"daba691d": [
+"GET https://deepstatemap.live/css/bundle-255023.css",
+97947
+],
+"9c1e24d7": [
+"GET https://deepstatemap.live/images/orientation_lock.svg",
+11777
+],
+"442eaeb6": [
+"GET https://deepstatemap.live/js/fabric.eraser_brush.mixin.js",
+28243
+],
+"70e66e8b": [
+"GET https://rss.dw.com/rdf/rss-en-world",
+12072
+],
+"80d21d9c": [
+"GET https://deepstatemap.live/js/fabric.min.js",
+311096
+],
+"c652af0f": [
+"GET https://deepstatemap.live/js/bundle-c2b85c.min.js",
+504035
+],
+"5659221f": [
+"GET https://www.googletagmanager.com/gtm.js?id=GTM-WN7VWFN",
+491150
+],
+"0326184c": [
+"GET https://news.google.com/rss/search?q=(Congresso%20OR%20STF%20OR%20Planalto%20OR%20%22C%C3%A2mara%20dos%20Deputados%22%20OR%20Senado%20OR%20ministro)%20when%3A1d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+161396
+],
+"2d484036": [
+"GET https://deepstatemap.live/images/flags/gb.svg",
+1825
+],
+"75c8b849": [
+"GET https://deepstatemap.live/images/logo.png",
+6378
+],
+"b0601dcb": [
+"GET https://deepstatemap.live/api/translates/public?language=en",
+45157
+],
+"0781234b": [
+"GET https://news.google.com/rss/search?q=(Itamaraty%20OR%20%22pol%C3%ADtica%20externa%22%20OR%20%22Mauro%20Vieira%22%20OR%20%22governo%20brasileiro%22)%20when%3A3d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+94151
+],
+"89ecef10": [
+"GET https://www.googletagmanager.com/gtag/js?id=G-YTF2JECBDL&cx=c&gtm=4e6bi0h2",
+621705
+],
+"45c01fa1": [
+"GET https://deepstatemap.live/assets/fonts/MaterialSymbolsOutlined.woff2",
+250204
+],
+"bde29bc7": [
+"GET https://deepstatemap.live/api/feature-flags",
+19
+],
+"d6208191": [
+"GET https://api.maptiler.com/resources/logo.svg",
+16656
+],
+"faddc6f0": [
+"GET https://www.googletagmanager.com/gtag/js?id=G-YTF2JECBDL",
+621694
+],
+"9fdfad1b": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/36/21@2x.webp",
+7234
+],
+"1ca6f216": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/36/22@2x.webp",
+15388
+],
+"0687fb2c": [
+"GET https://deepstatemap.live/api/history/last",
+623864
+],
+"5e71f5f0": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/38/22@2x.webp",
+9186
+],
+"98248621": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/38/21@2x.webp",
+9756
+],
+"fca45692": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/37/21@2x.webp",
+9052
+],
+"814e8110": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/37/23@2x.webp",
+5456
+],
+"5e984657": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/37/22@2x.webp",
+12364
+],
+"c90ef10f": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/39/20@2x.webp",
+11130
+],
+"dfa30341": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/37/20@2x.webp",
+9086
+],
+"ad2f8e8f": [
+"GET https://deepstatemap.live/images/icons/telegram.svg",
+1646
+],
+"d2728515": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/36/23@2x.webp",
+13166
+],
+"fbabf291": [
+"GET https://deepstatemap.live/images/icons/base.svg",
+13969
+],
+"36d1e772": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/38/20@2x.webp",
+12622
+],
+"04004b5c": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/35/21@2x.webp",
+13094
+],
+"19c5c7c4": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/36/20@2x.webp",
+12376
+],
+"a9af36aa": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/39/23@2x.webp",
+14324
+],
+"73ab6594": [
+"GET https://deepstatemap.live/images/icons/google-play.svg",
+984
+],
+"057482ad": [
+"GET https://deepstatemap.live/images/icons/youtube.svg",
+1189
+],
+"09bd50b7": [
+"GET https://deepstatemap.live/images/partners/dsns.svg",
+94744
+],
+"a1fd740d": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/35/22@2x.webp",
+14132
+],
+"f99a61f6": [
+"GET https://deepstatemap.live/images/partners/mod.png",
+14641
+],
+"35d7b5b7": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/38/23@2x.webp",
+3590
+],
+"30c0b3b0": [
+"GET https://deepstatemap.live/images/icons/facebook.svg",
+645
+],
+"f7528c8b": [
+"GET https://deepstatemap.live/images/icons/twitter.svg",
+557
+],
+"aedbb768": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/39/21@2x.webp",
+7912
+],
+"98f371ae": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/35/23@2x.webp",
+17836
+],
+"4b1a4a79": [
+"GET https://deepstatemap.live/images/partners/brave1.png",
+2082
+],
+"052b9cc1": [
+"GET https://deepstatemap.live/images/partners/mintsyfra.png",
+6653
+],
+"5e94f794": [
+"GET https://deepstatemap.live/images/icons/evorog.svg",
+1788
+],
+"479d8e37": [
+"GET https://deepstatemap.live/images/icons/app-store.svg",
+957
+],
+"2490acad": [
+"GET https://deepstatemap.live/images/partners/pleso_therapy.png",
+7005
+],
+"4a626599": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/39/22@2x.webp",
+9544
+],
+"7218ef2a": [
+"GET https://deepstatemap.live/images/icons/bmc.svg",
+5111
+],
+"5cd9e164": [
+"GET https://deepstatemap.live/railways.json",
+1438057
+],
+"75710cf2": [
+"GET https://www.googletagmanager.com/gtag/destination?id=AW-615811025&cx=c&gtm=4e6bi0h2",
+499919
+],
+"841e3f93": [
+"GET https://st1.deepstatemap.live/styles/DSUkraineEn/6/35/20@2x.webp",
+8810
+],
+"7e15f765": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_13.png",
+1142
+],
+"8ff6e33f": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_2.png",
+669
+],
+"75165ce8": [
+"GET https://deepstatemap.live/images/custom_nato/moscow_ship.png",
+31551
+],
+"0fd505a7": [
+"GET https://deepstatemap.live/images/custom_nato/enemy.png",
+2357
+],
+"81e455d3": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_15.png",
+1258
+],
+"9df0e460": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_14.png",
+718
+],
+"76dab944": [
+"GET https://deepstatemap.live/images/custom_nato/iblorussia.png",
+2357
+],
+"0c69ef90": [
+"GET https://deepstatemap.live/images/custom_nato/eblorussia.png",
+2357
+],
+"a3c55add": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_8.png",
+739
+],
+"812ffc32": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_12.png",
+688
+],
+"aa9f789f": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_11.png",
+1095
+],
+"413081ea": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_9.png",
+1249
+],
+"f8266625": [
+"GET https://deepstatemap.live/images/custom_nato/headquarter.png",
+1256
+],
+"495ba290": [
+"GET https://deepstatemap.live/images/custom_nato/russiacapital.png",
+24813
+],
+"d8a12586": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_16.png",
+745
+],
+"55521efe": [
+"GET https://deepstatemap.live/images/custom_nato/clown.png",
+32883
+],
+"ad69cb8c": [
+"GET https://deepstatemap.live/images/custom_nato/arrow_10.png",
+723
+],
+"31a82d28": [
+"GET https://deepstatemap.live/images/custom_nato/ukrainecapital.png",
+25868
+],
+"8189f3a3": [
+"GET https://deepstatemap.live/images/custom_nato/kerchbridge.png",
+6359
+],
+"b21c4c04": [
+"GET https://deepstatemap.live/images/custom_nato/airport.png",
+2229
+],
+"264dce61": [
+"GET https://agenciabrasil.ebc.com.br/rss/internacional/feed.xml",
+86078
+],
+"3c9e2694": [
+"GET https://googleads.g.doubleclick.net/pagead/viewthroughconversion/615811025/?random=1795114593124&cv=11&fst=1795114593124&bg=ffffff&guid=ON&async=1&gtm=45be6bi0h2v870412766z8863422911za20gzb863422911zd863422911xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116",
+6646
+],
+"2b7822dd": [
+"GET https://www.google.com/pagead/1p-user-list/615811025/?random=1795114593124&cv=11&fst=1795111200000&bg=ffffff&guid=ON&async=1&gtm=45be6bi0h2v870412766z8863422911za20gzb863422911zd863422911xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115938466~115938469~118897920~118897930~120213116~120385422~120469145~1",
+42
+],
+"34ee86b7": [
+"GET https://scripts.claspo.io/scripts/F9269EE184524D129B2EC815FBAE2963.js",
+712453
+],
+"88ce6a97": [
+"GET https://agenciabrasil.ebc.com.br/rss/politica/feed.xml",
+66499
+],
+"ebab66df": [
+"POST https://script.claspo.io/site-script/v1/event\n{\"scriptVersion\":\"latest\",\"orgId\":null,\"siteId\":4895,\"guid\":\"F9269EE184524D129B2EC815FBAE2963\",\"url\":\"https://deepstatemap.live/en#6/46.8451644/32.8491211\",\"message\":\"SCRIPT_INITIAL_LOAD\",\"log_level\":\"INFO\",\"data\":\"{\\\"site\\\":\\\"deepstatemap.live\\\",\\\"",
+51
+],
+"d620b099": [
+"GET https://script.claspo.io/forms/v1/location",
+187
+],
+"220d65f7": [
+"GET https://script.claspo.io/forms/v3/page/eyJmb3JtSWQiOjk4MTgsInZhcmlhbnRJZCI6OTgxOCwibGFuZyI6InVrX1VBIiwiYnJvd3Nlckxhbmd1YWdlIjoidWtfVUEiLCJhY2NvdW50SWQiOjQ4OTUsInJldmlzaW9uIjoiZGM0ZDlkMDktYzg1Yi00MWY0LWE3MjItZDQ3ZTQ3YTZiMzM3IiwidHJpZ2dlcmVkQnkiOiJSdWxlcyJ9",
+10378
+],
+"5be33b73": [
+"POST https://script.claspo.io/site-script/v1/event\n{\"scriptVersion\":\"latest\",\"orgId\":null,\"siteId\":4895,\"guid\":\"F9269EE184524D129B2EC815FBAE2963\",\"url\":\"https://deepstatemap.live/en#6/46.8451644/32.8491211\",\"message\":\"RUNTIME_ERROR\",\"log_level\":\"ERROR\",\"data\":\"{\\\"error\\\":\\\"Error GoogleFontsLoader er",
+51
+],
+"9ad0f814": [
+"GET https://cdn.claspo.io/img/4717/forms/9818/8e997129-2a25-464c-8108-a90ad67413b2.png",
+17145
+],
+"364e7bf0": [
+"GET https://feeds.bbci.co.uk/news/business/rss.xml",
+43079
+],
+"8ea4f671": [
+"GET https://www.ft.com/markets?format=rss",
+11938
+],
+"46d8a71a": [
+"GET https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-US&gl=US&ceid=US:en",
+168984
+],
+"f821bad1": [
+"GET https://agenciabrasil.ebc.com.br/rss/economia/feed.xml",
+82184
+],
+"c43384b9": [
+"GET https://www.federalreserve.gov/feeds/press_all.xml",
+14457
+],
+"574eca3c": [
+"GET https://news.google.com/rss/search?q=(%22Banco%20Central%22%20OR%20Copom%20OR%20CVM%20OR%20%22Tesouro%20Nacional%22)%20when%3A3d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+153984
+],
+"e3d32b19": [
+"GET https://script.claspo.io/forms/v3/page/eyJmb3JtSWQiOjU5NDM1LCJ2YXJpYW50SWQiOjU5NDM1LCJsYW5nIjoidWtfVUEiLCJicm93c2VyTGFuZ3VhZ2UiOiJ1a19VQSIsImFjY291bnRJZCI6NDg5NSwicmV2aXNpb24iOiI0Yjc3N2IyYS0zZDI3LTQ0ZWUtYTk5Zi02OTYxMzU3MGUxOWYiLCJ0cmlnZ2VyZWRCeSI6IlJ1bGVzIn0=",
+17228
+],
+"7f16b7e0": [
+"GET https://cdn.claspo.io/img/4717/forms/59430/daae2118-f99d-4bcc-a30a-453c6b5c1ffc.png",
+1133811
+],
+"bced6e88": [
+"GET https://script.claspo.io/forms/v3/page/eyJmb3JtSWQiOjU4NzEsInZhcmlhbnRJZCI6NTg3MSwibGFuZyI6InVrX1VBIiwiYnJvd3Nlckxhbmd1YWdlIjoidWtfVUEiLCJhY2NvdW50SWQiOjQ4OTUsImFwcGVhcmFuY2VSZXZpc2lvbiI6IjcyYWQ3NTZlLTFhYTAtNDZiYi05NmQ4LTNmMjkwNWJiNWIwYyIsInRyaWdnZXJlZEJ5IjoiUnVsZXMifQ==",
+11413
+],
+"8f7fa595": [
+"GET https://cdn.claspo.io/img/4717/forms/5871/9a7ed17b-d2c3-4e4b-b888-5ebbff0f29db.png",
+10458
+],
+"49c19219": [
+"GET https://feeds.bbci.co.uk/news/world/europe/rss.xml",
+17950
+],
+"47fcd4d6": [
+"GET https://news.google.com/rss/search?q=(Ucr%C3%A2nia%20OR%20Ucrania)%20(guerra%20OR%20ofensiva%20OR%20frente%20OR%20R%C3%BAssia)%20when%3A2d&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+161632
+],
+"3218a7fc": [
+"GET https://news.google.com/rss/search?q=Ukraine%20(front%20OR%20offensive%20OR%20advance%20OR%20Pokrovsk%20OR%20drones%20OR%20%22peace%20talks%22)%20when%3A2d&hl=en-US&gl=US&ceid=US:en",
+143271
+],
+"ff4f31c6": [
+"GET https://www.anbima.com.br/informacoes/merc-sec/arqs/ms261119.txt",
+6681
+],
+"57b6f135": [
+"GET https://statusinvest.com.br/fii/getearnings?IndiceCode=&Filter=&Start=2026-11-19&End=2027-01-18",
+35080
+],
+"bd4d41fa": [
+"GET https://finance.yahoo.com/news/rssindex",
+4608
+],
+"49952a42": [
+"GET https://googleads.g.doubleclick.net/pagead/viewthroughconversion/615811025/?random=1795115193257&cv=11&fst=1795115193257&bg=ffffff&guid=ON&async=1&gtm=45be6bi0h2v870412766z8863422911za20gzb863422911zd863422911xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616985~115938465~115938469~118897920~118897930",
+6657
+],
+"a2652f3b": [
+"GET https://www.google.com/pagead/1p-user-list/615811025/?random=1795115193257&cv=11&fst=1795114800000&bg=ffffff&guid=ON&async=1&gtm=45be6bi0h2v870412766z8863422911za20gzb863422911zd863422911xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616985~115938465~115938469~118897920~118897930~120213116~120385422~1",
+42
+],
+"a9b46afa": [
+"POST https://script.claspo.io/site-script/v1/event\n{\"scriptVersion\":\"latest\",\"orgId\":null,\"siteId\":4895,\"guid\":\"F9269EE184524D129B2EC815FBAE2963\",\"url\":\"https://deepstatemap.live/en#6/46.8451644/32.8491211\",\"message\":\"SCRIPT_INITIAL_LOAD\",\"log_level\":\"INFO\",\"data\":\"{\\\"site\\\":\\\"deepstatemap.live\\\",\\\"",
+51
+],
+"c183259f": [
+"GET https://www.googletagmanager.com/gtag/js?id=G-YTF2JECBDL&cx=c&gtm=4e6bh1h1",
+621705
+],
+"013e6030": [
+"GET https://einvestidor.estadao.com.br/feed/",
+393
+],
+"a8b91e55": [
+"GET https://www.googletagmanager.com/gtag/destination?id=AW-615811025&cx=c&gtm=4e6bh1h1",
+499919
+],
+"413ac94f": [
+"GET https://googleads.g.doubleclick.net/pagead/viewthroughconversion/615811025/?random=1795115793457&cv=11&fst=1795115793457&bg=ffffff&guid=ON&async=1&gtm=45be6bh1h1v870412766z8863422911za20gzb863422911zd863422911xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616985~115938465~115938468~118897920~118897930",
+6656
+],
+"5ee5ec7b": [
+"GET https://www.google.com/pagead/1p-user-list/615811025/?random=1795115793457&cv=11&fst=1795114800000&bg=ffffff&guid=ON&async=1&gtm=45be6bh1h1v870412766z8863422911za20gzb863422911zd863422911xeaxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616985~115938465~115938468~118897920~118897930~120213116~120385423~1",
+42
+],
+"69c33afc": [
+"POST https://script.claspo.io/site-script/v1/event\n{\"scriptVersion\":\"latest\",\"orgId\":null,\"siteId\":4895,\"guid\":\"F9269EE184524D129B2EC815FBAE2963\",\"url\":\"https://deepstatemap.live/en#6/46.8451644/32.8491211\",\"message\":\"SCRIPT_INITIAL_LOAD\",\"log_level\":\"INFO\",\"data\":\"{\\\"site\\\":\\\"deepstatemap.live\\\",\\\"",
+51
+],
+"afc746bf": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EBVSP?range=1d&interval=5m&includePrePost=false",
+6793
+],
+"0dc94191": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?range=1d&interval=5m&includePrePost=false",
+14553
+],
+"197c8cbf": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=1d&interval=5m&includePrePost=false",
+7866
+],
+"3d4328c9": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?range=1d&interval=5m&includePrePost=false",
+7642
+],
+"5932df67": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EDJI?range=1d&interval=5m&includePrePost=false",
+7279
+],
+"3b2333e4": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5ESTOXX50E?range=1d&interval=5m&includePrePost=false",
+9067
+],
+"274da112": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EFTSE?range=1d&interval=5m&includePrePost=false",
+9183
+],
+"9def0079": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/%5EN225?range=1d&interval=5m&includePrePost=false",
+6419
+],
+"1fbe01c1": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/BRL%3DX?range=1d&interval=5m&includePrePost=false",
+15722
+],
+"e6209115": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/EURBRL%3DX?range=1d&interval=5m&includePrePost=false",
+18679
+],
+"bd55c92f": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/BZ%3DF?range=1d&interval=5m&includePrePost=false",
+21124
+],
+"7d680c8c": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?range=1d&interval=5m&includePrePost=false",
+21941
+],
+"7ae8cb50": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/CL%3DF?range=1d&interval=5m&includePrePost=false",
+21387
+],
+"9ac5c4e5": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/GC%3DF?range=1d&interval=5m&includePrePost=false",
+19720
+],
+"9194531f": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?range=1d&interval=5m&includePrePost=false",
+12042
+],
+"fd22a913": [
+"GET https://query1.finance.yahoo.com/v8/finance/chart/EWZ?range=1d&interval=5m&includePrePost=false",
+8492
+],
+"da73b95c": [
+"GET https://conteudos.xpi.com.br/feed/",
+1190
+],
+"dd6850c6": [
+"GET https://statusinvest.com.br/acao/getearnings?IndiceCode=ibovespa&Filter=&Start=2026-11-19&End=2027-01-18",
+18784
+],
+"c9ba4eba": [
+"GET https://www.cnnbrasil.com.br/economia/feed/",
+192725
+],
+"760b8f38": [
+"GET https://news.un.org/feed/subscribe/en/news/all/rss.xml",
+34638
+],
+"8a2b1b48": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"symbols\":{\"tickers\":[\"BMFBOVESPA:FVPQ11\",\"BMFBOVESPA:PABY11\",\"BMFBOVESPA:CTXT11\",\"BMFBOVESPA:HERM11\",\"BMFBOVESPA:ABCP11\",\"BMFBOVESPA:FTCE11\",\"BMFBOVESPA:MIST11\",\"BMFBOVESPA:FTLZ11\",\"BMFBOVESPA:FMOF11\",\"BMFBOVESPA:PMOV11\",\"BMFBOVESPA:RTEL11\",\"BMFBOVE",
+61888
+],
+"7762b0be": [
+"POST https://scanner.tradingview.com/brazil/scan\n{\"symbols\":{\"tickers\":[\"BMFBOVESPA:HGAG11\",\"BMFBOVESPA:RZAG11\",\"BMFBOVESPA:ZAVI11\",\"BMFBOVESPA:JASC11\",\"BMFBOVESPA:PNLN11\",\"BMFBOVESPA:EQIR11\",\"BMFBOVESPA:IRIM11\",\"BMFBOVESPA:BTRA11\",\"BMFBOVESPA:SNCI11\",\"BMFBOVESPA:BLCA11\",\"BMFBOVESPA:AURB11\",\"BMFBOVE",
+42946
+],
+"78e332e5": [
+"GET https://kyivindependent.com/news-archive/rss/",
+17813
+],
+"5379cd0b": [
+"GET https://api.gdeltproject.org/api/v2/doc/doc?format=json&mode=artlist&maxrecords=75&sort=datedesc&timespan=24h&query=(war%20OR%20sanctions%20OR%20election%20OR%20summit%20OR%20coup%20OR%20ceasefire%20OR%20missile)%20sourcelang%3Aenglish",
+36237
+],
+"e86ad181": [
+"GET https://api.gdeltproject.org/api/v2/doc/doc?format=json&mode=artlist&maxrecords=50&sort=datedesc&timespan=48h&query=(Ukraine%20OR%20Ukrainian)%20(offensive%20OR%20advance%20OR%20captured%20OR%20frontline)%20sourcelang%3Aenglish",
+19708
+],
+"800b30f8": [
+"GET https://www.suno.com.br/noticias/feed/",
+54889
+],
+"022f2edb": [
+"GET https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$top=5000&$format=json&$orderby=Data%20desc&$filter=(Indicador%20eq%20%27IPCA%27%20or%20Indicador%20eq%20%27PIB%20Total%27%20or%20Indicador%20eq%20%27Selic%27%20or%20Indicador%20eq%20%27Meta%20para%20",
+304412
+],
+"dfd08595": [
+"GET https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$top=3000&$format=json&$orderby=Data%20desc&$filter=(Indicador%20eq%20%27PIB%20Total%27%20or%20Indicador%20eq%20%27IPCA%27%20or%20Indicador%20eq%20%27Selic%27%20or%20Indicador%20eq%20%27D%C3%ADvida%20",
+422269
+],
+"2f7f44ad": [
+"GET https://statusinvest.com.br/acao/getearnings?IndiceCode=ibovespa&Filter=&Start=2026-11-20&End=2027-01-19",
+18460
+],
+"6b41f162": [
+"GET https://statusinvest.com.br/fii/getearnings?IndiceCode=&Filter=&Start=2026-11-20&End=2027-01-19",
+29348
+],
+"a577c1cf": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4389/dados?formato=json&dataInicial=06/10/2026&dataFinal=20/11/2026",
+1179
+],
+"52ce59b4": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json&dataInicial=06/10/2026&dataFinal=20/11/2026",
+1749
+],
+"ee5f4fa5": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.7478/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+558
+],
+"1e1a7bca": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.188/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+559
+],
+"ef46b07a": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+556
+],
+"c0e099b5": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+558
+],
+"ba8b32db": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.189/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+562
+],
+"2b335460": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.24364/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+589
+],
+"14985098": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.29604/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+589
+],
+"9609b451": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.190/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+560
+],
+"a27a703a": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.29606/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+589
+],
+"55f2426f": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.28763/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+617
+],
+"499d3ff5": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.24369/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+505
+],
+"074c7301": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.5793/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+519
+],
+"9de6d5b4": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+533
+],
+"85b76586": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados?formato=json&dataInicial=06/10/2026&dataFinal=20/11/2026",
+1210
+],
+"f383e6dc": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4513/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+533
+],
+"857f08da": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13621/dados?formato=json&dataInicial=06/10/2026&dataFinal=20/11/2026",
+1171
+],
+"bd72593b": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.22707/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+547
+],
+"28da3435": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.22701/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+561
+],
+"ca15b428": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.20539/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+561
+],
+"cb698651": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.20714/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+533
+],
+"cac201c8": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.21082/dados?formato=json&dataInicial=17/08/2025&dataFinal=20/11/2026",
+519
+],
+"527be306": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=01/01/2025&dataFinal=20/11/2026",
+799
+],
+"621ec776": [
+"GET https://www.anbima.com.br/informacoes/merc-sec/arqs/ms261120.txt",
+1245
+],
+"06b9c6d8": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX?range=1d&interval=5m&includePrePost=false",
+14553
+],
+"bf0bc5ff": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/CLP%3DX?range=1y&interval=1d&includePrePost=false",
+26666
+],
+"e0efee16": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/BRL%3DX?range=1y&interval=1d&includePrePost=false",
+27999
+],
+"c3a9f461": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/%5EFTSE?range=1d&interval=5m&includePrePost=false",
+9185
+],
+"fbc365ce": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/%5EN225?range=1d&interval=5m&includePrePost=false",
+6421
+],
+"6408daf2": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/BRL%3DX?range=1d&interval=5m&includePrePost=false",
+15280
+],
+"0da1ca5c": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/EURBRL%3DX?range=1d&interval=5m&includePrePost=false",
+17873
+],
+"e55cc389": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?range=1d&interval=5m&includePrePost=false",
+19261
+],
+"4eadb04e": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/BZ%3DF?range=1d&interval=5m&includePrePost=false",
+18392
+],
+"7be39ecd": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/CL%3DF?range=1d&interval=5m&includePrePost=false",
+18688
+],
+"f8a485e8": [
+"GET https://query2.finance.yahoo.com/v8/finance/chart/GC%3DF?range=1d&interval=5m&includePrePost=false",
+16904
+],
+"e410400c": [
+"GET https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$top=5000&$format=json&$orderby=Data%20desc&$filter=(Indicador%20eq%20%27IPCA%27%20or%20Indicador%20eq%20%27PIB%20Total%27%20or%20Indicador%20eq%20%27Selic%27%20or%20Indicador%20eq%20%27Meta%20para%20",
+304412
+],
+"396d5230": [
+"GET https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoAnuais?$top=3000&$format=json&$orderby=Data%20desc&$filter=(Indicador%20eq%20%27PIB%20Total%27%20or%20Indicador%20eq%20%27IPCA%27%20or%20Indicador%20eq%20%27Selic%27%20or%20Indicador%20eq%20%27D%C3%ADvida%20",
+401177
+],
+"8aa0f180": [
+"GET https://statusinvest.com.br/acao/getearnings?IndiceCode=ibovespa&Filter=&Start=2026-11-21&End=2027-01-20",
+18460
+],
+"c2cd200f": [
+"GET https://statusinvest.com.br/fii/getearnings?IndiceCode=&Filter=&Start=2026-11-21&End=2027-01-20",
+6108
+],
+"b634b005": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4389/dados?formato=json&dataInicial=07/10/2026&dataFinal=21/11/2026",
+1141
+],
+"64cea116": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.432/dados?formato=json&dataInicial=07/10/2026&dataFinal=21/11/2026",
+1749
+],
+"74891f1e": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13522/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+556
+],
+"e520cd01": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.433/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+558
+],
+"2bd7f7b1": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.7478/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+558
+],
+"8180bf03": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.189/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+562
+],
+"0ba6b1ee": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.188/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+559
+],
+"79106110": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.24364/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+589
+],
+"8112e938": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.29604/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+589
+],
+"10c3988f": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.28763/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+617
+],
+"40802f05": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.190/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+560
+],
+"b3620cde": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.29606/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+589
+],
+"c6503c75": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.5793/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+519
+],
+"08a7b2b4": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.4513/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+533
+],
+"4d299030": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados?formato=json&dataInicial=07/10/2026&dataFinal=21/11/2026",
+1171
+],
+"48b5a8bc": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+533
+],
+"c2cee441": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.24369/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+505
+],
+"bfa8a434": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13621/dados?formato=json&dataInicial=07/10/2026&dataFinal=21/11/2026",
+1132
+],
+"61122863": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.22707/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+547
+],
+"4d1a6781": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.22701/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+561
+],
+"28131608": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.20539/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+561
+],
+"75e00105": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.20714/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+533
+],
+"082e24a8": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.21082/dados?formato=json&dataInicial=18/08/2025&dataFinal=21/11/2026",
+519
+],
+"12943aed": [
+"GET https://api.bcb.gov.br/dados/serie/bcdata.sgs.13762/dados?formato=json&dataInicial=01/01/2025&dataFinal=21/11/2026",
+799
+]
+}
