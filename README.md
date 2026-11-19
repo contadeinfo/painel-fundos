@@ -16,3 +16,7 @@ Arquivos:
 Para rodar na hora: aba **Actions** → *Atualiza peers (CVM)* → **Run workflow**.
 
 Retornos calculados pela cota (líquidos de taxas). Mesma convenção do Comdinheiro: mês e ano contra a última cota do período anterior; 12 a 60 meses contra a primeira cota depois da data de N meses atrás (conferido em 19/11/2026: 310 de 312 números idênticos). Fundo sem cota há mais de 5 dias fica sem retorno. Captação = captação − resgates desde 1º de janeiro.
+
+## Cotações a cada minuto
+
+`scripts/cotacoes.py` (workflow *Cotações*) busca no Yahoo Finance as cotações do dia dos ativos de `cotacoes/simbolos.txt` e publica `cotacoes.json` no ramo **cotacoes** (sempre um único commit, substituído a cada minuto). Em pregão (seg-sex, 7h-21h de Brasília) atualiza a cada 60 s; fora dele, a cada 5 min. O painel lê esse arquivo primeiro e só tenta a fonte direta se ele estiver velho.
