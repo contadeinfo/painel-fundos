@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Money Times</title>
+	<atom:link href="https://www.moneytimes.com.br/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.moneytimes.com.br/</link>
+	<description>Notícias que enriquecem seu dia</description>
+	<lastBuildDate>Fri, 27 Nov 2026 23:17:05 +0000</lastBuildDate>
+	<language>pt-BR</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>Da Hipótese de Riemann ao Pix: a nova corrida pela segurança digital</title>
+		<link>https://www.moneytimes.com.br/da-hipotese-de-riemann-ao-pix-a-nova-corrida-pela-seguranca-digital/</link>
+		
+		<dc:creator><![CDATA[Matheus Spiess]]></dc:creator>
+		<pubDate>Sat, 28 Nov 2026 11:00:00 +0000</pubDate>
+				<category><![CDATA[Colunas]]></category>
+		<category><![CDATA[Anthropic]]></category>
+		<category><![CDATA[Bancos]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Criptomoedas]]></category>
+		<category><![CDATA[Economia]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[IBM]]></category>
+		<category><![CDATA[Inteligência Artificial]]></category>
+		<category><![CDATA[Pix]]></category>
+		<category><![CDATA[Segurança]]></category>
+		<category><![CDATA[Tecnologia]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<category><![CDATA[Thinking outside the box]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430315</guid>
+
+					<description><![CDATA[Talvez você nunca tenha ouvido falar de Bernhard Riemann. Mas provavelmente já fez um Pix, acessou o aplicativo do banco ou comprou alguma coisa pela internet hoje. Por trás dessas atividades existe uma infraestrutura de matemática, programas e sistemas de segurança que raramente recebe nossa atenção, justamente porque costuma funcionar em silêncio. É nesse universo [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">Talvez você nunca tenha ouvido falar de Bernhard Riemann. Mas provavelmente já fez um Pix, acessou o aplicativo do banco ou comprou alguma coisa pela internet hoje. Por trás dessas atividades existe uma infraestrutura de matemática, programas e sistemas de segurança que raramente recebe nossa atenção, justamente porque costuma funcionar em silêncio. </p>
+
+
+
+<p class="wp-block-paragraph">É nesse universo que uma notícia aparentemente distante da vida financeira do brasileiro ganhou relevância. Em 20 de novembro, o matemático Levent Alpöge, pesquisador da Anthropic, afirmou ter encontrado, com a ajuda do Claude, <a href="https://www.moneytimes.com.br/funcionario-da-anthropic-diz-que-ia-ajudou-a-resolver-problema-matematico-de-167-anos/" target="_blank" rel="noreferrer noopener">uma demonstração da Hipótese de Riemann</a>, problema formulado em 1859 e que atravessou gerações de matemáticos sem solução reconhecida. </p>
+
+
+
+<p class="wp-block-paragraph">O anúncio não ficou apenas na palavra do pesquisador. Alpöge disponibilizou uma demonstração formal em Lean, linguagem que permite a computadores verificar passos lógicos de uma prova matemática. No dia seguinte, as comunidades Lean FRO e Mathlib declararam ter reproduzido verificações e certificado a validade formal do resultado, um indício extraordinariamente forte. </p>
+
+
+
+<p class="wp-block-paragraph">Ainda assim, a compreensão dos métodos e o reconhecimento acadêmico mais amplo seguem em desenvolvimento; o Clay Mathematics Institute, responsável pelo prêmio de US$ 1 milhão associado ao problema, mantém seus próprios critérios de reconhecimento. </p>
+
+
+
+<p class="wp-block-paragraph">Para compreender por que esse episódio importa, não é necessário aprender matemática avançada. Basta entender a diferença entre encontrar um padrão, provar que ele sempre funciona e usar esse conhecimento para construir novas ferramentas. </p>
+
+
+
+<h2 id="h-um-misterio-escondido-entre-os-numeros-primos" class="wp-block-heading">Um mistério escondido entre os números primos </h2>
+
+
+
+<p class="wp-block-paragraph">Os números primos são aqueles divisíveis apenas por 1 e por eles mesmos: 2, 3, 5, 7, 11 e assim por diante. Eles parecem surgir sem uma regularidade simples. À medida que avançamos pela sequência dos números naturais, os primos ficam menos frequentes, mas continuam aparecendo de maneira difícil de antecipar. </p>
+
+
+
+<p class="wp-block-paragraph">A Hipótese de Riemann não ensina a descobrir a senha de alguém nem oferece uma lista mágica de todos os números primos. Ela trata, de forma muito resumida, da precisão com que conseguimos descrever sua distribuição. É como saber a direção geral de uma estrada e, de repente, ganhar uma descrição muito mais exata de suas curvas. </p>
+
+
+
+<p class="wp-block-paragraph">Uma demonstração desse porte pode esclarecer resultados que hoje dependem da hipótese e abrir novas rotas para a pesquisa matemática. O feito mais revelador, entretanto, talvez esteja no processo: um pesquisador conseguiu trabalhar com um sistema de inteligência artificial em um problema que resistiu durante 167 anos. O papel da máquina foi além de corrigir um texto ou resumir artigos; ela participou de uma investigação matemática de fronteira. </p>
+
+
+
+<p class="wp-block-paragraph">Isso não prova que já exista uma superinteligência capaz de resolver qualquer desafio. Matemática, pesquisa médica, desenvolvimento de produtos e gestão de empresas exigem também experimentação, informações confiáveis e conhecimento prático. Mas sugere que estamos entrando em uma fase na qual a IA deixa de apenas reproduzir respostas e passa a colaborar de maneira cada vez mais sofisticada na produção de conhecimento. </p>
+
+
+
+<h2 id="h-entao-a-ia-pode-descobrir-a-senha-do-seu-banco-nbsp" class="wp-block-heading"><strong>Então a IA pode descobrir a senha do seu banco?</strong> </h2>
+
+
+
+<p class="wp-block-paragraph">Aqui é preciso separar o fato científico da manchete alarmista. A criptografia moderna transforma informações em dados que só podem ser compreendidos por quem possui a chave adequada. Ela protege conexões bancárias, comunicações, assinaturas digitais e uma infinidade de transações. Certos métodos, como o RSA, utilizam propriedades de números primos muito grandes. </p>
+
+
+
+<p class="wp-block-paragraph">A ideia pode ser explicada com uma conta simples. Multiplicar dois números primos é fácil: 61 vezes 53 resulta em 3.233. Fazer o caminho contrário (descobrir quais números formaram o produto) pode se tornar extremamente difícil quando estamos falando de números com centenas de algarismos. O RSA explora justamente a dificuldade computacional de fatorar determinados números enormes. </p>
+
+
+
+<p class="wp-block-paragraph">Mas conhecer melhor como os primos se distribuem não é o mesmo que descobrir, rapidamente, os fatores de um número gigantesco. Em outras palavras: uma prova da Hipótese de Riemann não quebra automaticamente o RSA, não revela as senhas do aplicativo bancário e não torna o Pix inseguro de uma hora para outra. Seria incorreto apresentar essa consequência como estabelecida. </p>
+
+
+
+<p class="wp-block-paragraph">O alerta verdadeiro é mais amplo. Técnicas matemáticas novas podem, no futuro, inspirar algoritmos que hoje nem imaginamos. E, independentemente da Hipótese de Riemann, modelos de IA mais capazes já conseguem acelerar tarefas relacionadas à programação, à procura de falhas e à análise de grandes volumes de informações. É aí que a segurança digital começa a mudar de escala. </p>
+
+
+
+<h2 id="h-os-ataques-ficaram-mais-rapidos-e-a-defesa-precisa-acompanhar-nbsp" class="wp-block-heading"><strong>Os ataques ficaram mais rápidos e a defesa precisa acompanhar</strong> </h2>
+
+
+
+<p class="wp-block-paragraph">Pense em uma tentativa de golpe. Antes, o criminoso precisava escrever mensagens, adaptar abordagens, reunir dados sobre a vítima e, muitas vezes, dominar ferramentas técnicas. Agora, sistemas de IA podem automatizar partes desse trabalho: produzir mensagens convincentes, imitar vozes, analisar informações públicas, criar códigos maliciosos e testar vulnerabilidades conhecidas. </p>
+
+
+
+<p class="wp-block-paragraph">Segundo um levantamento divulgado pela IBM em julho de 2026, aproximadamente um em cada quatro incidentes maliciosos de violação de dados examinados envolveu algum uso de IA. Nesse grupo, o custo médio chegou a US$ 6 milhões por ocorrência, ante US$ 4,99 milhões na amostra global do estudo. </p>
+
+
+
+<p class="wp-block-paragraph">São números de uma pesquisa com organizações atingidas, não uma estimativa de todos os ataques existentes; mesmo assim, mostram que o fenômeno já deixou de ser apenas hipotético. </p>
+
+
+
+<p class="wp-block-paragraph">A própria Anthropic identificou, em uma análise publicada neste ano, centenas de contas usadas em atividades cibernéticas maliciosas e documentou como ferramentas de IA ajudaram a executar etapas que antes exigiam mais pessoas e tempo. O ponto decisivo não é a invenção de um ataque completamente novo. É a possibilidade de repetir operações conhecidas com mais velocidade, menor custo e maior escala. </p>
+
+
+
+<p class="wp-block-paragraph">A tecnologia, porém, também fortalece quem se defende. A IA consegue examinar milhões de eventos de uma rede, identificar comportamentos suspeitos, auxiliar na correção de programas vulneráveis e acelerar a resposta a invasões. A corrida, portanto, acontece dos dois lados: atacantes tentam explorar a automação; empresas de segurança procuram usá-la para reagir antes que o dano se espalhe. </p>
+
+
+
+<p class="wp-block-paragraph">Para o brasileiro, essa disputa não é abstrata. Uma fraude bancária pode significar dinheiro perdido; um vazamento de dados pode abrir caminho para novas tentativas de golpe; uma invasão em um hospital, uma distribuidora de energia ou um sistema de pagamentos pode interromper serviços essenciais. Proteger a infraestrutura digital passa a ser parte da proteção da própria economia. </p>
+
+
+
+<h2 id="h-e-os-computadores-quanticos-outro-problema-outra-resposta-nbsp" class="wp-block-heading"><strong>E os computadores quânticos? Outro problema, outra resposta&#8230;</strong> </h2>
+
+
+
+<p class="wp-block-paragraph">É comum misturar três assuntos diferentes: Hipótese de Riemann, inteligência artificial e computação quântica. Todos dialogam com matemática avançada, mas os riscos não são intercambiáveis </p>
+
+
+
+<p class="wp-block-paragraph">Um computador quântico suficientemente poderoso poderia, por métodos conhecidos, comprometer sistemas criptográficos hoje amplamente utilizados, como RSA e certos algoritmos de curvas elípticas. Isso é diferente de afirmar que a prova de Riemann tenha esse efeito. </p>
+
+
+
+<p class="wp-block-paragraph">A preocupação é concreta o bastante para motivar uma transição internacional. Em 2024, o instituto americano NIST publicou os primeiros padrões de criptografia pós-quântica; em outubro de 2026, detalhou orientações para substituir, ao longo dos próximos anos, algoritmos vulneráveis. </p>
+
+
+
+<p class="wp-block-paragraph">O objetivo é preparar sistemas antes que uma máquina quântica com capacidade de quebrar essas proteções esteja disponível. </p>
+
+
+
+<p class="wp-block-paragraph">O desafio inclui informações roubadas hoje e armazenadas para possível decifração no futuro. É o chamado “coletar agora, descriptografar depois”. Não precisamos imaginar um colapso imediato da segurança para compreender por que bancos, governos e empresas precisam atualizar suas tecnologias com antecedência. </p>
+
+
+
+<h2 id="h-o-que-isso-significa-para-os-investimentos-nbsp" class="wp-block-heading"><strong>O que isso significa para os investimentos</strong> </h2>
+
+
+
+<p class="wp-block-paragraph">Do ponto de vista do investidor, a conclusão não é sair comprando qualquer empresa que tenha “cibersegurança” no nome. É reconhecer que a proteção de dados e sistemas deixou de ser uma despesa acessória. </p>
+
+
+
+<p class="wp-block-paragraph">Quanto mais negócios migram para a nuvem, utilizam agentes de IA e dependem de conexões digitais, maior tende a ser a necessidade de prevenção, monitoramento, autenticação e recuperação diante de incidentes. </p>
+
+
+
+<p class="wp-block-paragraph">Essa demanda pode favorecer companhias dedicadas à proteção de redes, identidades, dados e aplicações. Existem formas diversificadas de acessar o setor, como os ETFs americanos Global X Cybersecurity (BUG) e First Trust Nasdaq Cybersecurity (CIBR), além do BDR do BUG negociado na B3 sob o código BBUG39. Mas uma tendência estrutural favorável não significa que todos os negócios terão lucros crescentes nem que os preços atuais sejam automaticamente atrativos. </p>
+
+
+
+<p class="wp-block-paragraph">Concorrência, mudanças tecnológicas, avaliações elevadas, concentração em poucas companhias e oscilação cambial continuam relevantes. Para uma carteira equilibrada, uma exposição temática deve ser complementar, dimensionada de acordo com o risco e subordinada à diversificação entre classes de ativos, setores e países. </p>
+
+
+
+<p class="wp-block-paragraph">Também existe uma lição que independe de investir no setor. Senhas exclusivas, autenticação em múltiplas etapas, atualizações de segurança e desconfiança de solicitações urgentes são medidas simples, mas importantes, para proteger o patrimônio no cotidiano. A IA pode tornar um golpe mais convincente; ela não elimina a necessidade de conferirmos a origem de uma mensagem ou de uma transferência. </p>
+
+
+
+<p class="wp-block-paragraph">Talvez a melhor maneira de interpretar a notícia sobre Riemann seja esta: estamos aprendendo a usar máquinas para enfrentar problemas antes reservados a algumas das mentes mais brilhantes da humanidade. O potencial econômico é extraordinário, mas o avanço também amplia a responsabilidade sobre os sistemas que sustentam a vida digital. </p>
+
+
+
+<p class="wp-block-paragraph">No fim, a pergunta mais relevante para o investidor brasileiro não é se a inteligência artificial descobriu uma fórmula capaz de abrir todas as fechaduras. É se governos, bancos, empresas e consumidores estão preparados para um mundo no qual tanto quem constrói quanto quem tenta invadir essas fechaduras dispõe de ferramentas cada vez mais poderosas. Nesse ambiente, segurança digital deixa de ser detalhe técnico: torna-se infraestrutura econômica. </p>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Rede D&#8217;Or (RDOR3) antecipa pagamento de R$ 2,1 bilhões em dividendos; confira a data</title>
+		<link>https://www.moneytimes.com.br/rede-dor-rdor3-antecipa-pagamento-de-r-21-bilhoes-em-dividendos-confira-a-data/</link>
+		
+		<dc:creator><![CDATA[Carolina Gama]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 23:17:02 +0000</pubDate>
+				<category><![CDATA[Empresas]]></category>
+		<category><![CDATA[Ações]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Dividendos]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Pagamentos]]></category>
+		<category><![CDATA[Rede D'Or]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430458</guid>
+
+					<description><![CDATA[A Rede D&#8217;Or São Luiz (RDOR3) antecipou o pagamento de dividendos intercalares, segundo comunicado divulgado nesta sexta-feira (27). O conselho de administração aprovou a mudança da data de pagamento de 30 de dezembro para 9 de dezembro de 2026. A companhia justificou a decisão pela disponibilidade de caixa. O valor bruto total é de R$ [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">A <strong>Rede D&#8217;Or São Luiz (RDOR3) </strong>antecipou o pagamento de <strong>dividendos </strong>intercalares, segundo comunicado divulgado nesta sexta-feira (27). O conselho de administração aprovou a mudança da data de pagamento de 30 de dezembro para 9 de dezembro de 2026. A companhia justificou a decisão pela disponibilidade de caixa.</p>
+
+
+
+<p class="wp-block-paragraph">O valor bruto total é de R$ 2,1 bilhões, o equivalente a R$ 0,95171731666 por ação ordinária.</p>
+
+
+
+<p class="wp-block-paragraph">Os dividendos foram declarados pelo conselho em 12 de dezembro de 2025 e ratificados pela Assembleia Geral Ordinária em 30 de abril de 2026. Têm direito ao provento os acionistas que detinham ações da empresa em 18 de dezembro de 2025.</p>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Bancada do PT na Câmara reafirma apoio a Lula e defende investimentos e redução dos juros</title>
+		<link>https://www.moneytimes.com.br/bancada-do-pt-na-camara-reafirma-apoio-a-lula-e-defende-investimentos-e-reducao-dos-juros/</link>
+		
+		<dc:creator><![CDATA[Estadão Conteúdo]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 23:01:13 +0000</pubDate>
+				<category><![CDATA[Política]]></category>
+		<category><![CDATA[Câmara dos Deputados]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Estadão Conteúdo]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Juros]]></category>
+		<category><![CDATA[Lula]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430455</guid>
+
+					<description><![CDATA[A bancada do PT na Câmara dos Deputados divulgou nota nesta sexta-feira (27) em que defende a exclusão dos investimentos públicos dos limites do arcabouço fiscal, a redução das taxas de juros e a ampliação da tributação sobre os considerados &#8220;super-ricos&#8221;. O comunicado foi elaborado após seminário da bancada sobre economia, realizado ma quinta-feira (26), [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">A bancada do <strong>PT </strong>na Câmara dos Deputados divulgou nota nesta sexta-feira (27) em que defende a exclusão dos investimentos públicos dos limites do <a href="https://www.moneytimes.com.br/tag/arcabouco-fiscal/">arcabouço fiscal</a>, a redução das<strong> taxas de juros</strong> e a ampliação da tributação sobre os considerados &#8220;super-ricos&#8221;. O comunicado foi elaborado após seminário da bancada sobre economia, realizado ma quinta-feira (26), em Brasília.</p>
+
+
+
+<p class="wp-block-paragraph">No texto, os deputados reafirmam o apoio ao presidente <strong>Luiz Inácio Lula da Silva (PT)</strong>, mas criticam a pressão do mercado sobre o governo petista.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;A imensa pressão para circunscrever o governo e as instituições do Estado aos interesses do mercado financeiro e do rentismo, em uma perspectiva neoliberal, não terá nenhuma tolerância de nossa bancada. O debate não pode ser interditado, e nossa voz se soma à dos milhões de brasileiros e brasileiras que votaram em Lula Presidente e nas nossas candidaturas para gritar por duas medidas fundamentais na área econômica, de igual prioridade&#8221;, diz a nota.</p>
+
+
+
+<p class="wp-block-paragraph">Para os petistas, diante de um cenário de desaceleração econômica, o próximo governo Lula precisa aumentar os investimentos públicos capazes de alavancar aportes da iniciativa privada no médio e longo prazos, para reindustrializar o País. Os parlamentares também defendem que esses investimentos não fiquem submetidos às regras do arcabouço fiscal.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;Um elemento necessário nesse momento é a exclusão dos investimentos públicos dos limites do arcabouço fiscal, com impacto imediato no apoio à infraestrutura de transportes, mobilidade urbana, energia, saneamento, conectividade digital, habitação, pesquisa científica e inovação tecnológica. São estas áreas que ampliam a capacidade produtiva do país e a competitividade da produção nacional. Isso, por sua vez, contribui decisivamente para o crescimento da economia e, com ele, o aumento da arrecadação futura&#8221;, afirma a bancada.</p>
+
+
+
+<p class="wp-block-paragraph">Os petistas também classificam como inegociáveis &#8220;ataques aos mínimos constitucionais da saúde e educação&#8221; e se comprometem a apoiar o fim dos supersalários em todos os Poderes e de dispositivos da previdência dos militares, classificados pelos parlamentares como privilégios. </p>
+
+
+
+<p class="wp-block-paragraph">Por fim, a bancada também defende a aprovação de projetos voltados à tributação dos super-ricos e diz que &#8220;qualquer ajuste de contas públicas não pode recair sobre os mais pobres, a classe trabalhadora e as camadas médias do país&#8221;.</p>
+
+
+
+<h2 id="h-juros" class="wp-block-heading">Juros</h2>
+
+
+
+<p class="wp-block-paragraph">A segunda medida considerada prioritária pela bancada petista é a redução das taxas de juros. Na nota, os parlamentares acusam o Banco Central de atuar em função dos interesses do mercado financeiro e criticam as regras que embasam a condução da política monetária.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;Igualmente urgente e prioritária é a necessidade imperiosa de barrar os juros abusivos e criminosos hoje praticados no país, promovidos por um Banco Central capturado pelos interesses do mercado e imobilizado por regras anacrônicas e decisões macroeconômicas dissociadas das decisões emanadas da democracia brasileira. Hoje o Banco Central está totalmente rendido aos objetivos de uma parcela muito restrita de super-ricos e rentistas que se beneficiam dos juros escorchantes vigentes&#8221;, diz o texto.</p>
+
+
+
+<p class="wp-block-paragraph">Os deputados argumentam que as altas taxas de juros alimentam o endividamento das famílias, das <a href="https://www.moneytimes.com.br/empresas/">empresas</a> e do Estado. &#8220;Não há corte de gastos que seja suficiente para que os privilegiados aceitem baixar os juros&#8221;, afirmam.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;Os juros precisam baixar já, de forma gradual mas permanente, para abrir um novo momento das finanças públicas e da relação dívida/PIB, para aliviar a atividade produtiva das empresas, para permitir melhor qualidade de vida das pessoas e das famílias&#8221;, sustenta a bancada.</p>
+
+
+
+<p class="wp-block-paragraph">Por fim, os petistas afirmam estar disponíveis para discutir soluções estruturais ainda nos meses de dezembro e janeiro, antes do início da próxima legislatura, em fevereiro.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;O presidente Lula pode continuar contando com essa combativa bancada para fazer avançar seu programa de governo, unindo responsabilidade fiscal e responsabilidade social, crescimento econômico e bem-estar social, combate à inflação e desenvolvimento&#8221;, conclui a nota.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Herdeiros da Armani consideram comprar pequena participação na grife em operação de venda de ações, dizem fontes</title>
+		<link>https://www.moneytimes.com.br/herdeiros-da-armani-consideram-comprar-pequena-participacao-na-grife-em-operacao-de-venda-de-acoes-dizem-fontes/</link>
+		
+		<dc:creator><![CDATA[Reuters]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 22:30:00 +0000</pubDate>
+				<category><![CDATA[Internacional]]></category>
+		<category><![CDATA[Ações]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Empresas]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[L'Oréal]]></category>
+		<category><![CDATA[LVMH]]></category>
+		<category><![CDATA[Reuters]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430448</guid>
+
+					<description><![CDATA[Os herdeiros do falecido estilista Giorgio Armani estão considerando comprar uma pequena parcela da participação de 15% que está à venda, conforme estipulado no testamento do fundador, afirmaram duas pessoas a par do assunto. A L’Oréal, cuja licença para as fragrâncias, produtos para a pele e maquiagem da Armani é válida até 2050, ficará com [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">Os herdeiros do falecido estilista <strong>Giorgio Armani </strong>estão considerando comprar uma pequena parcela da participação de 15% que está à venda, conforme estipulado no testamento do fundador, afirmaram duas pessoas a par do assunto.</p>
+
+
+
+<p class="wp-block-paragraph">A <strong>L’Oréal</strong>, cuja licença para as fragrâncias, produtos para a pele e maquiagem da Armani é válida até 2050, ficará com a maior parte da participação, disseram as fontes, com uma delas acrescentando que o grupo francês de beleza está em negociações para adquirir cerca de 10% da Armani.</p>
+
+
+
+<p class="wp-block-paragraph">A fabricante de óculos <strong>EssilorLuxottica</strong>, outra forte aliada comercial da Armani, compraria cerca de 2% a 3% da grife italiana, com os 2% a 3% restantes ficando com os herdeiros de Armani, disseram as fontes.</p>
+
+
+
+<p class="wp-block-paragraph">A sobrinha de Armani, Silvana Armani, de 71 anos, responsável pelos designs da linha feminina da Giorgio Armani; o sobrinho e membro do conselho Andrea Camerana, de 56 anos; e o parceiro de longa data do estilista, Leo dell’Orco, de 74 anos, que lidera a linha masculina, são os herdeiros que estão considerando a compra da participação, disse uma das fontes.</p>
+
+
+
+<h2 id="h-o-testamento-de-armani" class="wp-block-heading">O testamento de Armani</h2>
+
+
+
+<p class="wp-block-paragraph">Armani, que faleceu aos 91 anos em setembro de 2025, determinou em seu testamento que cerca de 15% da empresa deveriam ser vendidos entre 12 e 18 meses após sua morte, seguido da alienação de mais 30% a 54,9% das ações ou por uma abertura de capital, com prioridade ao LVMH , à L’Oréal, à EssilorLuxottica ou a outro grupo de “peso equivalente”.</p>
+
+
+
+<p class="wp-block-paragraph">O grupo francês de <a href="https://www.moneytimes.com.br/tag/luxo/">luxo</a> <strong>LVMH </strong>não está envolvido no processo no momento, disse uma das fontes.</p>
+
+
+
+<p class="wp-block-paragraph">O testamento não mencionou a opção de alguns herdeiros adquirirem parte da participação inicial de 15%.</p>
+
+
+
+<p class="wp-block-paragraph">Dividir essa participação entre vários investidores, em vez de vendê-la a um único comprador, preservaria as opções da família para a segunda fase do processo, já que eles preferem uma eventual abertura de capital, informou a Reuters neste mês.</p>
+
+
+
+<p class="wp-block-paragraph">As negociações estão em andamento e ainda não foi alcançado um acordo final, disseram as fontes.</p>
+
+
+
+<p class="wp-block-paragraph">Representantes da Armani, do Rothschild — consultoria da grife —, da LVMH e da EssilorLuxottica preferiram não comentar. A L’Oréal não respondeu aos pedidos de comentário enviados por email.</p>
+
+
+
+<p class="wp-block-paragraph">A Fundação Giorgio Armani, criada pelo estilista para preservar seu legado e cumprir seus desejos, detém atualmente a propriedade plena de 10% da grife e os direitos de nua propriedade sobre os 90% restantes, o que significa que possui o título legal dessas ações, mas não tem o direito de exercer, por exemplo, seus direitos de voto, nem de receber rendimentos como <a href="https://www.moneytimes.com.br/tag/dividendos/">dividendos</a>. Esses direitos, conhecidos como usufruto, são compartilhados entre os herdeiros do estilista.</p>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Padilha deve continuar na Saúde no quarto mandato de Lula, diz Estadão</title>
+		<link>https://www.moneytimes.com.br/padilha-deve-continuar-na-saude-no-quarto-mandato-de-lula-diz-estadao/</link>
+		
+		<dc:creator><![CDATA[Money Times]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 22:10:00 +0000</pubDate>
+				<category><![CDATA[Política]]></category>
+		<category><![CDATA[Alexandre Padilha]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Educação]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Lula]]></category>
+		<category><![CDATA[MEC]]></category>
+		<category><![CDATA[Ministério da Educação]]></category>
+		<category><![CDATA[Ministério da Saúde]]></category>
+		<category><![CDATA[Saúde]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430441</guid>
+
+					<description><![CDATA[O ministro da Saúde, Alexandre Padilha, será mantido no cargo no quarto mandato do presidente Luiz Inácio Lula da Silva (PT), segundo fontes ouvidas pelo Estadão. Padilha, filiado ao PT, assumiu o ministério em março do ano passado, no lugar de Nísia Trindade, eleita agora deputada federal. Antes disso, comandava a Secretaria de Relações Institucionais [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">O ministro da Saúde, <strong>Alexandre Padilha</strong>, será mantido no cargo no quarto mandato do presidente <a href="https://www.moneytimes.com.br/tag/lula/">Luiz Inácio Lula da Silva</a> (PT), segundo fontes ouvidas pelo Estadão.</p>
+
+
+
+<p class="wp-block-paragraph">Padilha, filiado ao <strong>PT</strong>, assumiu o ministério em março do ano passado, no lugar de Nísia Trindade, eleita agora deputada federal. Antes disso, comandava a Secretaria de Relações Institucionais (SRI), responsável pela articulação do Planalto com o Congresso. </p>
+
+
+
+<p class="wp-block-paragraph">Em 2024, ele foi chamado de &#8220;desafeto&#8221; e &#8220;incompetente&#8221; pelo então presidente da Câmara, Arthur Lira (PP-AL), hoje senador eleito.</p>
+
+
+
+<p class="wp-block-paragraph">Padilha já foi ministro da Saúde no governo <strong>Dilma Rousseff </strong>e chefiou a SRI de 2009 a 2010, no segundo mandato de Lula. Na gestão de Fernando Haddad na Prefeitura de São Paulo, foi secretário de Relações Governamentais e, depois, da Saúde.</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Leia também:</strong> <a href="https://www.moneytimes.com.br/alckmin-deve-assumir-novo-ministerio-da-seguranca-publica-dizem-fontes-ccgg/">Alckmin deve assumir novo Ministério da Segurança Pública no Lula 4, dizem fontes</a></li>
+</ul>
+
+
+
+<h2 id="h-o-nome-de-lula-para-o-mec" class="wp-block-heading"><strong>O nome de Lula para o MEC</strong></h2>
+
+
+
+<p class="wp-block-paragraph">No <strong>Ministério da Educação</strong>, Lula avalia manter Leonardo Barchini, apesar da pressão do PT pela pasta, que, assim como a Saúde, tem orçamento bilionário. </p>
+
+
+
+<p class="wp-block-paragraph">Barchini era secretário-executivo de Camilo Santana, ex-ministro da Educação escolhido por Lula para comandar a Casa Civil. Ele também foi chefe de gabinete de Haddad quando este chefiava o MEC.</p>
+
+
+
+<p class="wp-block-paragraph"></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Petróleo registra primeiro ganho semanal em novembro em meio aos temores sobre oferta</title>
+		<link>https://www.moneytimes.com.br/petroleo-registra-primeiro-ganho-semanal-em-novembro-por-temores-sobre-oferta-davs/</link>
+		
+		<dc:creator><![CDATA[Reuters]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 21:50:43 +0000</pubDate>
+				<category><![CDATA[Mercados]]></category>
+		<category><![CDATA[Arábia Saudita]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Commodities]]></category>
+		<category><![CDATA[Estados Unidos (EUA)]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Forças Armadas]]></category>
+		<category><![CDATA[Irã]]></category>
+		<category><![CDATA[Oriente Médio]]></category>
+		<category><![CDATA[Petróleo]]></category>
+		<category><![CDATA[Reuters]]></category>
+		<category><![CDATA[Saudi Aramco]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430442</guid>
+
+					<description><![CDATA[O petróleo Brent registrou uma ligeira queda nesta sexta-feira (27), mas interrompeu uma sequência de três semanas de perdas para registrar seu primeiro ganho semanal em novembro. A commodity segue pressionada pelos ataques a petroleiros no Estreito de Ormuz e à infraestrutura energética saudita, que alimentaram preocupações com o abastecimento no Oriente Médio. Os contratos [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">O <a href="https://www.moneytimes.com.br/tag/petroleo/">petróleo</a> Brent registrou uma ligeira queda nesta sexta-feira (27), mas interrompeu uma sequência de três semanas de perdas para registrar seu primeiro ganho semanal em novembro.</p>
+
+
+
+<p class="wp-block-paragraph">A <em>commodity </em>segue pressionada pelos ataques a petroleiros no Estreito de Ormuz e à infraestrutura energética saudita, que alimentaram preocupações com o abastecimento no Oriente Médio.</p>
+
+
+
+<p class="wp-block-paragraph">Os contratos futuros do petróleo Brent caíram US$ 1,13, ou 1,2%, fechando a sessão a US$95,44 o barril. O preço atingiu sua maior cotação desde 9 de novembro no início do pregão, mas ficou abaixo da marca de US$100.</p>
+
+
+
+<p class="wp-block-paragraph">Os futuros do petróleo West Texas Intermediate (WTI) dos EUA fecharam a US$83,08 por barril, uma queda de 0,60 dólar, ou 0,7%, em relação ao fechamento de quarta-feira. Não houve fechamento do WTI na quinta-feira devido ao feriado de Ação de Graças nos EUA.</p>
+
+
+
+<p class="wp-block-paragraph">O Brent registrou alta de cerca de 3% na semana, enquanto o WTI registrou queda de 0,9%.</p>
+
+
+
+<h2 class="wp-block-heading">O que mexeu com o petróleo hoje?</h2>
+
+
+
+<p class="wp-block-paragraph">&#8220;Os ataques a instalações de energia e petroleiros no Oriente Médio trouxeram de volta ao foco a interrupção no abastecimento&#8221;, disse Mark Schaefer, diretor da corretora Liquidity Energy.</p>
+
+
+
+<p class="wp-block-paragraph">Os preços recuaram nas últimas semanas, à medida que os investidores ficaram aliviados com o fato de o presidente dos EUA, <a href="https://www.moneytimes.com.br/tag/donald-trump/">Donald Trump</a>, não ter intensificado as ações militares contra o <a href="https://www.moneytimes.com.br/tag/ira/">Irã</a> após as <a href="https://www.moneytimes.com.br/tag/eleicoes/">eleições</a> de meio de mandato.</p>
+
+
+
+<p class="wp-block-paragraph">No entanto, Teerã continuou a atacar navios que transitavam pelo estratégico Estreito de Ormuz, interrompendo as <a href="https://www.moneytimes.com.br/tag/exportacoes/">exportações</a> de petróleo, enquanto os houthis do Iêmen atacaram infraestruturas da <a href="https://www.moneytimes.com.br/tag/arabia-saudita/">Arábia Saudita</a>.</p>
+
+
+
+<p class="wp-block-paragraph">As Forças Armadas dos EUA informaram na sexta-feira que imobilizaram um navio comercial na quinta-feira após ele tentar furar o bloqueio dos EUA ao Irã, enquanto um assessor do líder supremo iraniano afirmou que o Irã manteria o Estreito de Ormuz fechado, ao mesmo tempo em que prometeu romper o embargo.</p>
+
+
+
+<p class="wp-block-paragraph">A refinaria de Jazan, da Saudi Aramco, suspendeu temporariamente algumas operações depois que um projétil atingiu o local na quinta-feira, matando um trabalhador, informou o Ministério da Energia da Arábia Saudita.</p>
+
+
+
+<p class="wp-block-paragraph">O ataque foi o mais recente golpe contra instalações-chave da Arábia Saudita, um dia depois que os houthis reivindicaram ataques a Ras Tanura, a maior refinaria do reino e um importante centro de exportação de petróleo bruto.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Ibovespa fecha em queda após euforia com Trabuco na Fazenda, mas acumula ganhos de mais de 6% na semana</title>
+		<link>https://www.moneytimes.com.br/ibovespa-fecha-em-queda-apos-euforia-com-trabuco-na-fazenda-mas-acumula-ganhos-de-mais-de-6-na-semana-davs/</link>
+		
+		<dc:creator><![CDATA[Dani Alvarenga]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 21:31:21 +0000</pubDate>
+				<category><![CDATA[Mercados]]></category>
+		<category><![CDATA[Bolsa de Valores]]></category>
+		<category><![CDATA[Bradespar]]></category>
+		<category><![CDATA[Brasil]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Dólar]]></category>
+		<category><![CDATA[Estados Unidos (EUA)]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Ibovespa]]></category>
+		<category><![CDATA[Imposto de Renda]]></category>
+		<category><![CDATA[Luiz Carlos Trabuco]]></category>
+		<category><![CDATA[Lula]]></category>
+		<category><![CDATA[Ministério da Fazenda]]></category>
+		<category><![CDATA[Money Trader]]></category>
+		<category><![CDATA[Morgan Stanley]]></category>
+		<category><![CDATA[MT Redes]]></category>
+		<category><![CDATA[Petrobras]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<category><![CDATA[Trading]]></category>
+		<category><![CDATA[UBS]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430345</guid>
+
+					<description><![CDATA[A bolsa brasileira começou o pregão desta sexta-feira (27) em clima de festa e, nos primeiros minutos do pregão, o Ibovespa disparou 3,86% aos 183.623,17 pontos. A euforia dos investidores foi impulsionada pelo anúncio de que Luiz Carlos Trabuco ocuparia o cargo de ministro da Fazenda a partir de 2027. Porém, a festa durou pouco. [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">A bolsa brasileira começou o pregão desta sexta-feira (27) em clima de festa e, nos primeiros minutos do pregão, o Ibovespa disparou 3,86% aos 183.623,17 pontos. A euforia dos investidores foi impulsionada pelo anúncio de que <strong>Luiz Carlos Trabuco </strong>ocuparia o cargo de <strong>ministro da Fazenda</strong> a partir de 2027.</p>
+
+
+
+<p class="wp-block-paragraph">Porém, a festa durou pouco. A realização de lucros e a queda de Petrobras (<a href="https://www.moneytimes.com.br/cotacao/petr4/">PETR4</a>; <a href="https://www.moneytimes.com.br/cotacao/petr3/">PETR3</a>) e Vale (VALE3) limitaram os ganhos do Ibovespa, que fechou em queda de 0,13%, aos 176.573,35 pontos. Ainda assim, o principal índice da B3 acumulou alta de 6,13% na semana. </p>
+
+
+
+<p class="wp-block-paragraph">Já o dólar à vista encerrou em queda de 3,97%, a R$ 5,5156. A divisa completou cinco sessões seguidas de perdas, acumulando recuo de 7,07% na semana.</p>
+
+
+
+<p class="wp-block-paragraph">A queda da moeda norte-americana frente ao real foi na contramão do desempenho do dólar global. Por volta de 18h30 (horário de Brasília), o<strong> DXY</strong>, indicador que compara a moeda a uma cesta de seis divisas globais, como <a href="https://www.moneytimes.com.br/tag/euro/"><strong>euro</strong></a> e <a href="https://www.moneytimes.com.br/tag/libra/"><strong>libra</strong></a>,<strong> </strong>operava em alta de 0,38%, aos 104,0470 pontos.</p>
+
+
+
+<h2 id="h-o-que-agitou-os-mercados-hoje" class="wp-block-heading">O que agitou os mercados hoje?</h2>
+
+
+
+<p class="wp-block-paragraph">A virada da bolsa brasileira começou ainda na quarta-feira (25), quando os rumores de que <strong>Luiz Carlos Trabuco</strong>, presidente do Conselho de Administração do <strong>Bradesco</strong> (<strong>BBDC4</strong>), poderia assumir o <a href="https://www.seudinheiro.com/tag/ministerio-da-fazenda/">Ministério da Fazenda</a> começaram a circular entre os investidores.</p>
+
+
+
+<p class="wp-block-paragraph">Já na quinta-feira (26), a expectativa levou o Ibovespa a disparar 6,07%. A confirmação, após o fechamento do pregão de ontem, deu continuidade ao movimento de recuperação dos ativos brasileiros nesta sexta.</p>
+
+
+
+<p class="wp-block-paragraph">Para Nicolas Gass, estrategista de investimentos e sócio da GT Capital, a escolha de Trabuco retirou parte do prêmio de <a href="https://www.moneytimes.com.br/tag/risco-fiscal/">risco fiscal</a> que pressionava o mercado. O perfil do banqueiro, com experiência no setor privado e credibilidade junto aos investidores, ajudou a melhorar as expectativas para a condução da política econômica.</p>
+
+
+
+<p class="wp-block-paragraph">Embora a bolsa tenha iniciado o dia em forte alta, o Ibovespa perdeu força ao longo do pregão. Segundo Gass, parte dos investidores aproveitou a confirmação para realizar lucros depois da disparada da véspera. “Compra no boato, vende no fato”, resumiu o estrategista.</p>
+
+
+
+<p class="wp-block-paragraph">A pressão de Petrobras e Vale, duas das empresas de maior peso no Ibovespa, também contribuiu para a devolução dos ganhos. O índice chegou a perder mais de 6 mil pontos em relação à máxima do dia.</p>
+
+
+
+<p class="wp-block-paragraph">Contudo, o movimento não foi acompanhado por uma reversão no <a href="https://www.moneytimes.com.br/tag/cambio/">câmbio</a> ou na curva de juros. O dólar e os <a href="https://www.moneytimes.com.br/tag/juros-futuros/">juros futuros</a> continuaram em queda, indicando que os investidores mantiveram parte do otimismo com a escolha de Trabuco.</p>
+
+
+
+<p class="wp-block-paragraph">Os investidores também reagiram ao IPCA-15 de novembro, divulgado nesta semana. A prévia da inflação subiu 0,22%, abaixo das expectativas do mercado, e também ajudou a aliviar a curva de juros.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;O movimento é até mais limpo que na bolsa porque segurou o dia todo. O que chama atenção é a parte longa caindo mais que a curta. É o mercado tirando prêmio fiscal da curva, não só apostando em corte de Selic&#8221;, disse Gass.</p>
+
+
+
+<h2 id="h-as-altas-e-baixas-do-ibovespa" class="wp-block-heading">As altas e baixas do Ibovespa</h2>
+
+
+
+<p class="wp-block-paragraph">A ponta positiva do Ibovespa foi liderada pela Tenda <strong>(</strong>TEND3<strong>)</strong> nesta sexta-feira. A companhia registrou ganhos de 13,02%, a R$ 18,66.</p>
+
+
+
+<p class="wp-block-paragraph">Já a ponta negativa do principal índice da B3 foi encabeçada pela Natura (NATU3), que encerrou o dia em queda de 6,54%, a R$ 4,86.</p>
+
+
+
+<p class="wp-block-paragraph">As <em>blue chips</em> também foram afetadas pelo sobe e desce da bolsa, com Petrobras e Vale fechando o dia no vermelho.</p>
+
+
+
+<p class="wp-block-paragraph">A pressão dos papéis da petroleira decorreu da notícia de que a companhia assumirá o controle integral do bloco exploratório C-M-789 (Opal) na Bacia de Campos, conforme apurou a coluna Capital, do jornal O Globo. A Petrobras absorverá as fatias da ExxonMobil (40%) e da QatarEnergy (30%), elevando a participação a 100%.</p>
+
+
+
+<p class="wp-block-paragraph">A queda dos preços do <a href="https://www.moneytimes.com.br/tag/petroleo/">petróleo</a> hoje também não ajudou. A <em>commodity </em>segue pressionado pelos riscos para o transporte marítimo no <a href="https://www.moneytimes.com.br/tag/oriente-medio/">Oriente Médio</a> diante das tensões geopolíticas.</p>
+
+
+
+<p class="wp-block-paragraph">Enquanto o <strong>Brent para fevereiro fechou em queda de 0,91%, a US$ 90,84</strong>, o barril, <strong>PETR4 recuou 2,43%, a R$ 42,14</strong>, e <strong>PETR3 teve perdas de 3,14%, a R$ 47,55</strong>.</p>
+
+
+
+<p class="wp-block-paragraph">Já a Vale acompanhou a queda do minério de ferro no exterior, que fechou em queda de 0,3%, cotado a US$ 98,99, no mercado futuro da Dalian Commodity Exchange. A mineradora encerrou o dia com recuo de 2,62%, a R$ 57,19.</p>
+
+
+
+<p class="wp-block-paragraph">Por outro lado, as <em>blue chips</em> financeiras viram o retorno de fluxo de capital na bolsa impulsionar o setor. O Índice Financeiro (IFNC) registrou alta de 2,12% nesta sexta.</p>
+
+
+
+<h2 class="wp-block-heading">Wall Street em ritmo de recuperação</h2>
+
+
+
+<p class="wp-block-paragraph">Em dia de pregão mais curto, com as negociações encerradas às 15h (de Brasília), as <strong>bolsas de Nova York</strong> fecharam o pregão desta sexta-feira (24) em alta.</p>
+
+
+
+<p class="wp-block-paragraph">O movimento ocorreu na retomada dos negócios após o feriado de Ação de Graças e em meio à Black Friday, que tradicionalmente marca o início da temporada de compras de fim de ano nos Estados Unidos.</p>
+
+
+
+<p class="wp-block-paragraph">Embora persistam incertezas sobre os investimentos em <a href="https://www.moneytimes.com.br/tag/inteligencia-artificial/">inteligência artificial</a> (IA), as ações de fabricantes de semicondutores avançaram, sustentando o clima positivo de <a href="https://www.moneytimes.com.br/tag/wall-street/">Wall Street</a>.</p>
+
+
+
+<p class="wp-block-paragraph">Confira como os índices da região fecharam o pregão hoje:</p>
+
+
+
+<ul class="wp-block-list">
+<li><strong>Dow Jones</strong>: +1,18%, aos 50.775,35 pontos;</li>
+
+
+
+<li><strong>S&amp;P 500</strong>: +1,60%, aos 7.297,49 pontos; e</li>
+
+
+
+<li><strong>Nasdaq</strong>: +2,31%, aos 24.129,50 pontos.</li>
+</ul>
+
+
+
+<div class="mc-optin mc-optin--mt " data-optin="optin-email-mt">
+	<div class="mc-optin__title">Por dentro dos mercados</div>
+	<div class="mc-optin__subtitle"><div class="mc-optin__subtitle">
+<p>Receba gratuitamente as newsletters do Money Times</p>
+</div>
+</div>
+	<!-- FORM -->
+	<form class="mc-optin__form" action="https://ws.moneytimes.com.br/subscribe" method="post">
+		<div class="mc-optin__input"><input name="emailAddress" type="email" placeholder="Digite seu e-mail" required></div>
+		<div class="mc-optin__submit"><input type="submit" value="CONFIRA"></div>
+		<input name="sourceId" type="hidden" value="XM-MEL-MT-GIR01-AUDMT-X-SITE-CAIXINHA-MKTPORTAIS" />
+		<input name="listCode" type="hidden" value="PMT_GIR01" />
+		<input name="redirect" type="hidden" value="https://typ.moneytimes.com.br/cadastro-confirmado-gir01-a/">
+		<input name="email_page" type="hidden" value="mt_welcome_gir01" />
+		<input name="page_url" type="hidden" value="/feed/" />
+	</form>
+	<!-- FORM -->
+	<div class="mc-optin__terms">OBS: Ao clicar no botão você autoriza o Money Times a utilizar os dados fornecidos para encaminhar conteúdos informativos e publicitários.</div>
+</div>
+
+
+
+<p class="wp-block-paragraph"><em>*Com informações do Estadão Conteúdo.</em></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Dino suspende emendas parlamentares de Flávio Bolsonaro</title>
+		<link>https://www.moneytimes.com.br/dino-suspende-emendas-parlamentares-de-flavio-bolsonaro/</link>
+		
+		<dc:creator><![CDATA[Agência Brasil]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 20:57:54 +0000</pubDate>
+				<category><![CDATA[Política]]></category>
+		<category><![CDATA[Alexandre de Moraes]]></category>
+		<category><![CDATA[Brasil]]></category>
+		<category><![CDATA[Câmara dos Deputados]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Eleições 2026]]></category>
+		<category><![CDATA[Estados Unidos (EUA)]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Flávio Bolsonaro]]></category>
+		<category><![CDATA[Flávio Dino]]></category>
+		<category><![CDATA[Senado]]></category>
+		<category><![CDATA[STF]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430432</guid>
+
+					<description><![CDATA[O ministro do Supremo Tribunal Federal (STF) Flávio Dino suspendeu a execução de emendas parlamentares apresentadas pelo senador Flávio Bolsonaro (PL-RJ) ao Projeto de Lei Orçamentária Anual (Ploa) de 2027. São 14 emendas, totalizando R$ 79,3 milhões. “A fim de resguardar a higidez do devido processo orçamentário e evitar a consumação de dano de difícil [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">O ministro do <a href="https://www.moneytimes.com.br/tag/stf/">Supremo Tribunal Federal</a> (STF) <a href="https://www.moneytimes.com.br/tag/flavio-dino/">Flávio Dino</a> suspendeu a execução de emendas parlamentares apresentadas pelo senador <a href="https://www.moneytimes.com.br/tag/flavio-bolsonaro/">Flávio Bolsonaro</a> (PL-RJ) ao Projeto de Lei Orçamentária Anual (Ploa) de 2027. São 14 emendas, totalizando R$ 79,3 milhões.</p>
+
+
+
+<p class="wp-block-paragraph">“A fim de resguardar a higidez do devido processo orçamentário e evitar a consumação de dano de difícil ou impossível reparação, determino, por cautela, a imediata suspensão da tramitação das emendas parlamentares individuais de autoria do Exmo. Senador Flávio Bolsonaro.&#8221;</p>
+
+
+
+<p class="wp-block-paragraph">O ministro atendeu ao pedido do deputado Santana Braga (PT-SP), uma vez que o senador fugiu do país, logo após outro ministro do STF, <a href="https://www.moneytimes.com.br/tag/alexandre-de-moraes/">Alexandre de Moraes</a>, pedir a retenção de seu passaporte.</p>
+
+
+
+<p class="wp-block-paragraph">Flávio Bolsonaro chegou a Miami, nos Estados Unidos, três dias após ser derrotado no segundo turno das <a href="https://www.moneytimes.com.br/tag/eleicoes/">eleições</a> presidenciais. Moraes havia determinado a entrega dos passaportes de Flávio no âmbito de um inquérito em que o senador é investigado por lavagem de dinheiro, juntamente com o advogado Willer Tomaz, seu amigo. Ambos negam qualquer irregularidade.</p>
+
+
+
+<p class="wp-block-paragraph">Atualmente, o senador mora nos Estados Unidos com a família, e vota remotamente nas sessões plenárias do Senado Federal.</p>
+
+
+
+<p class="wp-block-paragraph">Dino abriu espaço para manifestação do senador e pediu que o Senado explique se houve autorização de viagem para Bolsonaro ou se ele se encontra em missão oficial no exterior.</p>
+
+
+
+<p class="wp-block-paragraph">A decisão do ministro é em caráter liminar. Uma decisão final será tomada após o posicionamento de Flávio e do Senado. A questão pode ainda ser submetida ao Plenário do Supremo.</p>
+
+
+
+<h2 id="h-eduardo-e-ramagem" class="wp-block-heading">Eduardo e Ramagem</h2>
+
+
+
+<p class="wp-block-paragraph">Dino comparou a situação do senador ao caso de <a href="https://www.moneytimes.com.br/tag/eduardo-bolsonaro/">Eduardo Bolsonaro</a>, irmão de Flávio, e de <a href="https://www.moneytimes.com.br/tag/alexandre-ramagem/">Alexandre Ramagem</a>. Ambos eram deputados federais quando fugiram para os Estados Unidos e tentaram exercer seus mandatos mesmo residindo fora do Brasil.</p>
+
+
+
+<p class="wp-block-paragraph">Naquela ocasião, o plenário do STF entendeu não ser legítimo o exercício de função parlamentar brasileira com sede em outro país. A Câmara cassou o mandato dos dois parlamentares. “O mandato parlamentar não se compadece com o regime de teletrabalho integral transnacional”, decidiu a Corte na ocasião.</p>
+
+
+
+<p class="wp-block-paragraph">“É de clareza solar que uma emenda parlamentar de autoria de um deputado permanentemente sediado em outro país é revestida de evidente e insanável impedimento de ordem técnica, por afronta aos princípios da legalidade e da moralidade.”</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Taxas dos DIs fecham com fortes baixas após governo Lula confirmar Trabuco na Fazenda</title>
+		<link>https://www.moneytimes.com.br/taxas-dos-dis-fecham-com-fortes-baixas-apos-governo-lula-confirmar-trabuco-na-fazenda/</link>
+		
+		<dc:creator><![CDATA[Reuters]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 20:17:51 +0000</pubDate>
+				<category><![CDATA[Mercados]]></category>
+		<category><![CDATA[Banco Central]]></category>
+		<category><![CDATA[Bradesco]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Copom]]></category>
+		<category><![CDATA[Economia]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Juros]]></category>
+		<category><![CDATA[Luiz Carlos Trabuco]]></category>
+		<category><![CDATA[Lula]]></category>
+		<category><![CDATA[Ministério da Fazenda]]></category>
+		<category><![CDATA[Reuters]]></category>
+		<category><![CDATA[Taxa Selic]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430415</guid>
+
+					<description><![CDATA[As taxas dos DIs desabaram mais de 70 pontos-base em vários vencimentos nesta sexta-feira, após o governo Lula confirmar que o presidente do conselho de administração do Bradesco, Luiz Carlos Trabuco, será o novo ministro da Fazenda. No fim da tarde a taxa do DI (Depósito Interfinanceiro) para janeiro de 2028 estava em 13,685%, com [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">As taxas dos DIs desabaram mais de 70 pontos-base em vários vencimentos nesta sexta-feira, após o governo <a href="https://www.moneytimes.com.br/tag/lula/">Lula</a> confirmar que o presidente do conselho de administração do <a href="https://www.moneytimes.com.br/tag/bradesco/">Bradesco</a>, Luiz Carlos Trabuco, será o novo ministro da Fazenda.</p>
+
+
+
+<p class="wp-block-paragraph">No fim da tarde a taxa do DI (Depósito Interfinanceiro) para janeiro de 2028 estava em 13,685%, com recuo de 50 pontos-base ante o ajuste anterior de 14,183%. Já a taxa do DI para janeiro de 2030 estava em 13,785%, com baixa de 79 pontos-base ante 14,577%. Foi a quinta sessão consecutiva de queda das taxas.    </p>
+
+
+
+<p class="wp-block-paragraph">O Palácio do Planalto informou na noite de quinta-feira que Trabuco aceitou o convite do presidente Luiz Inácio Lula da Silva para comandar a Fazenda, como havia antecipado a Reuters.Com ampla aprovação no mercado financeiro, Trabuco é visto como um nome capaz de recuperar a credibilidade do governo na área fiscal e promover os ajustes necessários nas contas públicas.</p>
+
+
+
+<p class="wp-block-paragraph">Em reação, as taxas dos DIs abriram a sessão com baixas fortes, próximas dos 90 pontos-base em vários vencimentos, devolvendo parte dos prêmios incorporados à curva a termo desde a reeleição de Lula, no fim de outubro.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;No curto prazo, isso muda absolutamente tudo, já que Trabuco tem algo que Lula não tem, credibilidade no mercado financeiro&#8221;, comentou o diretor da consultoria Wagner Investimentos, José Faria Júnior, em relatório enviado a clientes.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;A dúvida é saber qual será o seu limite de trabalho, a sua autonomia para propor medidas corretas e que atendam a agenda vencedora da eleição com o necessário ajuste fiscal&#8221;, acrescentou.</p>
+
+
+
+<p class="wp-block-paragraph">Na mínima do dia, às 9h09, a taxa do DI para janeiro de 2030 atingiu 13,630%, uma queda de 95 pontos-base ante o ajuste da véspera. </p>
+
+
+
+<p class="wp-block-paragraph">A chegada de Trabuco à Fazenda, na avaliação do head de renda fixa da Manchester Investimentos, Rafael Sueishi, “acaba, sobretudo, fazendo mais preço e mexendo mais com as expectativas de médio e longo prazo nos juros”. </p>
+
+
+
+<p class="wp-block-paragraph">“É nos vencimentos mais longos que o mercado acaba precificando sustentabilidade fiscal e trajetória da dívida pública”, lembrou, em comentário escrito. </p>
+
+
+
+<p class="wp-block-paragraph">Apesar do forte recuo das taxas, a curva seguiu precificando manutenção da taxa básica Selic em 13,75% ao ano em 9 de dezembro, no encontro do Comitê de Política Monetária (Copom) do Banco Central. Profissionais ouvidos pela Reuters avaliaram que o que mudou foi a perspectiva para 2027. </p>
+
+
+
+<p class="wp-block-paragraph">Nas últimas semanas, o mercado de <a href="https://www.moneytimes.com.br/tag/juros-futuros/">juros futuros</a> chegou a precificar a possibilidade de uma Selic de 15% no fim de 2027 em função das preocupações de que as contas públicas pudessem se deteriorar no quarto governo Lula, em meio à resistência do presidente em cortar gastos.</p>
+
+
+
+<p class="wp-block-paragraph">Nesta sexta-feira, sob o &#8220;efeito Trabuco&#8221;, a curva já precificava uma Selic de 13,75% no fim do próximo ano &#8212; o que pressupõe manutenção da taxa atual ao longo de 2027.</p>
+
+
+
+<p class="wp-block-paragraph">A forte queda das taxas futuras no Brasil contrastou nesta sexta-feira com o cenário externo, onde os rendimentos dos Treasuries tiveram altas firmes em uma sessão de horário reduzido nos EUA. Neste fim de tarde, o rendimento do Treasury de 10 anos &#8212; referência global para decisões de investimento &#8212; exibia alta de 9 pontos-base, a 4,936%. </p>
+
+
+
+<p class="wp-block-paragraph">Pela manhã, com efeito ofuscado pela indicação de Trabuco, o Instituto Brasileiro de Geografia e Estatística (IBGE) informou que a taxa de desemprego no país atingiu 5,1% nos três meses até outubro &#8212; o menor nível do ano, igualando o menor patamar da série histórica, registrado em dezembro de 2025.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Dólar recua para os R$ 5,5156 com efeito Trabuco e acumula queda de 7% na semana</title>
+		<link>https://www.moneytimes.com.br/dolar-recua-para-os-r-55156-com-efeito-trabuco-e-acumula-queda-de-7-na-semana-davs/</link>
+		
+		<dc:creator><![CDATA[Dani Alvarenga]]></dc:creator>
+		<pubDate>Fri, 27 Nov 2026 20:12:14 +0000</pubDate>
+				<category><![CDATA[Mercados]]></category>
+		<category><![CDATA[Brasil]]></category>
+		<category><![CDATA[Câmbio]]></category>
+		<category><![CDATA[Canal WhatsApp]]></category>
+		<category><![CDATA[Contas públicas]]></category>
+		<category><![CDATA[Dólar]]></category>
+		<category><![CDATA[Economia]]></category>
+		<category><![CDATA[Estadão Conteúdo]]></category>
+		<category><![CDATA[Feed Principal]]></category>
+		<category><![CDATA[Lula]]></category>
+		<category><![CDATA[Ministério do Planejamento]]></category>
+		<category><![CDATA[Tempo Real]]></category>
+		<guid isPermaLink="false">https://www.moneytimes.com.br/?p=1430365</guid>
+
+					<description><![CDATA[O dólar puxou o freio nesta semana e acumulou queda de 7,07% ao registrar cinco pregões consecutivos de perdas. Nesta sexta-feira (27), a moeda recuou 3,97% frente ao real, encerrando a sessão a R$ R$ 5,5156. A queda da divisa foi na contramão do desempenho do dólar global. Por volta das 17h10, o índice DXY, [&#8230;]]]></description>
+										<content:encoded><![CDATA[
+<p class="wp-block-paragraph">O <a href="https://www.moneytimes.com.br/tag/dolar/">dólar</a> puxou o freio nesta semana e acumulou queda de 7,07% ao registrar cinco pregões consecutivos de perdas. Nesta sexta-feira (27), a moeda recuou 3,97% frente ao <a href="https://www.moneytimes.com.br/tag/real/">real</a>, encerrando a sessão a R$ R$ 5,5156.</p>
+
+
+
+<p class="wp-block-paragraph">A queda da divisa foi na contramão do desempenho do dólar global. Por volta das 17h10, o índice DXY, que compara o dólar a uma cesta de seis divisas fortes, registrava alta de 0,37%, a 103,6390 pontos. No acumulado da semana, o índice subiu 0,19%</p>
+
+
+
+<h2 class="wp-block-heading">O que mexeu com o dólar hoje?</h2>
+
+
+
+<p class="wp-block-paragraph">O <a href="https://www.moneytimes.com.br/tag/dolar/">dólar</a> à vista chegou a bater mínima intradiária, ficando abaixo de R$ 5,50. Por volta das 10h (horárioa de Brasília, a divisa recuou 4,60%, a R$ 5,4793.</p>
+
+
+
+<p class="wp-block-paragraph">O movimento da moeda norte-americana teve como principal fator a escolha do nome de <strong>Luiz Carlos Trabuco</strong> para comandar o <a href="https://www.moneytimes.com.br/tag/ministerio-da-fazenda/">Ministério da Fazenda</a> no governo <a href="https://www.moneytimes.com.br/tag/lula/">Lula 4</a>. Com o anúncio, o mercado financeiro buscou normalizar o câmbio e devolveu parte da alta que levou o dólar a R$ 6,00, afirma <strong>Fernando Cesar</strong>, operador sênior da corretora AGK.</p>
+
+
+
+<p class="wp-block-paragraph">Na época, a cautela com o cenário fiscal após a reeleição do presidente da República, Luiz Inácio Lula da Silva, pressionou o real e impulsionou o dólar.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;Dólar caindo com a bolsa forte é o retrato de estrangeiro voltando a comprar Brasil. Só que é um movimento de confiança, e confiança precisa de entrega&#8221;, afirmou Emerson Junior, <em>head</em> de câmbio e contas internacionais da Convexa Investimentos.</p>
+
+
+
+<p class="wp-block-paragraph">&#8220;O teste agora é o desenho do ajuste fiscal. Se vier abaixo do esperado, o dólar pode devolver parte dessa queda&#8221;, completou.</p>
+
+
+
+<p class="wp-block-paragraph">Lá fora, a moeda norte-americana seguiu em trajetória de valorização ante divisas fortes, em meio à alta dos rendimentos dos <a href="https://www.moneytimes.com.br/tag/treasuries/">Treasuries</a> e do <a href="https://www.moneytimes.com.br/tag/petroleo/">petróleo</a>.</p>
+
+
+
+<p class="wp-block-paragraph">A <em>commodity </em>energética é impulsionada pelas tensões no <a href="https://www.moneytimes.com.br/tag/oriente-medio/">Oriente Médio</a>. Esse cenário alimenta as preocupações inflacionárias e elevam as expectativas de juros mais altos nos EUA, fortalecendo o dólar global.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
