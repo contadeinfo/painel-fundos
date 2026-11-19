@@ -71,17 +71,23 @@ def cadastro(alvo, baixa, dig):
     return out
 
 
-def lamina(alvo, baixa, dig, hoje):
+def lamina(alvo, baixa, dig, hoje, meses=12):
+    """Lâmina mais recente de cada fundo (procura até 12 meses para trás; nem todo fundo publica todo mês)."""
     out = {c: {} for c in alvo}
     a, m = hoje.year, hoje.month
-    for _ in range(8):  # a lâmina sai com defasagem; procura o mês mais recente publicado
+    for _ in range(meses):
+        falta = {c for c in alvo if not out[c]}
+        if not falta:
+            break
         am = f'{a}{m:02d}'
         try:
             zb = baixa(LAMINA.format(am))
-        except Exception:
+        except Exception as e:
+            print('aviso lâmina', am, e)
             zb = None
         if zb:
             z = zipfile.ZipFile(io.BytesIO(zb))
+            novo = {}
             for n in z.namelist():
                 if not n.lower().endswith('.csv'):
                     continue
@@ -89,17 +95,15 @@ def lamina(alvo, baixa, dig, hoje):
                 for r in _ler_csv(z.read(n)):
                     k = _col_cnpj(r)
                     c = dig(r.get(k)) if k else None
-                    if c in alvo:
+                    if c in falta:
                         r = _limpa(r)
+                        d = novo.setdefault(c, {'competencia': f'{m:02d}/{a}'})
                         if parte == 'lamina':
-                            out[c]['lamina'] = r
+                            d['lamina'] = r
                         else:
-                            out[c].setdefault(parte, []).append(r)
-            for c in out:
-                if out[c]:
-                    out[c]['competencia'] = f'{m:02d}/{a}'
-            print('  lâmina', am, sum(1 for c in out if out[c]), 'fundos')
-            break
+                            d.setdefault(parte, []).append(r)
+            out.update(novo)
+            print('  lâmina', am, len(novo), 'fundos novos')
         m -= 1
         if m == 0:
             a, m = a - 1, 12
