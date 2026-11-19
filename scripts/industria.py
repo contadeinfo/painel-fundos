@@ -3,7 +3,7 @@
 
 - data/industria.json: captação líquida e patrimônio por classe CVM, mês a mês (13 meses);
   maiores captações e resgates entre os fundos de ações no mês corrente e no anterior;
-  posição do Set FIF no ranking de captação dos fundos de ações.
+  posição do fundo de referência (alertas.json) no ranking de captação dos fundos de ações.
 - data/radar.json: fundos de ações livres (ANBIMA) abertos ao público, com patrimônio relevante,
   que ainda não estão na lista de peers, com retorno no mês, no ano e em 12 meses.
 
@@ -19,7 +19,7 @@ CAD_175 = 'https://dados.cvm.gov.br/dados/FI/CAD/DADOS/registro_fundo_classe.zip
 HIST = os.path.join(RAIZ, 'data', 'industria_mensal.json')
 SAIDA = os.path.join(RAIZ, 'data', 'industria.json')
 RADAR = os.path.join(RAIZ, 'data', 'radar.json')
-SET = '02444266000159'
+SET = json.load(open(os.path.join(RAIZ, 'alertas.json'), encoding='utf-8')).get('fundo_referencia')
 ANBIMA_RADAR = ('Ações Livre', 'Ações Valor/Crescimento', 'Ações Valor / Crescimento', 'Ações Small Caps', 'Ações Dividendos')
 PL_MIN_RADAR = 50e6
 csv.field_size_limit(10 ** 8)
@@ -92,7 +92,7 @@ def lista_top(por_fundo, CAD, n=15):
     top = [item(c, v, i + 1) for i, (c, v) in enumerate(ordem[:n])]
     fundo = [item(c, v, len(ordem) - i) for i, (c, v) in enumerate(reversed(ordem[-n:]))]
     set_pos = next((item(c, v, i + 1) for i, (c, v) in enumerate(ordem) if c == SET), None)
-    return {'captacao': top, 'resgate': fundo, 'set': set_pos, 'total_fundos': len(ordem)}
+    return {'captacao': top, 'resgate': fundo, 'referencia': set_pos, 'total_fundos': len(ordem)}
 
 
 def cota_em(L, lim):

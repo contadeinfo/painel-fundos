@@ -1,10 +1,15 @@
 {
   "_leia": "Configuração dos avisos por e-mail. Para desligar um aviso, troque o valor por null. Edite direto aqui no GitHub (ícone de lápis) e salve.",
+  "fundo_referencia": "02444266000159",
   "resumo_diario": true,
-  "set_mudou_quartil": ["mes", "ano", "m12"],
+  "referencia_mudou_quartil": [
+    "mes",
+    "ano",
+    "m12"
+  ],
   "resgate_peer_pct_pl": 5,
   "captacao_peer_pct_pl": 10,
-  "set_resgate_pct_pl": 2,
+  "referencia_resgate_pct_pl": 2,
   "dolar_acima": null,
   "dolar_abaixo": null,
   "ibov_variacao_dia_pct": 3,

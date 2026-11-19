@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Avisos por e-mail: o robô abre uma "issue" no repositório marcando @dono; o GitHub manda e-mail.
 
-Modo 'completo' (depois da atualização dos peers): Set mudou de quartil, resgate/captação forte de
-peer, resgate forte no Set, concorrente novo no radar e, de manhã, o resumo diário.
+Modo 'completo' (depois da atualização dos peers): fundo de referência mudou de quartil, resgate/captação
+forte de peer, resgate forte no fundo de referência, concorrente novo no radar e, de manhã, o resumo diário.
 Modo 'mercado' (durante o pregão): dólar acima/abaixo de um valor e Ibovespa com variação forte.
 Configuração: alertas.json. Memória do que já foi avisado: data/alertas_estado.json.
 """
@@ -12,10 +12,11 @@ REPO = os.environ.get('GITHUB_REPOSITORY', 'contadeinfo/painel-fundos')
 DONO = REPO.split('/')[0]
 TOKEN = os.environ.get('GITHUB_TOKEN')
 CFG = json.load(open(os.path.join(RAIZ, 'alertas.json'), encoding='utf-8'))
+REF = CFG.get('fundo_referencia')
 EST_ARQ = os.path.join(RAIZ, 'data', 'alertas_estado.json')
 COLS = {'dia': 1, 'mes': 3, 'ano': 5, 'm12': 7, 'm24': 9, 'm36': 11, 'm48': 13, 'm60': 15}
 NOMEJ = {'dia': 'dia', 'mes': 'mês', 'ano': 'ano', 'm12': '12 meses', 'm24': '24 meses', 'm36': '36 meses'}
-PAINEL = 'Abra o Painel Comercial (aba Relatório Peers) para ver os detalhes.'
+PAINEL = 'Detalhes no painel.'
 
 
 def gh(metodo, caminho, corpo=None):
@@ -71,17 +72,18 @@ def completo(E):
     P = json.load(open(os.path.join(RAIZ, 'data', 'peers.json'), encoding='utf-8'))
     ref = P['data']
     fundos = [r for r in P['rows'] if r[0] not in ('IBOV', 'CDI')]
-    set_row = next((r for r in fundos if r[0].lower().startswith('set')), None)
-    # 1) quartil do Set
-    if set_row and CFG.get('set_mudou_quartil'):
-        for j in CFG['set_mudou_quartil']:
+    nome_ref = next((f['nome'] for f in json.load(open(os.path.join(RAIZ, 'fundos.json'), encoding='utf-8')) if f['cnpj'] == REF), None)
+    set_row = next((r for r in fundos if r[0] == nome_ref), None)
+    # 1) quartil do fundo de referência
+    if set_row and CFG.get('referencia_mudou_quartil'):
+        for j in CFG['referencia_mudou_quartil']:
             i = COLS[j]
             de = sum(1 for r in fundos if r[i] is not None)
             q = quartil(set_row[i + 1], de)
             ant = E.setdefault('quartil', {}).get(j)
             if q and ant and q != ant:
-                avisa(f'Set FIF mudou do {ant}º para o {q}º quartil ({NOMEJ[j]})',
-                      f'Na janela de **{NOMEJ[j]}**, o Set FIF passou do **{ant}º** para o **{q}º quartil** entre os {de} peers '
+                avisa(f'Fundo de referência mudou do {ant}º para o {q}º quartil ({NOMEJ[j]})',
+                      f'Na janela de **{NOMEJ[j]}**, o fundo de referência passou do **{ant}º** para o **{q}º quartil** entre os {de} peers '
                       f'(posição {set_row[i + 1]}º, retorno {sg(set_row[i])}), com dados da CVM de {ref}.\n\n{PAINEL}')
             if q:
                 E['quartil'][j] = q
@@ -103,8 +105,8 @@ def completo(E):
         k = f"{F['cnpj']}:{d}"
         if k in vistos:
             continue
-        eh_set = F['cnpj'] == '02444266000159'
-        lim_r = CFG.get('set_resgate_pct_pl') if eh_set else CFG.get('resgate_peer_pct_pl')
+        eh_set = F['cnpj'] == REF
+        lim_r = CFG.get('referencia_resgate_pct_pl') if eh_set else CFG.get('resgate_peer_pct_pl')
         lim_c = None if eh_set else CFG.get('captacao_peer_pct_pl')
         if lim_r and pct <= -lim_r:
             vistos[k] = 1
@@ -141,7 +143,7 @@ def completo(E):
 def resumo(P, set_row, fundos):
     L = [f"**Dados de fundos (CVM) de {P['data']}**", '']
     if set_row:
-        L.append('| Janela | Set FIF | Posição | Ibovespa | CDI |')
+        L.append('| Janela | Fundo de referência | Posição | Ibovespa | CDI |')
         L.append('|---|---|---|---|---|')
         bench = {r[0]: r for r in P['rows'] if r[0] in ('IBOV', 'CDI')}
         for j in ('dia', 'mes', 'ano', 'm12', 'm24', 'm36'):
@@ -149,7 +151,7 @@ def resumo(P, set_row, fundos):
             de = sum(1 for r in fundos if r[i] is not None)
             L.append(f"| {NOMEJ[j]} | {sg(set_row[i])} | {set_row[i + 1] or '—'}º de {de} ({quartil(set_row[i + 1], de) or '—'}º quartil) | "
                      f"{sg(bench.get('IBOV', [None] * 20)[i])} | {sg(bench.get('CDI', [None] * 20)[i])} |")
-        L += ['', f"Patrimônio do Set: {mi(set_row[17])} · captação líquida no ano: {mi(set_row[19])}", '']
+        L += ['', f"Patrimônio do fundo de referência: {mi(set_row[17])} · captação líquida no ano: {mi(set_row[19])}", '']
     mes = sorted((r for r in fundos if r[3] is not None), key=lambda r: -r[3])
     if mes:
         L.append('**Melhores do mês:** ' + '; '.join(f'{r[0][:40]} {sg(r[3])}' for r in mes[:3]))
