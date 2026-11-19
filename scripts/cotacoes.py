@@ -69,6 +69,28 @@ def tradingview():
     return out, erros
 
 
+AW = {'BRL=X': 'USDBRL', 'EURBRL=X': 'EURBRL', 'BTC-USD': 'BTCUSD'}
+
+
+def awesome():
+    """AwesomeAPI (Brasil): dólar, euro e bitcoin sem atraso; o fechamento anterior do dólar no
+    TradingView às vezes vem errado, então para esses três a AwesomeAPI manda."""
+    try:
+        with urllib.request.urlopen(urllib.request.Request('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,BTC-USD', headers=UA), timeout=15) as r:
+            j = json.load(r)
+        out = {}
+        for s, k in AW.items():
+            q = j.get(k)
+            if q and q.get('bid'):
+                px, pct = float(q['bid']), float(q.get('pctChange') or 0)
+                out[s] = {'close': px, 'change_abs': px - px / (1 + pct / 100), 'high': float(q.get('high') or 0) or None,
+                          'low': float(q.get('low') or 0) or None, 'volume': None, 'update_mode': 'streaming',
+                          'currency': 'BRL' if k.endswith('BRL') else 'USD', 'ts': int(q.get('timestamp') or 0) or None}
+        return out
+    except Exception:
+        return {}
+
+
 def yahoo_dia(s):
     """Gráfico de 5 em 5 min do Yahoo (quando o Yahoo aceita)."""
     try:
@@ -111,9 +133,10 @@ def main():
         t0 = time.time()
         agora = int(t0)
         tv, erros = tradingview()
+        aw = awesome()
         ok = 0
         for s in SIMB:
-            d = tv.get(TV.get(s, ''))
+            d = aw.get(s) or tv.get(TV.get(s, ''))
             if not d or d.get('close') is None:
                 continue
             ok += 1
@@ -127,7 +150,9 @@ def main():
             if prev is not None and e['prev'] is not None and abs(prev - e['prev']) > 1e-9 * max(1, abs(prev)):
                 e['serie'] = []          # novo pregão: o fechamento anterior mudou, recomeça o gráfico do dia
             ult = e['serie'][-1][1] if e['serie'] else None
-            if ult is None or abs(px - ult) > 1e-12 or not e['mudou']:
+            if d.get('ts'):
+                e['mudou'] = d['ts']
+            elif ult is None or abs(px - ult) > 1e-12 or not e['mudou']:
                 e['mudou'] = agora - atraso   # hora (aproximada) do último negócio
             e['prev'] = prev
             if SERIE(s):
@@ -139,7 +164,7 @@ def main():
             Q[s] = {'m': {'symbol': s, 'regularMarketPrice': px, 'chartPreviousClose': prev,
                           'regularMarketTime': e['mudou'], 'regularMarketDayHigh': d.get('high'),
                           'regularMarketDayLow': d.get('low'), 'regularMarketVolume': d.get('volume'),
-                          'currency': d.get('currency'), 'atraso_s': atraso, 'fonte': 'TradingView'},
+                          'currency': d.get('currency'), 'atraso_s': atraso, 'fonte': 'AwesomeAPI' if s in aw else 'TradingView'},
                     't': [p[0] for p in e['serie']], 'c': [p[1] for p in e['serie']]}
         if not tentou_yahoo:   # uma vez por ciclo: completa o gráfico do dia com o Yahoo, se ele deixar
             tentou_yahoo = True
@@ -150,7 +175,7 @@ def main():
                     Q[s]['t'] = [p[0] for p in ESTADO[s]['serie']]; Q[s]['c'] = [p[1] for p in ESTADO[s]['serie']]
         now = dt.datetime.now(dt.timezone.utc)
         dados = {'gerado_em': now.strftime('%Y-%m-%dT%H:%M:%SZ'), 'ok': ok, 'total': len(SIMB),
-                 'falhas': sorted(s for s in SIMB if not tv.get(TV.get(s, ''))), 'q': Q}
+                 'falhas': sorted(s for s in SIMB if not (aw.get(s) or tv.get(TV.get(s, '')))), 'q': Q}
         try:
             publica(dados, primeiro)
             primeiro = False
