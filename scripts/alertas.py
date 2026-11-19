@@ -56,7 +56,7 @@ def sg(v, d=2):
 
 
 def mi(v):
-    return '—' if v is None else f'R$ {v / 1e6:,.1f} mi'.replace(',', 'X').replace('.', ',').replace('X', '.')
+    return '—' if v is None else ('−' if v < 0 else '') + f'R$ {abs(v) / 1e6:,.1f} mi'.replace(',', 'X').replace('.', ',').replace('X', '.')
 
 
 def cotacoes():
@@ -174,7 +174,8 @@ def resumo(P, set_row, fundos):
         F = json.load(open(fo, encoding='utf-8'))
         a = F['anos'][0]
         ult = lambda ind: (F['series'].get(ind, {}).get(a) or [[None, None]])[-1][1]
-        L.append(f"**Focus ({a}):** IPCA {ult('IPCA')}% · Selic {ult('Selic')}% · câmbio R$ {ult('Câmbio')} · PIB {ult('PIB Total')}%".replace('.', ','))
+        f2 = lambda v: '—' if v is None else f'{v:.2f}'.replace('.', ',')
+        L.append(f"**Focus ({a}):** IPCA {f2(ult('IPCA'))}% · Selic {f2(ult('Selic'))}% · câmbio R$ {f2(ult('Câmbio'))} · PIB {f2(ult('PIB Total'))}%")
     avisa(f"Resumo do dia {dt.date.today():%d/%m/%Y}", '\n'.join(L), rotulo='resumo')
 
 
