@@ -127,10 +127,10 @@ def main():
         cl, pf = agrega(S, CAD)
         ult = max(L[-1][0] for L in S.values())
         H[am] = {'classes': cl, 'ate': ult}
+        print('  ', am, len(S), 'fundos, até', ult)
         if am in recentes:          # só os 2 meses recentes ficam na memória (o resto vira total por classe)
             MES[am] = (S, pf)
         del S
-        print('  ', am, len(S), 'fundos, até', ult)
     H = {k: H[k] for k in sorted(H)[-24:]}
     json.dump(H, open(HIST, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 

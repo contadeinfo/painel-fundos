@@ -55,7 +55,8 @@ def le_cda(zb, alvo):
                 q = cnpj_de(r, 'CNPJ_FUNDO_CLASSE_COTA', 'CNPJ_FUNDO_COTA')
                 if not q:
                     continue
-                k = (q, r.get('NM_FUNDO_CLASSE_COTA') or r.get('NM_FUNDO_COTA') or '')
+                nm = next((v for kk, v in r.items() if kk and v and ('COTA' in kk.upper()) and (kk.upper().startswith('NM_') or 'DENOM' in kk.upper())), '')
+                k = (q, nm.strip())
                 cotas.setdefault(c, {})[k] = num(r.get('VL_MERC_POS_FINAL'))
                 if q not in conjunto:
                     novos.add(q)
@@ -122,38 +123,51 @@ def main():
     except Exception:
         old = {}
     hoje = dt.date.today()
-    achados = []
-    a, m = hoje.year, hoje.month
-    for _ in range(8):
-        am = f'{a}{m:02d}'
-        if len(achados) < 2:
-            try:
-                zb = baixa(URL.format(am))
-            except Exception as e:
-                print('aviso', am, e)
-                zb = None
-            if zb:
-                achados.append((am, zb))
-                print('CDA', am, f'{len(zb) / 1e6:.0f} MB')
+    # a CVM deixa posições em sigilo por até 90 dias: lemos os últimos 8 meses publicados e, para cada
+    # fundo, ficamos com o mês mais recente em que as ações aparecem (e o anterior a ele, para comparar)
+    meses, a, m = [], hoje.year, hoje.month
+    for _ in range(10):
+        meses.append(f'{a}{m:02d}')
         m -= 1
         if m == 0:
             a, m = a - 1, 12
-    if not achados:
+    ultimo_pub = None
+    LIDO, NOMES = {}, {}
+    for am in meses:
+        if len(LIDO) >= 8:
+            break
+        try:
+            zb = baixa(URL.format(am))
+        except Exception as e:
+            print('aviso', am, e)
+            zb = None
+        if not zb:
+            continue
+        if ultimo_pub is None:
+            ultimo_pub = am
+            if old.get('competencia_arquivo') == am and old.get('fundos') and old.get('versao') == 2:
+                print('CDA já processada:', am)
+                return
+        r, nomes, comp = le_cda(zb, alvo)
+        del zb
+        LIDO[am] = (r, comp)
+        NOMES.update(nomes)
+        print('CDA', am, comp, sum(1 for v in r.values() if v['pos']), 'fundos com ações abertas')
+    if not LIDO:
         print('nenhuma CDA encontrada')
         return
-    if old.get('competencia_arquivo') == achados[0][0] and old.get('fundos'):
-        print('CDA já processada:', achados[0][0])
-        return
-    atual, nomes, comp = le_cda(achados[0][1], alvo)
-    ant = le_cda(achados[1][1], alvo)[0] if len(achados) > 1 else {}
-    del achados[1:]
+    ordem = sorted(LIDO, reverse=True)
     res, consol = {}, {}
     for c, nome in alvo.items():
-        A, B = atual.get(c, {}), ant.get(c, {})
+        abertos = [am for am in ordem if sum(LIDO[am][0].get(c, {}).get('pos', {}).values()) >= 30]
+        am0 = abertos[0] if abertos else ordem[0]
+        A = LIDO[am0][0].get(c, {})
+        B = LIDO[abertos[1]][0].get(c, {}) if len(abertos) > 1 else {}
         pa, pb = A.get('pos', {}), B.get('pos', {})
         top = sorted(pa.items(), key=lambda x: -x[1])
         mud = sorted(((tk, pa.get(tk, 0) - pb.get(tk, 0)) for tk in set(pa) | set(pb)), key=lambda x: -abs(x[1]))
-        res[c] = {'nome': nome, 'pl': A.get('pl'), 'sigilo': A.get('sigilo'), 'via': A.get('via'),
+        res[c] = {'nome': nome, 'competencia': LIDO[am0][1], 'comparado_com': LIDO[abertos[1]][1] if len(abertos) > 1 else None,
+                  'pl': A.get('pl'), 'sigilo': LIDO[ordem[0]][0].get(c, {}).get('sigilo'), 'via': A.get('via'),
                   'n_acoes': len(pa), 'acoes_pct': round(sum(pa.values()), 2),
                   'top': [{'tk': tk, 'pct': p} for tk, p in top[:15]],
                   'entradas': [tk for tk in pa if tk not in pb and pa[tk] >= 0.5][:10] if pb else [],
@@ -167,14 +181,14 @@ def main():
     cons = sorted(consol.values(), key=lambda x: (-x['n'], -x['soma']))[:40]
     for x in cons:
         x['media'] = round(x['soma'] / x['n'], 2)
-        x['nome'] = nomes.get(x['tk'], '')
+        x['nome'] = NOMES.get(x['tk'], '')
         x.pop('soma')
         x['fundos'] = x['fundos'][:12]
-    out = {'gerado_em': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'competencia': comp,
-           'competencia_arquivo': achados[0][0], 'fundos': res, 'consolidado': cons,
-           'nomes': {tk: nomes.get(tk, '') for f in res.values() for tk in [t['tk'] for t in f['top']]}}
+    out = {'versao': 2, 'gerado_em': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'competencia': LIDO[ordem[0]][1],
+           'competencia_arquivo': ultimo_pub, 'meses_lidos': [LIDO[am][1] for am in ordem], 'fundos': res, 'consolidado': cons,
+           'nomes': {tk: NOMES.get(tk, '') for f in res.values() for tk in [t['tk'] for t in f['top']] + [x['tk'] for x in cons]}}
     json.dump(out, open(SAIDA, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
-    print('OK carteiras', comp, sum(1 for v in res.values() if v['n_acoes']), 'fundos com ações')
+    print('OK carteiras', sum(1 for v in res.values() if v['n_acoes']), 'fundos com ações')
 
 
 if __name__ == '__main__':
