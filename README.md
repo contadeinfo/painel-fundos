@@ -15,4 +15,4 @@ Arquivos:
 
 Para rodar na hora: aba **Actions** → *Atualiza peers (CVM)* → **Run workflow**.
 
-Retornos calculados pela cota (líquidos de taxas), na última data com cota da maioria dos fundos. Captação = captação − resgates desde 1º de janeiro. Pode diferir ligeiramente de provedores pagos por convenções de data.
+Retornos calculados pela cota (líquidos de taxas). Mesma convenção do Comdinheiro: mês e ano contra a última cota do período anterior; 12 a 60 meses contra a primeira cota depois da data de N meses atrás (conferido em 19/11/2026: 310 de 312 números idênticos). Fundo sem cota há mais de 5 dias fica sem retorno. Captação = captação − resgates desde 1º de janeiro.

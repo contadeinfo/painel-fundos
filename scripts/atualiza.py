@@ -136,27 +136,41 @@ def valor_em(serie, datas, limite):
 
 
 def janelas(serie_cota, ref):
-    """serie_cota: {date: valor}. Retornos em % até ref (a última data comum)."""
+    """serie_cota: {date: valor}. Retornos em % até ref.
+
+    Convenção (igual à do Comdinheiro, conferida em 19/11/2026):
+    - dia: contra a cota anterior;
+    - mês e ano: contra a última cota do mês/ano anterior;
+    - 12 a 60 meses: contra a primeira cota DEPOIS da mesma data N meses antes.
+    """
+    import bisect
     datas = sorted(d for d in serie_cota if d <= ref)
     if not datas:
         return {}
-    fim = serie_cota[datas[-1]]
-    def ret(lim, exige=True):
-        v, d0 = valor_em(serie_cota, datas, lim)
-        if v is None or not v:
-            return None
-        if exige and d0 < lim - dt.timedelta(days=12):
-            return None  # série não cobre a janela
-        return (fim / v - 1) * 100
     ult = datas[-1]
+    if ult < ref - dt.timedelta(days=5):
+        return {}  # sem cota recente (fundo encerrado ou informe parado): não inventa retorno
+    fim = serie_cota[ult]
+    def ate(lim):  # última cota <= lim
+        i = bisect.bisect_right(datas, lim) - 1
+        if i < 0 or datas[i] < lim - dt.timedelta(days=12):
+            return None
+        return (fim / serie_cota[datas[i]] - 1) * 100
+    def depois(lim):  # primeira cota > lim
+        if datas[0] > lim:
+            return None  # série não cobre a janela
+        i = bisect.bisect_right(datas, lim)
+        if i >= len(datas) or datas[i] > lim + dt.timedelta(days=12):
+            return None
+        return (fim / serie_cota[datas[i]] - 1) * 100
     ant = datas[-2] if len(datas) > 1 else None
     out = {
-        'dia': (fim / serie_cota[ant] - 1) * 100 if ant and serie_cota[ant] else None,
-        'mes': ret(dt.date(ult.year, ult.month, 1) - dt.timedelta(days=1)),
-        'ano': ret(dt.date(ult.year, 1, 1) - dt.timedelta(days=1)),
+        'dia': (fim / serie_cota[ant] - 1) * 100 if ant else None,
+        'mes': ate(dt.date(ult.year, ult.month, 1) - dt.timedelta(days=1)),
+        'ano': ate(dt.date(ult.year, 1, 1) - dt.timedelta(days=1)),
     }
     for n in (12, 24, 36, 48, 60):
-        out[f'm{n}'] = ret(menos_meses(ult, n))
+        out[f'm{n}'] = depois(menos_meses(ult, n))
     return out
 
 
@@ -208,8 +222,9 @@ def main():
         cot = {d: v[0] for d, v in s.items() if v[0]}
         J = janelas(cot, ref) if cot else {}
         datas = sorted(d for d in s if d <= ref)
-        pl = s[datas[-1]][1] if datas else None
-        capt = sum(v[2] - v[3] for d, v in s.items() if d.year == ref.year and d <= ref) if datas else None
+        recente = bool(datas) and datas[-1] >= ref - dt.timedelta(days=5)
+        pl = s[datas[-1]][1] if recente else None
+        capt = sum(v[2] - v[3] for d, v in s.items() if d.year == ref.year and d <= ref) if recente else None
         ult_d = datas[-1].isoformat() if datas else None
         r = [f['nome']]
         for k in ('dia', 'mes', 'ano', 'm12', 'm24', 'm36', 'm48', 'm60'):
