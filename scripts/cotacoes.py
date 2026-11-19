@@ -147,8 +147,11 @@ def main():
             if um.startswith('delayed_streaming_'):
                 atraso = int(um.rsplit('_', 1)[-1] or 0)
             e = ESTADO.setdefault(s, {'serie': [], 'mudou': None, 'prev': None})
-            if prev is not None and e['prev'] is not None and abs(prev - e['prev']) > 1e-9 * max(1, abs(prev)):
-                e['serie'] = []          # novo pregão: o fechamento anterior mudou, recomeça o gráfico do dia
+            tol = 3e-3 if s in aw else 1e-9   # na AwesomeAPI o fechamento anterior é recalculado pelo % (arredondado)
+            novo_dia = prev is not None and e['prev'] is not None and abs(prev - e['prev']) > tol * max(1, abs(prev))
+            parado = e['serie'] and agora - e['serie'][-1][0] > 6 * 3600 and (ult_px := e['serie'][-1][1]) != round(px, 6)
+            if novo_dia or parado:
+                e['serie'] = []          # novo pregão: recomeça o gráfico do dia
             ult = e['serie'][-1][1] if e['serie'] else None
             if d.get('ts'):
                 e['mudou'] = d['ts']
