@@ -138,23 +138,32 @@ def main():
                          'amort': g(cm, 'amortizacao')})
         # rendimento por cota estimado (DY do mês × valor patrimonial da cota)
         for h in hist:
+            for k in ('dy', 'rent_pat', 'rent_ef', 'amort'):   # a CVM manda em fração (0,0069 = 0,69%)
+                if h[k] is not None:
+                    h[k] = round(h[k] * 100, 4)
             h['rend_cota'] = round(h['dy'] * h['vp'] / 100, 4) if h['dy'] is not None and h['vp'] else None
         u12 = [h for h in hist if h['d'] > (dt.date.fromisoformat(datas[-1]) - dt.timedelta(days=360)).isoformat()]
         rend12 = sum(h['rend_cota'] or 0 for h in u12) if u12 else None
         dy12_pat = sum(h['dy'] or 0 for h in u12) if u12 else None
         # composição do ativo (valores em R$ do ativo/passivo)
         compos = {}
-        for k, v in ap.items():
-            x = num(v)
-            if x and x > 0 and k and not re.search(r'cnpj|data|total|passivo|pagar|distribuir|provis|obriga|outros_valores_pagar', k, re.I):
+        ATIVO = ['Disponibilidades', 'Titulos_Publicos', 'Titulos_Privados', 'Fundos_Renda_Fixa', 'Terrenos', 'Imoveis_Renda_Acabados', 'Imoveis_Renda_Construcao',
+                 'Imoveis_Venda_Acabados', 'Imoveis_Venda_Construcao', 'Outros_Direitos_Reais', 'Acoes', 'Debentures', 'Bonus_Subscricao',
+                 'Certificados_Deposito_Valores_Mobiliarios', 'Cedulas_Debentures', 'Fundo_Acoes', 'FIP', 'FII', 'FDIC', 'Outras_Cotas_FI', 'Notas_Promissorias',
+                 'Acoes_Sociedades_Atividades_FII', 'Cotas_Sociedades_Atividades_FII', 'CEPAC', 'CRI', 'CRI_CRA', 'Letras_Hipotecarias', 'LCI', 'LCI_LCA', 'LIG',
+                 'Outros_Valores_Mobliarios', 'Contas_Receber_Aluguel', 'Contas_Receber_Venda_Imoveis', 'Outros_Valores_Receber']
+        for k in ATIVO:   # só as linhas de detalhe (os totais repetiriam valores)
+            x = num(ap.get(k))
+            if x and x > 0:
                 compos[k] = x
         tot = sum(compos.values()) or None
-        grupos = {'Imóveis': r'imove|terreno|direitos_bens|imovel', 'CRI': r'\bcri|certificado.*receb', 'Cotas de FII': r'fii|cotas.*fundo',
-                  'LCI/LH/LIG': r'lci|lh\b|letras_hipot|lig', 'Caixa e renda fixa': r'disponib|titulos_pub|titulos_priv|fundos_renda_fixa|aplica|deposito|caixa|cdb|lca',
-                  'Ações e outros': r'acoes|debent|outros|bonus|warrant|sociedade'}
+        grupos = {'Imóveis': r'^(Terrenos|Imoveis_|Outros_Direitos_Reais|Acoes_Sociedades_Atividades_FII|Cotas_Sociedades_Atividades_FII|CEPAC)',
+                  'CRI': r'^CRI', 'Cotas de FII': r'^FII$', 'LCI/LH/LIG': r'^(LCI|Letras_Hipotecarias|LIG)',
+                  'Caixa e renda fixa': r'^(Disponibilidades|Titulos_Publicos|Titulos_Privados|Fundos_Renda_Fixa)',
+                  'Aluguéis e vendas a receber': r'^(Contas_Receber|Outros_Valores_Receber)'}
         gr = {}
         for k, x in compos.items():
-            alvo = next((nome for nome, rx in grupos.items() if re.search(rx, k, re.I)), 'Ações e outros')
+            alvo = next((nome for nome, rx in grupos.items() if re.search(rx, k)), 'Ações, debêntures e outros')
             gr[alvo] = gr.get(alvo, 0) + x
         gp = {k: round(v / tot * 100, 1) for k, v in sorted(gr.items(), key=lambda x: -x[1])} if tot else {}
         tipo = None
@@ -169,46 +178,85 @@ def main():
             'publico': (geral.get(col(geral, 'publico_alvo') or '', '') or '').strip(),
             'admin': (geral.get(col(geral, 'nome_administrador') or '', '') or '').strip(),
             'ref': datas[-1], 'pl': pl, 'vp': vp, 'cotistas': cot, 'cotas': cotas, 'taxa_adm': txadm,
-            'dy_mes_pat': hist[-1]['dy'] if hist else None, 'dy12_pat': dy12_pat, 'rend12': rend12,
+            'dy_mes_pat': hist[-1]['dy'] if hist else None, 'dy12_pat': round(dy12_pat, 3) if dy12_pat is not None else None, 'rend12': round(rend12, 4) if rend12 is not None else None,
             'ult_rend': hist[-1]['rend_cota'] if hist else None, 'composicao': gp,
+            'taxa_adm_aa': round(txadm * 12 * 100, 3) if txadm is not None else None,
+            'cotistas_12m': next((h['cotistas'] for h in hist if h['d'] >= (dt.date.fromisoformat(datas[-1]) - dt.timedelta(days=365)).isoformat()), None),
         }
         fundos[tk] = {'info': info, 'geral': limpa(geral), 'complemento': limpa(comp), 'ativo_passivo': limpa(ap), 'historico': hist}
         resumo.append(info)
 
-    # ---- trimestral: imóveis (vacância, inadimplência, área)
-    imov = {}
-    for parte, linhas in T.items():
-        if 'imovel' not in parte and 'imoveis' not in parte:
-            continue
-        for r in linhas:
+    # ---- trimestral: imóveis (vacância, inadimplência), inquilinos, ativos financeiros e vencimento dos contratos
+    def ultimo_por_cnpj(parte):
+        out = {}
+        for r in T.get(parte, []):
             c, d = cnpj_de(r), data_de(r)
             if c and d:
-                imov.setdefault(c, {}).setdefault(d, []).append((parte, r))
+                out.setdefault(c, {}).setdefault(d, []).append(r)
+        return {c: (max(ds), ds[max(ds)]) for c, ds in out.items()}
+    IM, INQ, ATV, TC = (ultimo_por_cnpj(x) for x in ('imovel', 'imovel_renda_acabado_inquilino', 'ativo', 'complemento'))
     por_cnpj = {f['info']['cnpj']: f for f in fundos.values()}
-    for c, ds in imov.items():
-        F = por_cnpj.get(c)
-        if not F:
-            continue
-        d = max(ds)
-        L = []
-        for parte, r in ds[d]:
-            L.append({'classe': parte, 'nome': r.get(col(r, 'nome_imovel') or col(r, 'nome') or '', ''), 'endereco': r.get(col(r, 'endereco') or '', ''),
-                      'area': num(r.get(col(r, 'area') or '', None)), 'vac': num(r.get(col(r, 'vacancia') or '', None)),
-                      'inad': num(r.get(col(r, 'inadimplencia') or '', None)), 'receita': num(r.get(col(r, 'percentual_receita') or col(r, 'receitas') or '', None)),
-                      'unidades': num(r.get(col(r, 'unidades') or '', None)), 'outras': r.get(col(r, 'outras_caracteristicas') or '', '')})
-        L = [x for x in L if x['nome']]
-        renda = [x for x in L if x['vac'] is not None]
-        def media(campo):
-            xs = [x for x in renda if x[campo] is not None]
-            if not xs:
-                return None
-            w = sum(x['area'] or 0 for x in xs)
-            return sum(x[campo] * (x['area'] or 0) for x in xs) / w if w else sum(x[campo] for x in xs) / len(xs)
-        vac, inad = media('vac'), media('inad')
-        # a CVM manda vacância às vezes em fração (0,05) e às vezes em % (5): normaliza para %
-        norm = lambda v: None if v is None else v * 100 if v <= 1 and any((x['vac'] or 0) <= 1 for x in renda) else v
-        F['imoveis'] = {'ref': d, 'lista': L[:200]}
-        F['info'].update({'imoveis': len(L), 'vacancia': norm(vac), 'inadimplencia': norm(inad), 'area': sum(x['area'] or 0 for x in L) or None})
+    for c, F in por_cnpj.items():
+        info = F['info']
+        if c in IM:
+            d, rows = IM[c]
+            L = [{'nome': r.get('Nome_Imovel', '').strip(), 'classe': r.get('Classe', '').strip(), 'endereco': r.get('Endereco', '').strip(),
+                  'area': num(r.get('Area')), 'unidades': num(r.get('Numero_Unidades')), 'vac': num(r.get('Percentual_Vacancia')),
+                  'inad': num(r.get('Percentual_Inadimplencia')), 'receita': num(r.get('Percentual_Receitas_FII')),
+                  'pct_inv': num(r.get('Percentual_Imovel_Total_Investido')), 'outras': (r.get('Outras_Caracteristicas_Relevantes') or '').strip()[:300]}
+                 for r in rows]
+            L = [x for x in L if x['nome'] or x['endereco']]
+            # cada administrador informa de um jeito: fração (0,05) ou percentual (5). Se algum valor do fundo é
+            # fração "quebrada" (entre 0 e 1), tratamos todos como fração; senão, como percentual.
+            for campo in ('vac', 'inad', 'receita', 'pct_inv'):
+                vals = [x[campo] for x in L if x[campo] is not None]
+                fra = vals and max(vals) <= 1 and any(0 < v < 1 for v in vals)
+                if fra:
+                    for x in L:
+                        if x[campo] is not None:
+                            x[campo] = round(x[campo] * 100, 2)
+            renda = [x for x in L if x['vac'] is not None and 'renda' in x['classe'].lower()] or [x for x in L if x['vac'] is not None]
+            def media(campo):
+                xs = [x for x in renda if x[campo] is not None]
+                if not xs:
+                    return None
+                w = sum(x['area'] or 0 for x in xs)
+                return round(sum(x[campo] * (x['area'] or 0) for x in xs) / w, 2) if w else round(sum(x[campo] for x in xs) / len(xs), 2)
+            F['imoveis'] = {'ref': d, 'lista': sorted(L, key=lambda x: -(x['receita'] or x['pct_inv'] or 0))[:150]}
+            info.update({'imoveis': len(L), 'vacancia': media('vac'), 'inadimplencia': media('inad'), 'area': round(sum(x['area'] or 0 for x in L)) or None})
+        if c in INQ:
+            d, rows = INQ[c]
+            setores = {}
+            for r in rows:
+                v = num(r.get('Percentual_Receitas_FII')) or 0
+                setores[(r.get('Setor_Atuacao') or 'Não informado').strip()] = setores.get((r.get('Setor_Atuacao') or 'Não informado').strip(), 0) + v
+            tot = sum(setores.values()) or 1
+            F['inquilinos'] = {'ref': d, 'setores': [[k, round(v / tot * 100, 1)] for k, v in sorted(setores.items(), key=lambda x: -x[1])[:12]], 'n': len(rows)}
+        if c in ATV:
+            d, rows = ATV[c]
+            A = [{'tipo': (r.get('Tipo') or '').strip(), 'nome': (r.get('Nome_Ativo') or r.get('Emissor') or '').strip(), 'emissor': (r.get('Emissor') or '').strip(),
+                  'codigo': (r.get('Codigo_Acao') or '').strip(), 'venc': (r.get('Data_Vencimento') or '')[:10], 'valor': num(r.get('Valor'))} for r in rows]
+            A = [x for x in A if x['valor']]
+            tot = sum(x['valor'] for x in A) or 1
+            tipos = {}
+            for x in A:
+                tipos[x['tipo'] or 'Outros'] = tipos.get(x['tipo'] or 'Outros', 0) + x['valor']
+            F['ativos'] = {'ref': d, 'top': [dict(x, pct=round(x['valor'] / tot * 100, 2)) for x in sorted(A, key=lambda x: -x['valor'])[:25]],
+                           'por_tipo': [[k, round(v / tot * 100, 1)] for k, v in sorted(tipos.items(), key=lambda x: -x[1])], 'n': len(A)}
+        if c in TC:
+            d, rows = TC[c]
+            r = rows[0]
+            venc = [[k.split('Faixa_')[-1].replace('_', ' '), num(v)] for k, v in r.items() if k and k.startswith('Percentual_Vencimento_Receita_FII_Faixa') and num(v) is not None]
+            if any(v for _, v in venc):
+                fra = max(v for _, v in venc) <= 1.0001
+                F['vencimentos'] = {'ref': d, 'faixas': [[k, round(v * 100 if fra else v, 2)] for k, v in venc]}
+            F['trimestral'] = limpa(r)
+        # segmento mais útil quando a CVM diz só "Multicategoria"/"Outros"
+        seg = info['segmento']
+        if seg in ('Multicategoria', 'Outros', 'Não informado', 'Híbrido', 'Títulos e Val. Mob.'):
+            info['segmento_painel'] = {'Papel': 'Papel (CRI e recebíveis)', 'Fundo de fundos': 'Fundo de fundos', 'Tijolo': 'Tijolo multicategoria', 'Híbrido': 'Híbrido'}.get(info['tipo'], seg)
+        else:
+            info['segmento_painel'] = seg
     os.makedirs(PASTA, exist_ok=True)
     for tk, F in fundos.items():
         json.dump(F, open(os.path.join(PASTA, tk + '.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
