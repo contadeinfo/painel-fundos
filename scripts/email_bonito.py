@@ -50,11 +50,43 @@ class Msg:
 
 
 # ---------------- gráficos (matplotlib, no tema do painel) ----------------
+FONTES_URL = {
+    'sans': 'https://raw.githubusercontent.com/IBM/plex/master/packages/plex-sans/fonts/complete/ttf/IBMPlexSans-Regular.ttf',
+    'sans_b': 'https://raw.githubusercontent.com/IBM/plex/master/packages/plex-sans/fonts/complete/ttf/IBMPlexSans-SemiBold.ttf',
+    'serif_b': 'https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexserif/IBMPlexSerif-SemiBold.ttf',
+    'mono_b': 'https://raw.githubusercontent.com/google/fonts/main/ofl/ibmplexmono/IBMPlexMono-Medium.ttf',
+}
+_F = {}
+
+
+def fontes():
+    """Baixa (uma vez) as fontes IBM Plex; se não der, usa a padrão."""
+    if _F:
+        return _F
+    from matplotlib import font_manager as fm
+    pasta = os.path.join(os.path.expanduser('~'), '.cache', 'fontes-painel')
+    os.makedirs(pasta, exist_ok=True)
+    for k, u in FONTES_URL.items():
+        arq = os.path.join(pasta, os.path.basename(u))
+        try:
+            if not os.path.exists(arq):
+                with urllib.request.urlopen(u, timeout=20) as r, open(arq, 'wb') as f:
+                    f.write(r.read())
+            fm.fontManager.addfont(arq)
+            _F[k] = fm.FontProperties(fname=arq)
+        except Exception as e:
+            print('aviso fonte', k, e)
+            _F[k] = fm.FontProperties(family='DejaVu Sans', weight='bold' if k.endswith('_b') else 'normal')
+    return _F
+
+
 def _plt():
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 10, 'axes.edgecolor': '#d6d0c4', 'axes.labelcolor': '#374151',
+    F = fontes()
+    fam = F['sans'].get_name() if F.get('sans') else 'DejaVu Sans'
+    plt.rcParams.update({'font.family': fam, 'font.size': 10, 'axes.edgecolor': '#d6d0c4', 'axes.labelcolor': '#374151',
                          'xtick.color': '#4b5563', 'ytick.color': '#4b5563', 'axes.spines.top': False, 'axes.spines.right': False,
                          'axes.grid': True, 'grid.color': '#ebe6dc', 'grid.linewidth': .8, 'figure.facecolor': 'white', 'axes.facecolor': 'white'})
     return plt
@@ -87,7 +119,7 @@ def grafico_barras(nome, categorias, series, titulo='', unidade='%'):
         ax.legend(loc='lower center', bbox_to_anchor=(.5, 1.0 if not titulo else 1.06), ncol=k, frameon=False, fontsize=8.5)
         fig.tight_layout()
         os.makedirs(GRAF, exist_ok=True)
-        p = os.path.join(GRAF, nome + '.png')
+        p = os.path.join(GRAF, _nome_unico(nome) + '.png')
         fig.savefig(p, bbox_inches='tight')
         plt.close(fig)
         return p
@@ -120,12 +152,83 @@ def grafico_linhas(nome, rotulos_x, series, titulo='', unidade='%', area=False):
             ax.legend(frameon=False, fontsize=8.5, loc='best')
         fig.tight_layout()
         os.makedirs(GRAF, exist_ok=True)
-        p = os.path.join(GRAF, nome + '.png')
+        p = os.path.join(GRAF, _nome_unico(nome) + '.png')
         fig.savefig(p, bbox_inches='tight')
         plt.close(fig)
         return p
     except Exception as e:
         print('aviso gráfico', nome, e)
+        return None
+
+
+_SEQ = [0]
+
+
+def _nome_unico(base):
+    _SEQ[0] += 1
+    return f"{base}_{dt.datetime.utcnow():%Y%m%d%H%M%S}_{os.getpid() % 1000:03d}{_SEQ[0]:02d}"
+
+
+def cabecalho_png(m):
+    """Faixa de topo no tema do painel (azul-marinho e dourado), com título em serifa."""
+    try:
+        plt = _plt()
+        F = fontes()
+        from matplotlib.patches import Rectangle
+        fig = plt.figure(figsize=(8.6, 1.85), dpi=160)
+        ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off(); ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+        ax.add_patch(Rectangle((0, 0.06), 1, 0.94, color=AZUL))
+        ax.add_patch(Rectangle((0, 0), 1, 0.06, color=TONS.get(m.tom, OURO)))
+        ax.add_patch(Rectangle((0.035, 0.73), 0.028, 0.025, color=OURO))
+        ax.text(0.072, 0.742, 'PAINEL  ·  ROBÔ DE DADOS', color=OURO, fontproperties=F['sans_b'], fontsize=8.5, va='center')
+        agora = (dt.datetime.utcnow() - dt.timedelta(hours=3))
+        ax.text(0.965, 0.742, agora.strftime('%d/%m/%Y  %H:%M'), color='#94a3b8', fontproperties=F['mono_b'], fontsize=8.5, va='center', ha='right')
+        tit = m.titulo if len(m.titulo) <= 58 else m.titulo[:56] + '…'
+        ax.text(0.035, 0.44, tit, color='white', fontproperties=F['serif_b'], fontsize=19 if len(tit) <= 40 else 15.5, va='center')
+        if m.subtitulo:
+            sub = m.subtitulo if len(m.subtitulo) <= 100 else m.subtitulo[:98] + '…'
+            ax.text(0.035, 0.19, sub, color='#cbd5e1', fontproperties=F['sans'], fontsize=9.5, va='center')
+        os.makedirs(GRAF, exist_ok=True)
+        p = os.path.join(GRAF, _nome_unico('topo') + '.png')
+        fig.savefig(p, facecolor=AZUL); plt.close(fig)
+        return p
+    except Exception as e:
+        print('aviso cabeçalho', e)
+        return None
+
+
+def kpis_png(itens):
+    """Cartões de números em destaque (como no painel): rótulo, valor grande colorido e detalhe."""
+    try:
+        plt = _plt()
+        F = fontes()
+        from matplotlib.patches import FancyBboxPatch, Rectangle
+        n = len(itens)
+        por = 2 if n in (2, 4) else 3 if n != 1 else 1
+        lin = (n + por - 1) // por
+        W, H = 8.6, 1.12 * lin + 0.18
+        fig = plt.figure(figsize=(W, H), dpi=160)
+        ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off(); ax.set_xlim(0, W); ax.set_ylim(0, H)
+        ax.add_patch(Rectangle((0, 0), W, H, color='#faf8f3'))
+        gap, mx = 0.14, 0.12
+        cw = (W - 2 * mx - gap * (por - 1)) / por
+        for i, (rot, val, det, cor) in enumerate(itens):
+            r, c = divmod(i, por)
+            x = mx + c * (cw + gap); y = H - 0.12 - (r + 1) * 1.12 + 0.14
+            ax.add_patch(FancyBboxPatch((x, y), cw, 0.96, boxstyle='round,pad=0,rounding_size=0.08', fc='white', ec='#e7e1d5', lw=1))
+            ax.add_patch(Rectangle((x + 0.02, y + 0.925), cw - 0.04, 0.035, color=cor or OURO))
+            ax.text(x + 0.16, y + 0.75, str(rot).upper()[:34], color=CINZA, fontproperties=F['sans_b'], fontsize=7.2, va='center')
+            v = str(val)
+            ax.text(x + 0.16, y + 0.45, v, color=cor or AZUL, fontproperties=F['mono_b'], fontsize=17 if len(v) <= 12 else 13.5 if len(v) <= 17 else 11, va='center')
+            if det:
+                d = str(det) if len(str(det)) <= 48 else str(det)[:46] + '…'
+                ax.text(x + 0.16, y + 0.17, d, color=CINZA, fontproperties=F['sans'], fontsize=7.6, va='center')
+        os.makedirs(GRAF, exist_ok=True)
+        p = os.path.join(GRAF, _nome_unico('cartoes') + '.png')
+        fig.savefig(p, facecolor='#faf8f3'); plt.close(fig)
+        return p
+    except Exception as e:
+        print('aviso cartões', e)
         return None
 
 
@@ -194,35 +297,94 @@ def para_html(m):
 
 
 # ---------------- Markdown (issue do GitHub) ----------------
-def para_markdown(m, sha_img=None):
-    L = [f'@{DONO}', '', f'## {m.titulo}']
-    if m.subtitulo:
-        L += ['', f'_{m.subtitulo}_']
-    for b in m.blocos:
+def _sinal(v):
+    t = str(v)
+    if t.startswith('+') and t not in ('+0,00%', '+0,0%'):
+        return f'▲ {t}'
+    if t.startswith('−') or (t.startswith('-') and len(t) > 1):
+        return f'▼ {t}'
+    return t
+
+
+def _img(caminho, alt, largura=720):
+    url = f'https://raw.githubusercontent.com/{REPO}/main/data/graficos/{os.path.basename(caminho)}'
+    return f'<img src="{url}" width="{largura}" alt="{html.escape(alt)}">'
+
+
+def para_markdown(m, imagens=True):
+    """Texto da issue (o GitHub manda por e-mail). Tema, fontes e números em destaque vão como imagem;
+    o resto em Markdown bem organizado. Sem imagens (imagens=False), sai uma versão só texto."""
+    L = []
+    resumo = next((b[1] for b in m.blocos if b[0] == 'kpis'), None)
+    if resumo:   # primeira linha = prévia do e-mail no celular
+        L.append(' · '.join(f'**{r}:** {v}' for r, v, *_ in resumo[:4]))
         L.append('')
+    topo = cabecalho_png(m) if imagens else None
+    if topo:
+        L += [f'<p align="center">{_img(topo, m.titulo)}</p>', '']
+    else:
+        L += [f'# {m.titulo}', ''] + ([f'_{m.subtitulo}_', ''] if m.subtitulo else [])
+    primeiro_kpi = True
+    for b in m.blocos:
         if b[0] == 'kpis':
-            L.append('| ' + ' | '.join(f'**{r}**' for r, *_ in b[1]) + ' |')
-            L.append('|' + '---|' * len(b[1]))
-            L.append('| ' + ' | '.join(f'{v}<br><sub>{s or ""}</sub>' for _, v, s, _c in b[1]) + ' |')
+            g = kpis_png(b[1]) if imagens else None
+            if g:
+                L += [f'<p align="center">{_img(g, " · ".join(f"{r}: {v}" for r, v, *_ in b[1]))}</p>', '']
+                if not primeiro_kpi or not resumo:
+                    L += ['<sub>' + ' · '.join(f'{r}: <b>{v}</b>' + (f' ({d})' if d else '') for r, v, d, _c in b[1]) + '</sub>', '']
+            else:
+                L.append('| ' + ' | '.join(f'**{r}**' for r, *_ in b[1]) + ' |')
+                L.append('|' + ':---:|' * len(b[1]))
+                L.append('| ' + ' | '.join(f'{_sinal(v)}<br><sub>{d or ""}</sub>' for _, v, d, _c in b[1]) + ' |')
+                L.append('')
+            primeiro_kpi = False
         elif b[0] == 'secao':
-            L.append(f'### {b[1]}')
+            L += [f'### ◆ {b[1]}', '']
         elif b[0] == 'tabela':
             _, cab, linhas, al = b
             al = al or ['left'] + ['right'] * (len(cab) - 1)
-            L.append('| ' + ' | '.join(cab) + ' |')
+            L.append('| ' + ' | '.join(f'**{c}**' for c in cab) + ' |')
             L.append('|' + ''.join(':---|' if a == 'left' else '---:|' for a in al))
-            L += ['| ' + ' | '.join(str(v) for v in l) + ' |' for l in linhas]
+            L += ['| ' + ' | '.join((_sinal(v) if a == 'right' else (f'**{v}**' if j == 0 else str(v))) for j, (v, a) in enumerate(zip(l, al))) + ' |' for l in linhas]
+            L.append('')
         elif b[0] == 'lista':
-            L += [f'- {x}' for x in b[1]]
+            L += [f'- {x}' for x in b[1]] + ['']
         elif b[0] == 'texto':
-            L.append(b[1])
+            L += [f'> {b[1]}', '']
         elif b[0] == 'grafico':
-            url = f'https://raw.githubusercontent.com/{REPO}/main/data/graficos/{os.path.basename(b[1])}?v={sha_img or dt.datetime.utcnow():%Y%m%d%H%M}'
-            L.append(f'![{b[2]}]({url})')
-            if b[2]:
-                L.append(f'<sub>{b[2]}</sub>')
-    L += ['', '---', f'<sub>Robô de dados · {(dt.datetime.utcnow() - dt.timedelta(hours=3)):%d/%m/%Y %H:%M} (Brasília) · dados públicos, não é recomendação · limites em <code>alertas.json</code></sub>']
+            if imagens:
+                L += [f'<p align="center">{_img(b[1], b[2] or "gráfico")}</p>']
+                if b[2]:
+                    L.append(f'<p align="center"><sub>{html.escape(b[2])}</sub></p>')
+                L.append('')
+    L += ['---', f'<sub>🤖 Robô de dados · {(dt.datetime.utcnow() - dt.timedelta(hours=3)):%d/%m/%Y %H:%M} (Brasília) · dados públicos (CVM, Banco Central, TradingView) · '
+          f'informativo, não é recomendação · limites dos avisos em <code>alertas.json</code> · @{DONO}</sub>']
     return '\n'.join(L)
+
+
+def _publica_imagens():
+    """Sobe as imagens novas antes de abrir a issue (para o e-mail já chegar com elas)."""
+    import subprocess
+    g = lambda *a: subprocess.run(['git', '-C', RAIZ, *a], capture_output=True, text=True)
+    if g('config', 'user.email').stdout.strip() == '':
+        g('config', 'user.name', 'robo-alertas'); g('config', 'user.email', 'robo-alertas@users.noreply.github.com')
+    # apaga imagens com mais de 45 dias
+    limite = dt.datetime.utcnow().timestamp() - 45 * 86400
+    for f in os.listdir(GRAF) if os.path.isdir(GRAF) else []:
+        try:
+            if os.path.getmtime(os.path.join(GRAF, f)) < limite:
+                os.remove(os.path.join(GRAF, f))
+        except OSError:
+            pass
+    g('add', '-A', 'data/graficos')
+    if g('diff', '--cached', '--quiet').returncode == 0:
+        return
+    g('commit', '-q', '-m', 'imagens dos avisos')
+    for i in range(4):
+        if g('pull', '--rebase', '-q').returncode == 0 and g('push', '-q').returncode == 0:
+            return
+        import time; time.sleep(5 * (i + 1))
+    print('aviso: não consegui publicar as imagens; o aviso vai sem elas')
 
 
 def _gh(metodo, caminho, corpo=None):
@@ -245,7 +407,7 @@ def envia(m):
             msg['From'] = f'Painel de dados <{GMAIL}>'
             msg['To'] = PARA
             alt = MIMEMultipart('alternative')
-            alt.attach(MIMEText(para_markdown(m).replace(f'@{DONO}', ''), 'plain', 'utf-8'))
+            alt.attach(MIMEText(para_markdown(m, imagens=False).replace(f'@{DONO}', ''), 'plain', 'utf-8'))
             alt.attach(MIMEText(corpo, 'html', 'utf-8'))
             msg.attach(alt)
             for cid, p in cids:
@@ -265,7 +427,10 @@ def envia(m):
             _gh('POST', '/labels', {'name': m.rotulo, 'color': 'b08a3e'})
         except Exception:
             pass
-        i = _gh('POST', '/issues', {'title': m.titulo, 'body': para_markdown(m), 'labels': [m.rotulo]})
+        corpo = para_markdown(m, imagens=bool(TOKEN))
+        if TOKEN:
+            _publica_imagens()
+        i = _gh('POST', '/issues', {'title': m.titulo, 'body': corpo, 'labels': [m.rotulo]})
         if i.get('number'):
             _gh('PATCH', f"/issues/{i['number']}", {'state': 'closed', 'state_reason': 'completed'})
         print('aviso (issue):', m.titulo)

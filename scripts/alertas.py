@@ -151,7 +151,7 @@ def resumo(P, set_row, fundos):
         q12 = quartil(set_row[8], sum(1 for r in fundos if r[7] is not None))
         m.kpis([('Fundo de referência no mês', sg(set_row[3]), f"{set_row[4]}º de {sum(1 for r in fundos if r[3] is not None)} peers", VERDE if (set_row[3] or 0) >= 0 else VERM),
                 ('No ano', sg(set_row[5]), f"Ibovespa {sg(bench.get('IBOV', [None]*20)[5])} · CDI {sg(bench.get('CDI', [None]*20)[5])}", VERDE if (set_row[5] or 0) >= 0 else VERM),
-                ('12 meses', sg(set_row[7]), f'{q12 or "—"}º quartil entre os peers', VERDE if (q12 or 4) <= 2 else VERM),
+                ('12 meses', sg(set_row[7]), f'{q12 or "—"}º quartil entre os peers', VERDE if (set_row[7] or 0) >= 0 else VERM),
                 ('Patrimônio', mi(set_row[17]), f'captação no ano {mi(set_row[19])}', None)])
         g = grafico_barras('resumo_janelas', [NOMEJ[j] for j in jan],
                            [('Fundo de referência', [set_row[COLS[j]] for j in jan], OURO), ('Mediana dos peers', [med(COLS[j]) for j in jan], '#94a3b8'),
@@ -163,7 +163,8 @@ def resumo(P, set_row, fundos):
     mes = sorted((r for r in fundos if r[3] is not None), key=lambda r: -r[3])
     if mes:
         m.secao('Destaques do mês entre os peers')
-        m.lista([f'▲ {r[0][:46]}: {sg(r[3])}' for r in mes[:3]] + [f'▼ {r[0][:46]}: {sg(r[3])}' for r in mes[-3:][::-1]])
+        seta = lambda v: '▲' if (v or 0) > 0 else '▼' if (v or 0) < 0 else '•'
+        m.lista([f'Melhor: {seta(r[3])} {r[0][:46]} ({sg(r[3])})' for r in mes[:3]] + [f'Pior: {seta(r[3])} {r[0][:46]} ({sg(r[3])})' for r in mes[-3:][::-1]])
     Q = cotacoes()
     if Q and Q.get('q'):
         m.secao('Mercado')
