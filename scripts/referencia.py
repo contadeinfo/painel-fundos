@@ -89,6 +89,20 @@ def ibov_mensal(ini, fim):
     return out
 
 
+def ibov_diario():
+    """Fechamento diário do Ibovespa (Yahoo Finance), para o gráfico da lâmina."""
+    out = {}
+    try:
+        J = json.loads(baixa('https://query1.finance.yahoo.com/v8/finance/chart/%5EBVSP?range=max&interval=1d'))['chart']['result'][0]
+        for t, c in zip(J['timestamp'], J['indicators']['quote'][0]['close']):
+            if c:
+                out[(dt.datetime.utcfromtimestamp(t) - dt.timedelta(hours=3)).date().isoformat()] = round(c, 2)
+    except Exception as e:
+        print('aviso Ibovespa diário', e)
+    print('Ibovespa diário:', len(out), 'dias')
+    return out
+
+
 def cdi_mensal(ini, fim):
     out = {}
     try:
@@ -125,16 +139,31 @@ def main():
     ini = dt.date.fromisoformat(mes[ks[0]]['d'])
     IB, CD = ibov_mensal(ini, hoje), cdi_mensal(ini, hoje)
     ibk = sorted(IB)
+    IBD = ibov_diario()
+    d0 = dias[0][0]
+    ib0 = next((IBD[d] for d in sorted(IBD) if d >= d0), None)
+    cota0 = num(dias[0][1])
     serie = []
     for i, k in enumerate(ks):
         x = mes[k]
         ant = mes[ks[i - 1]] if i else None
-        ret = (x['cota'] / ant['cota'] - 1) * 100 if ant else None
+        ret = (x['cota'] / ant['cota'] - 1) * 100 if ant else (x['cota'] / cota0 - 1) * 100
         j = ibk.index(k) if k in IB else -1
         ib = (IB[k] / IB[ibk[j - 1]] - 1) * 100 if j > 0 else None
+        if not ant and ib0:      # primeiro mês: desde o início do fundo
+            fimm = max((d for d in IBD if d[:7] == k), default=None)
+            ib = (IBD[fimm] / ib0 - 1) * 100 if fimm else None
         serie.append({'m': k, 'ate': x['d'], 'ret': round(ret, 4) if ret is not None else None, 'ibov': round(ib, 4) if ib is not None else None,
                       'cdi': CD.get(k), 'cota': x['cota'], 'pl': round(x['pl'] or 0, 2), 'cotst': x.get('cotst'), 'capt': round(x['capt'], 2)})
-    out = {'gerado_em': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'inicio': mes[ks[0]]['d'], 'ref': dias[-1][0], 'mensal': serie}
+    # série diária (cota do fundo e Ibovespa no mesmo dia) para o gráfico da lâmina
+    dd, cc, ii, ult = [], [], [], None
+    for d, q, *_ in dias:
+        if not num(q):
+            continue
+        ult = IBD.get(d, ult)
+        dd.append(d); cc.append(round(num(q), 6)); ii.append(ult)
+    out = {'gerado_em': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'inicio': dias[0][0], 'cota_inicial': cota0, 'ibov_inicial': ib0,
+           'ref': dias[-1][0], 'mensal': serie, 'diario': {'d': dd, 'cota': cc, 'ibov': ii}}
     json.dump(out, open(SAIDA, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     print('OK referencia:', len(serie), 'meses, de', ks[0], 'a', ks[-1], '| com Ibovespa:', sum(1 for s in serie if s['ibov'] is not None),
           '| com CDI:', sum(1 for s in serie if s['cdi'] is not None))
