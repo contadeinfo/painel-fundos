@@ -1268,6 +1268,21 @@ table th{letter-spacing:.06em}
 .mk-pill{border-color:var(--brand-line);background:rgba(255,255,255,.04)}
 .ghost{border-radius:8px}
 /* @@EXTRA-CSS@@ */
+/* P/L da bolsa */
+#mkValor .va-kpis{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:6px 0 4px}
+#mkValor .va-kpis em{font-style:normal;font-weight:600}
+#mkValor .va-kpis em.pos{color:#0e7f57}#mkValor .va-kpis em.neg{color:#b3261e}
+#mkValor .va-dg{margin:8px 0 14px;line-height:1.55}
+#mkValor .va-ch{height:340px}
+#mkValor .ua-two{align-items:start}
+@media (min-width:900px){#mkValor .ua-two{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}}
+#mkValor #tb-va td,#mkValor #tb-va th{padding-left:8px;padding-right:8px}
+#mkValor #tb-va{font-size:12.5px}
+#mkValor .b3-scroll{max-height:440px;overflow:auto}
+#mkValor .cx-ctl{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 10px}
+#mkValor td.neg{color:#b3261e}
+@media (max-width:640px){#mkValor .va-ch{height:300px}}
+
 .fi-ch-box{position:relative;height:360px}
 .fi-tp{display:inline-block;font:600 10.5px/1 var(--sans,inherit);padding:3px 7px;border-radius:999px;white-space:nowrap}
 .fi-tij{background:color-mix(in srgb,#b08a3e 18%,transparent);color:#8a6a2a}.fi-pap{background:color-mix(in srgb,#1d4f91 15%,transparent);color:#1d4f91}
@@ -1630,6 +1645,25 @@ tr.cx-out td{color:var(--muted);font-style:italic}
       <div class="b3d-grid" id="foKpis" style="margin:10px 0"></div><div class="cx-ch" style="height:250px"><canvas id="ch-focus" aria-label="Expectativas Focus"></canvas></div></section>
   </div>
   <div class="mk-foot"><div class="fn"><b>Notas de leitura</b><ul><li><span class="fn-t a">Atualiza sozinho</span> curva DI: robô de cotações no GitHub, que lê os contratos DI1 da B3 no TradingView a cada minuto em dias úteis das 9h às 19h (atraso de até 15 minutos; fora desse horário, de hora em hora); o painel relê a cada 2 minutos (o GitHub pode servir uma cópia de até 5 minutos). Focus: robô lê a API de Expectativas do Banco Central duas vezes por dia útil (o boletim sai às segundas).</li><li><span class="fn-t e">Calculado</span> taxas de 1 semana e 1 mês atrás estimadas a partir da variação percentual que o TradingView informa para cada contrato; diferenças em pontos-base (1 bp = 0,01 ponto percentual). No Focus, um ponto por semana (o último dado de cada semana).</li><li><span class="fn-t w">Atenção</span> contratos com pouco negócio podem ficar sem taxa no dia. Expectativas não são previsão do painel; são a mediana dos economistas consultados pelo BC.</li></ul></div></div>
+</section>
+<section id="mkValor">
+  <div class="sec-h"><h2>A bolsa está barata ou cara? · P/L do Ibovespa</h2><span class="mk-desc">Preço sobre lucro agregado das empresas do Ibovespa: quantos anos de lucro o mercado paga hoje. Com e sem Petrobras, comparado com a própria história e com o juro real dos títulos públicos.</span><span class="status" id="st-val">carregando…</span></div>
+  <div class="b3d-grid va-kpis" id="vaKpis"></div>
+  <p class="ua-dg va-dg" id="vaDg"></p>
+  <section class="card ua-wide"><div class="head"><div class="name">P/L agregado (últimos 12 meses), mês a mês</div><span class="b3-liq">vezes o lucro · linha tracejada = mediana da série escolhida desde 2012; faixa cinza = metade central dos meses (entre o 1º e o 3º quartil)</span></div>
+    <div class="cx-ctl"><div class="cx-seg" id="vaSer" role="group" aria-label="Série com média e faixa"><button type="button" data-s="ibov" aria-pressed="true">Ibovespa</button><button type="button" data-s="ex_petro" aria-pressed="false">Sem Petrobras</button><button type="button" data-s="ex_petro_vale" aria-pressed="false">Sem Petrobras e Vale</button></div>
+      <div class="cx-seg" id="vaPer" role="group" aria-label="Período"><button type="button" data-p="0" aria-pressed="true">Tudo</button><button type="button" data-p="120" aria-pressed="false">10 anos</button><button type="button" data-p="60" aria-pressed="false">5 anos</button></div></div>
+    <div class="ua-ch va-ch"><canvas id="ch-va" aria-label="P/L do Ibovespa e sem Petrobras ao longo do tempo"></canvas></div></section>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Prêmio de risco da bolsa</div><span class="b3-liq">lucro ÷ preço (earnings yield) menos o juro real do Tesouro IPCA+ de ~10 anos · pontos percentuais</span></div><div class="cx-ch" style="height:260px"><canvas id="ch-vap" aria-label="Prêmio de risco da bolsa sobre o juro real"></canvas></div><p class="ua-dg" id="vaDgP"></p></section>
+    <section class="card"><div class="head"><div class="name">Maiores empresas do índice</div><span class="b3-liq">pelo valor de mercado · P/L de cada uma no último mês</span></div>
+      <div class="b3-scroll"><table class="b3-tbl" id="tb-va"><thead><tr><th>Empresa</th><th>Valor de mercado</th><th>% do total</th><th>Lucro 12m</th><th>P/L</th></tr></thead><tbody><tr><td colspan="5">Carregando…</td></tr></tbody></table></div></section>
+  </div>
+  <div class="fn"><b>Notas de leitura</b><ul>
+    <li><span class="fn-t s">Fonte</span> CVM (dados abertos: ITR e DFP das companhias, com o lucro de cada trimestre e a quantidade de ações; FCA, com os códigos de negociação), B3 (arquivo oficial de cotações históricas COTAHIST e carteira teórica do Ibovespa) e Tesouro Transparente (taxas do Tesouro IPCA+).</li>
+    <li><span class="fn-t a">Atualiza sozinho</span> robô no GitHub em todo dia útil às 20h25 (depois que a B3 publica as cotações do dia); os balanços da CVM são relidos toda segunda-feira. O ponto do mês corrente usa o último pregão disponível.</li>
+    <li><span class="fn-t e">Estimado / calculado</span> P/L agregado = soma do valor de mercado ÷ soma do lucro líquido dos últimos 12 meses atribuído aos controladores (empresas com prejuízo entram com lucro negativo, como nos índices de mercado). Valor de mercado = ações ordinárias × preço da ON + preferenciais × preço da PN (sem ações em tesouraria). Lucro do 4º trimestre = lucro anual (DFP) − três primeiros trimestres. Cada balanço só entra no cálculo 45 dias depois do fim do trimestre (90 dias para o anual), como estaria disponível na época. Prêmio = 100 ÷ P/L − taxa do Tesouro IPCA+ com vencimento mais próximo de 10 anos, no último dia disponível de cada mês. "Mais barato que em X% dos meses" compara o P/L atual com todos os meses desde 2012; a mediana e os quartis são menos afetados que a média pelos anos de lucro muito baixo.</li>
+    <li><span class="fn-t w">Atenção</span> usa a composição <b>atual</b> do Ibovespa em toda a história (as empresas que saíram do índice não entram, e as que entraram depois só aparecem a partir de quando têm cotação e balanço): é um retrato de "como estas empresas eram precificadas", não o P/L oficial do índice em cada data. Não pondera pela carteira teórica (pondera pelo valor de mercado total). Resultados não recorrentes (baixas contábeis, ganhos extraordinários) entram como divulgados e podem distorcer meses isolados: em 2015-2016 (prejuízos de Petrobras e Vale) e em 2020 (pandemia) o lucro caiu tanto que o P/L passou de 45x; no gráfico, esses meses aparecem no teto de 45x e ficam fora da mediana só quando passam de 60x. Valores diferentes dos publicados por corretoras e pela Bloomberg (que costumam usar lucro projetado ou ajustado) são esperados.</li></ul></div>
 </section>
 <section id="mkComex">
   <div class="sec-h"><h2>Comércio exterior · o que o Brasil vende e compra</h2><span class="mk-desc">Exportações e importações de bens por país e por produto, em dólares (valor FOB).</span><span class="status" id="st-cx">carregando…</span></div>
@@ -5740,6 +5774,88 @@ window.addEventListener("hashchange",rota); rota();
     di(); clearInterval(tm); tm = setInterval(() => { if (location.hash === '#mercado' && !document.hidden) di(); }, 120000);
   }
   const rota = () => { if ((location.hash || '').replace('#', '') === 'mercado') setTimeout(inicia, 300); };
+  window.addEventListener('hashchange', rota); rota();
+})();
+</script>
+<script>(function(){ /* @@VALUATION@@ P/L agregado do Ibovespa, vindo do robô do GitHub */
+  const RAW = 'https://raw.githubusercontent.com/contadeinfo/painel-fundos/';
+  const $i = id => document.getElementById(id);
+  const nb = (v, d = 1) => v == null || !isFinite(v) ? '—' : v.toLocaleString('pt-BR', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const lb = m => MES[+m.slice(5) - 1] + '/' + m.slice(2, 4);
+  const cor = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const NOME = {ibov: 'Ibovespa', ex_petro: 'Sem Petrobras', ex_petro_vale: 'Sem Petrobras e Vale'};
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  let V = null, ser = 'ibov', per = 0, ch = null, chP = null, ini = false;
+  const estat = (xs, lo = 0) => { xs = xs.filter(x => x != null && x > lo && x < 60); if (xs.length < 6) return null; const q = [...xs].sort((a, b) => a - b), qt = f => q[Math.min(q.length - 1, Math.round(f * (q.length - 1)))]; const mu = xs.reduce((a, b) => a + b, 0) / xs.length; return {mu, med: qt(.5), p25: qt(.25), p75: qt(.75)}; };
+  const bi = v => v == null ? '—' : (Math.abs(v) >= 1000 ? nb(v / 1000, 2) + ' tri' : nb(v, 0) + ' bi');
+  function leitura(p){ if (p == null) return ['—', '']; if (p <= 20) return ['bem abaixo do histórico', 'pos']; if (p <= 40) return ['abaixo do histórico', 'pos']; if (p < 60) return ['perto do histórico', '']; if (p < 80) return ['acima do histórico', 'neg']; return ['bem acima do histórico', 'neg']; }
+  function kpis(){
+    const S = V.serie, u = S[S.length - 1], E = V.estatisticas || {};
+    const card = (k) => { const e = E[k] || {}; const [txt, cls] = leitura(e.percentil); return `<div class="b3d-k"><span>P/L ${NOME[k]}</span><b>${nb(u[k])}x</b><small>mediana ${nb(e.mediana)}x · <em class="${cls}">${txt}</em>${e.percentil != null ? ' · mais barato que em ' + (100 - e.percentil) + '% dos meses' : ''}</small></div>`; };
+    const ey = u.ibov ? 100 / u.ibov : null, nt = u.ntnb ?? (V.ntnb_atual || {}).taxa;
+    const pr = ey != null && nt != null ? ey - nt : null;
+    const prs = S.filter(r => r.ibov > 0 && r.ntnb != null).map(r => 100 / r.ibov - r.ntnb), ep = estat(prs, -50);
+    $i('vaKpis').innerHTML = ['ibov', 'ex_petro', 'ex_petro_vale'].map(card).join('') +
+      `<div class="b3d-k"><span>Lucro ÷ preço do Ibovespa</span><b>${nb(ey, 2)}%</b><small>retorno implícito do lucro, ao ano</small></div>` +
+      `<div class="b3d-k"><span>Prêmio sobre o Tesouro IPCA+</span><b>${pr == null ? '—' : (pr > 0 ? '+' : '') + nb(pr, 2) + ' p.p.'}</b><small>juro real ${nb(nt, 2)}% · mediana histórica ${ep ? nb(ep.med, 2) + ' p.p.' : '—'}</small></div>`;
+    const ei = E.ibov || {}, ex = E.ex_petro || {};
+    const desc = (e) => e.atual == null ? '' : `${nb(e.atual)}x o lucro dos últimos 12 meses, contra mediana de ${nb(e.mediana)}x desde ${S[0].m.slice(0, 4)} e de ${nb(e.media_10a)}x na média dos últimos 10 anos (mais barato que em ${100 - (e.percentil ?? 0)}% dos meses)`;
+    let t = `<b>Leitura automática:</b> o Ibovespa negocia a ${desc(ei)}. Sem Petrobras, ${desc(ex)}.`;
+    if (ei.percentil != null && ex.percentil != null && Math.abs(ei.atual / ei.mediana - ex.atual / ex.mediana) > 0.08) t += ex.atual / ex.mediana > ei.atual / ei.mediana ? ' A Petrobras puxa o P/L do índice para baixo: sem ela, a bolsa parece menos barata.' : ' A Petrobras puxa o P/L do índice para cima.';
+    if (pr != null) t += ` O lucro das empresas rende ${nb(ey, 1)}% ao ano sobre o preço, ${pr >= 0 ? nb(pr, 1) + ' p.p. acima' : nb(-pr, 1) + ' p.p. abaixo'} do juro real de ~10 anos do Tesouro (${nb(nt, 2)}%)${ep ? (pr > ep.med ? `, prêmio maior que a mediana histórica (${nb(ep.med, 1)}), o que favorece a bolsa` : `, prêmio menor que a mediana histórica (${nb(ep.med, 1)}), o que favorece a renda fixa`) : ''}.`;
+    $i('vaDg').innerHTML = t;
+  }
+  function grafico(){
+    if (typeof Chart === 'undefined') return;
+    const S0 = V.serie, S = per ? S0.slice(-per) : S0;
+    const fg = cor('--muted'), line = cor('--line'), gold = cor('--gold') || '#b08a3e', azul = cor('--mk1') || '#1d4f91', verde = '#0e7f57';
+    const st = estat(S0.map(r => r[ser]));
+    const C = {ibov: gold, ex_petro: azul, ex_petro_vale: verde};
+    const ds = ['ibov', 'ex_petro', 'ex_petro_vale'].map(k => ({label: NOME[k], data: S.map(r => r[k] > 0 && r[k] < 60 ? r[k] : (r[k] != null ? 45 : null)), borderColor: C[k], backgroundColor: C[k], borderWidth: k === ser ? 2.6 : 1.3, pointRadius: 0, tension: .2, spanGaps: true, order: k === ser ? 0 : 1}));
+    if (st) {
+      const band = v => S.map(() => +v.toFixed(2));
+      ds.push({label: 'faixa p75', data: band(st.p75), borderColor: 'rgba(0,0,0,0)', backgroundColor: 'rgba(120,120,120,.13)', pointRadius: 0, fill: '+1', order: 5});
+      ds.push({label: 'faixa p25', data: band(st.p25), borderColor: 'rgba(0,0,0,0)', pointRadius: 0, fill: false, order: 5});
+      ds.push({label: 'Mediana (' + NOME[ser] + ')', data: band(st.med), borderColor: fg, borderDash: [5, 4], borderWidth: 1.2, pointRadius: 0, fill: false, order: 4});
+    }
+    const data = {labels: S.map(r => lb(r.m)), datasets: ds};
+    const opt = {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false},
+      plugins: {legend: {labels: {color: fg, boxWidth: 12, filter: i => !/^faixa/.test(i.text)}}, tooltip: {filter: i => !/^faixa/.test(i.dataset.label), callbacks: {label: c => ` ${c.dataset.label}: ${nb(c.parsed.y)}x`}}},
+      scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true, maxTicksLimit: 10}, grid: {display: false}}, y: {ticks: {color: fg, callback: v => v + 'x'}, grid: {color: line}, suggestedMin: 0, max: per ? undefined : 45}}};
+    if (ch) { ch.data = data; ch.update(); } else ch = new Chart($i('ch-va'), {type: 'line', data, options: opt});
+    const P = S.filter(r => r.ibov > 0 && r.ntnb != null);
+    const pv = P.map(r => +(100 / r.ibov - r.ntnb).toFixed(2)), mp = pv.length ? pv.reduce((a, b) => a + b, 0) / pv.length : null;
+    const dataP = {labels: P.map(r => lb(r.m)), datasets: [
+      {label: 'Prêmio (p.p.)', data: pv, borderColor: gold, backgroundColor: 'rgba(176,138,62,.14)', fill: 'origin', borderWidth: 2, pointRadius: 0, tension: .2},
+      {label: 'Média do período', data: P.map(() => mp && +mp.toFixed(2)), borderColor: fg, borderDash: [5, 4], borderWidth: 1.2, pointRadius: 0}]};
+    const optP = {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false},
+      plugins: {legend: {labels: {color: fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.dataset.label}: ${nb(c.parsed.y, 2)}`, afterBody: it => { const r = P[it[0].dataIndex]; return r ? `Lucro/preço ${nb(100 / r.ibov, 2)}% · Tesouro IPCA+ ${nb(r.ntnb, 2)}%` : ''; }}}},
+      scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true, maxTicksLimit: 8}, grid: {display: false}}, y: {ticks: {color: fg}, grid: {color: line}}}};
+    if (chP) { chP.data = dataP; chP.options = optP; chP.update(); } else chP = new Chart($i('ch-vap'), {type: 'line', data: dataP, options: optP});
+    $i('vaDgP').textContent = P.length ? `Quanto maior o prêmio, mais a bolsa paga acima da renda fixa real. Último: ${nb(pv[pv.length - 1], 2)} p.p.; média do período mostrado: ${nb(mp, 2)} p.p.` : 'Sem dados do Tesouro para o período.';
+  }
+  function tabela(){
+    const E = (V.empresas || []).slice(0, 25);
+    $i('tb-va').querySelector('tbody').innerHTML = E.map(e => `<tr><td>${esc(e.tks.join(', '))}<small style="display:block;opacity:.7">${esc(e.nome)}</small></td><td>R$ ${bi(e.vm / 1e9)}</td><td>${nb(e.peso_vm)}%</td><td class="${e.lucro < 0 ? 'neg' : ''}">R$ ${bi(e.lucro / 1e9)}</td><td>${e.pl == null ? 'prejuízo' : nb(e.pl) + 'x'}</td></tr>`).join('') || '<tr><td colspan="5">Sem dados.</td></tr>';
+  }
+  function desenha(){
+    if (!V || !V.serie || !V.serie.length) return;
+    kpis(); grafico(); tabela();
+    const u = V.serie[V.serie.length - 1], d = V.ultimo_pregao;
+    $i('st-val').textContent = `${V.empresas_n} de ${V.carteira_n} ações do índice · cotações até ${d ? d.slice(6) + '/' + d.slice(4, 6) + '/' + d.slice(0, 4) : lb(u.m)}`;
+  }
+  async function carrega(){
+    try { const r = await fetch(RAW + 'main/data/valuation.json?t=' + Math.floor(Date.now() / 9e5), {cache: 'no-store'}); if (!r.ok) throw 0; V = await r.json(); desenha(); }
+    catch (e) { $i('st-val').textContent = 'não carregou (robô do GitHub fora do ar ou sem internet)'; }
+  }
+  function inicia(){
+    if (!$i('mkValor') || ini) return; ini = true;
+    $i('vaSer').addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; ser = b.dataset.s; $i('vaSer').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); grafico(); });
+    $i('vaPer').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b) return; per = +b.dataset.p; $i('vaPer').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); grafico(); });
+    carrega();
+  }
+  const rota = () => { if ((location.hash || '').replace('#', '') === 'mercado') setTimeout(inicia, 400); };
   window.addEventListener('hashchange', rota); rota();
 })();
 </script>

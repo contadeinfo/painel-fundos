@@ -27,3 +27,5 @@ Retornos dos fundos calculados pela cota (líquidos de taxas). Mesma convenção
 ## Custo
 
 Repositório **público**: o GitHub Actions não consome os minutos do plano grátis (eles só valem para repositórios privados). Não torne este repositório privado, ou os robôs passam a gastar a cota de 2.000 minutos por mês. Os horários foram limitados ao período de uso do painel para não sobrecarregar os servidores do GitHub.
+
+- **valuation.yml** (`scripts/valuation.py`): P/L agregado do Ibovespa (composição atual), sem Petrobras e sem Petrobras e Vale, desde 2012, e prêmio sobre o juro real do Tesouro IPCA+. Fontes: CVM (ITR, DFP, FCA), B3 (COTAHIST, carteira do Ibovespa), Tesouro Transparente. Roda seg-sex 20h25 de Brasília; balanços relidos às segundas. Saída: `data/valuation.json`.
