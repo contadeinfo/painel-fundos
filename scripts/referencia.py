@@ -92,13 +92,18 @@ def ibov_mensal(ini, fim):
 def ibov_diario():
     """Fechamento diário do Ibovespa (Yahoo Finance), para o gráfico da lâmina."""
     out = {}
-    try:
-        J = json.loads(baixa('https://query1.finance.yahoo.com/v8/finance/chart/%5EBVSP?range=max&interval=1d'))['chart']['result'][0]
-        for t, c in zip(J['timestamp'], J['indicators']['quote'][0]['close']):
-            if c:
-                out[(dt.datetime.utcfromtimestamp(t) - dt.timedelta(hours=3)).date().isoformat()] = round(c, 2)
-    except Exception as e:
-        print('aviso Ibovespa diário', e)
+    a = dt.date(2007, 12, 1)
+    while a < dt.date.today():       # em blocos de 4 anos: com intervalo longo o Yahoo devolve pontos mensais
+        b = min(dt.date.today() + dt.timedelta(days=1), dt.date(a.year + 4, a.month, 1))
+        p1, p2 = int(dt.datetime(a.year, a.month, a.day).timestamp()), int(dt.datetime(b.year, b.month, b.day).timestamp())
+        try:
+            J = json.loads(baixa(f'https://query1.finance.yahoo.com/v8/finance/chart/%5EBVSP?period1={p1}&period2={p2}&interval=1d'))['chart']['result'][0]
+            for t, c in zip(J['timestamp'], J['indicators']['quote'][0]['close']):
+                if c:
+                    out[(dt.datetime.utcfromtimestamp(t) - dt.timedelta(hours=3)).date().isoformat()] = round(c, 2)
+        except Exception as e:
+            print('aviso Ibovespa diário', a, e)
+        a = b
     print('Ibovespa diário:', len(out), 'dias')
     return out
 
