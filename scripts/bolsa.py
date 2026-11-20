@@ -107,7 +107,7 @@ def aluguel():
         for n in colunas:
             if any(x.lower() in n.lower() for x in nomes):
                 return idx[n]
-    i_tk, i_qt, i_rs, i_pm = col('TckrSymb', 'Ticker'), col('BalQty', 'Qty'), col('BalVal', 'Val'), col('AvrgPric', 'Pric')
+    i_tk, i_qt, i_rs, i_pm = col('TckrSymb', 'Ticker'), col('StockBalance', 'BalQty'), idx.get('Balance', col('BalVal')), col('AvgPric', 'AvrgPric')
     print('colunas', colunas, '->', i_tk, i_qt, i_rs, i_pm)
     por = {}
     for v in linhas:

@@ -241,6 +241,10 @@ JCP_RX = re.compile(r'^juros sobre (o )?capital pr[oó]prio', re.I)
 DIV_RX = re.compile(r'^dividendos', re.I)
 
 
+PAGO_RX = re.compile(r'dividend|juros sobre (o )?capital', re.I)
+NAO_RX = re.compile(r'recebid|n[aã]o controlador|minorit', re.I)
+
+
 def le_extras(z, tipo, PL, PV, EN, PC):
     """Patrimônio (BPP), dividendos + JCP (DVA, acumulado no ano) e data de entrega de cada formulário."""
     ult = lambda r: r.get('ORDEM_EXERC', '').upper() in ('ÚLTIMO', 'ULTIMO')
