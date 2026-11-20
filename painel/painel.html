@@ -1501,10 +1501,31 @@ tr.cx-out td{color:var(--muted);font-style:italic}
 .fif-heat td.a{background:rgba(14,127,87,.13)}.fif-heat td.b{background:rgba(179,38,30,.11)}
 .fif-heat td.y{font-weight:700;border-left:2px solid var(--line)}
 #view-set-fif td.up,#view-set-fif b.up{color:#0e7f57}#view-set-fif td.down,#view-set-fif b.down{color:#b3261e}
-.fif-lmgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
-.fif-lbl{display:block;font-size:12.5px;color:var(--muted);margin:6px 0 4px}.fif-lbl select,.fif-lbl input{font:inherit;margin-left:6px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)}
-#fifLmComp,#fifLmOfi{width:100%;font-family:var(--mono);font-size:12.5px;border:1px solid var(--line);border-radius:6px;padding:8px;background:var(--surface);color:var(--fg)}
-.fif-av{font-size:12.5px;margin-top:10px;line-height:1.5}.fif-av ul{margin:4px 0 0 18px;padding:0}.fif-av li{color:#8a5a00}
+.lmx-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:6px 0 14px}
+.lmx-f{display:flex;flex-direction:column;gap:6px}.lmx-f>span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.lmx-f select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.lmx-risco{display:flex;gap:4px}.lmx-risco button{flex:1;font:inherit;font-weight:700;padding:7px 0;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--muted);cursor:pointer}
+.lmx-risco button[aria-pressed="true"]{background:#9a7430;color:#fff;border-color:#9a7430}
+.lmx-st b{font-size:13px;font-weight:500;line-height:1.4}.lmx-st i{font-style:normal;margin-right:4px}.lmx-st i.ok{color:#0e7f57}.lmx-st i.no{color:#b3261e}
+.lmx-bt{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.lmx-b{font:inherit;font-size:13px;font-weight:600;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.lmx-b.pri{background:#9a7430;border-color:#9a7430;color:#fff}.lmx-b.dark{background:#14181e;border-color:#14181e;color:#e9d9b0}.lmx-b:disabled{opacity:.4;cursor:not-allowed}
+.lmx-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:12px;align-items:start}
+.lmx-box{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.lmx-box h3{margin:0 0 10px;font-size:14px;display:flex;align-items:center;gap:8px}.lmx-box h3 small{font-weight:400;color:var(--muted);font-size:12px}
+.lmx-box h3>span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#9a7430;color:#fff;font-size:12px}
+.lmx-comp{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:18px;align-items:center}#fifLmDonut{width:150px;height:150px}
+.lmx-tb{width:100%;border-collapse:collapse;font-size:12.5px}.lmx-tb th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+.lmx-tb td{padding:3px 6px;border-bottom:1px solid var(--line);vertical-align:middle}.lmx-tb tfoot th{border:0;padding-top:8px;font-size:12px}.lmx-tb tfoot .ok{color:#0e7f57}.lmx-tb tfoot .no{color:#b3261e}
+.lmx-tb input{font:inherit;width:100%;border:1px solid transparent;border-radius:6px;padding:5px 6px;background:transparent;color:var(--fg)}.lmx-tb input:hover,.lmx-tb input:focus{border-color:var(--line);background:var(--surface);outline:none}
+#fifLmComp{table-layout:fixed}#fifLmComp th:nth-child(1){width:auto}#fifLmComp th:nth-child(2){width:110px}#fifLmComp th:nth-child(3){width:140px}#fifLmComp th:nth-child(4){width:36px}#fifLmComp td:nth-child(2) input{text-align:right}#fifLmComp td:first-child{white-space:nowrap}#fifLmComp td:first-child input{width:calc(100% - 20px);display:inline-block;vertical-align:middle}#fifLmComp .sw{vertical-align:middle;margin-right:6px}
+.lmx-tb .sw{display:inline-block;width:10px;height:10px;border-radius:3px;flex:none}.lmx-tb .br{width:auto}.lmx-tb .br span{display:block;height:6px;border-radius:3px}
+.lmx-tb .x{border:0;background:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 4px}.lmx-tb .x:hover{color:#b3261e}
+.lmx-add{margin-top:8px;font:inherit;font-size:12.5px;border:1px dashed var(--line);border-radius:8px;background:none;color:var(--fg);padding:6px 10px;cursor:pointer}
+.lmx-conf{table-layout:fixed}.lmx-conf th{white-space:normal}.lmx-conf td,.lmx-conf th{text-align:right}.lmx-conf th:first-child,.lmx-conf thead th:last-child,.lmx-conf td:last-child{text-align:left}.lmx-conf input{text-align:right;width:90px;max-width:100%}
+.chip{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;white-space:nowrap}.chip.o{background:rgba(14,127,87,.12);color:#0e7f57}.chip.c{background:rgba(29,79,145,.12);color:#1d4f91}.chip.w{background:rgba(201,162,39,.18);color:#8a5a00}
+.lmx-nota{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.45}
+.fif-av{font-size:12.5px;margin-top:6px;line-height:1.5}.fif-av ul{margin:4px 0 0 18px;padding:0}.fif-av li{color:#8a5a00}
 .ghost.fif-gerar{background:var(--gold,#b08a3e);color:#fff;border-color:transparent;font-weight:600}
 /* @@SEM-ROLAGEM@@ tudo à vista: sem barras de rolagem em tabelas e listas (telas a partir de 760px) */
 @media (min-width:760px){
@@ -1560,7 +1581,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo home-by">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
     <p class="home-eyebrow">Mercado, economia e geopolítica</p>
@@ -1640,7 +1661,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
   <p class="mk-aviso" id="mkAviso" hidden>Os dados de mercado vêm de sites externos, que o claude.ai bloqueia. Para ver as cotações, abra o <b>arquivo do Painel de Mercado</b> no seu computador.</p>
@@ -1843,7 +1864,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
   <section class="card ct-slider">
@@ -1972,7 +1993,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
   <p class="mk-aviso" id="nwAviso" hidden>As notícias vêm de sites externos, que o claude.ai bloqueia. Para ver o feed, abra o <b>arquivo do Painel de Mercado</b> no seu computador.</p>
@@ -2006,7 +2027,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
   <p class="mk-aviso" id="osAviso" hidden>Os dados vêm de fontes externas, que o claude.ai bloqueia. Para ver o radar, abra o <b>arquivo do Painel de Mercado</b> no seu computador.</p>
@@ -2106,7 +2127,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
   <div class="b3-disc" role="note"><b>Atenção:</b> as cotações, indicadores e o consenso de analistas desta aba vêm de fontes de terceiros (Yahoo Finance, TradingView, Fundamentus e outras) e podem estar atrasados ou incorretos. <b>Verifique as informações</b> no site da B3, nos documentos da própria companhia (CVM / RI) e com seu assessor. <b>Nada aqui é recomendação de investimento</b>, de compra ou de venda de qualquer ação.</div>
@@ -2149,7 +2170,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">19/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">20/11/2026</span></div>
     </div>
   </section>
   <div class="b3-disc" role="note"><b>Atenção:</b> cotações, rendimentos, P/VP, vacância e demais indicadores desta aba vêm de fontes de terceiros (Fundamentus, TradingView, Yahoo Finance e outras) e podem estar atrasados ou incorretos. <b>Verifique as informações</b> nos relatórios gerenciais e informes do próprio fundo, no site da B3 / CVM e com seu assessor. Rendimento passado não garante rendimento futuro. <b>Nada aqui é recomendação de investimento</b>, de compra ou de venda de qualquer cota.</div>
