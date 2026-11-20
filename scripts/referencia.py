@@ -145,6 +145,10 @@ def main():
     IB, CD = ibov_mensal(ini, hoje), cdi_mensal(ini, hoje)
     ibk = sorted(IB)
     IBD = ibov_diario()
+    for d in sorted(IBD):        # fechamento do último pregão de cada mês pela série diária (mais fiel que o ponto mensal)
+        if d[:7] >= ks[0]:
+            IB[d[:7]] = IBD[d]
+    ibk = sorted(IB)
     d0 = dias[0][0]
     ib0 = next((IBD[d] for d in sorted(IBD) if d >= d0), None)
     cota0 = num(dias[0][1])
