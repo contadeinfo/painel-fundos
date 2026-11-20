@@ -324,7 +324,8 @@ def main():
         e['tks'].add(tk)
         e['peso'] += peso or 0
     for c, e in emp.items():
-        todos = [t for t, cc in tk2c.items() if cc == c and t in P]
+        bases = {t[:4] for t in e['tks']}
+        todos = sorted({t for t, cc in tk2c.items() if cc == c and t in P} | {t for t in P if t[:4] in bases})
         e['on'] = [t for t in todos if t[4:] == '3']
         e['pn'] = [t for t in todos if t[4:] in ('4', '5', '6', '7', '8')]
     meses = sorted({k for t in P.values() for k in t})
