@@ -17,6 +17,8 @@ from atualiza import baixa, so_digitos, RAIZ  # noqa: E402
 ANO0 = 2011
 PASTA = os.path.join(RAIZ, 'data', 'valuation')
 SAIDA = os.path.join(RAIZ, 'data', 'valuation.json')
+# códigos que o FCA às vezes não traz (CNPJ conferido no cadastro da CVM)
+CNPJ_EXTRA = {'BPAC': '30306294000145', 'CSNA': '33042730000104', 'CMIN': '08902291000115', 'MBRF': '03853896000140'}
 PETRO, VALE = '33000167000101', '33592510000154'
 ITR = 'https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/ITR/DADOS/itr_cia_aberta_{}.zip'
 DFP = 'https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/DFP/DADOS/dfp_cia_aberta_{}.zip'
@@ -89,7 +91,7 @@ def tickers():
 
 
 # ---------------- preços mensais (COTAHIST) ----------------
-TK_OK = re.compile(r'^[A-Z]{4}(3|4|5|6|7|8|11)$')
+TK_OK = re.compile(r'^[A-Z0-9]{4}(3|4|5|6|7|8|11)$')
 
 
 def precos(anos_novos):
@@ -98,7 +100,7 @@ def precos(anos_novos):
     hoje = dt.date.today()
     P = {}
     for a in range(ANO0, hoje.year + 1):
-        nome = f'precos_{a}.json'
+        nome = f'precos_v2_{a}.json'
         cache = json_load(nome, None)
         if cache is None or a in anos_novos:
             try:
@@ -201,6 +203,8 @@ def balancos(anos_novos):
                 c = so_digitos(r['CNPJ_CIA'])
                 on = (num(r.get('QT_ACAO_ORDIN_CAP_INTEGR')) or 0) - (num(r.get('QT_ACAO_ORDIN_TESOURO')) or 0)
                 pn = (num(r.get('QT_ACAO_PREF_CAP_INTEGR')) or 0) - (num(r.get('QT_ACAO_PREF_TESOURO')) or 0)
+                if 0 < on + pn < 5e7:     # várias companhias informam a quantidade em milhares
+                    on, pn = on * 1000, pn * 1000
                 if on + pn > 0:
                     S.setdefault(c, {})[r['DT_REFER']] = [on, pn]
             print(tipo, a, 'ok')
@@ -249,6 +253,14 @@ def lucro_12m(Lc, ate):
     return None, None
 
 
+def corrige_milhares(S):
+    for c, d in S.items():
+        for k, (on, pn) in d.items():
+            if 0 < on + pn < 5e7:
+                d[k] = [on * 1000, pn * 1000]
+    return S
+
+
 def acoes_em(Sc, ate, hoje):
     """Quantidade de ações do formulário mais próximo da data (antes ou depois): a quantidade não é
     informação de mercado, e assim desdobramentos/grupamentos ficam alinhados com o preço o quanto antes."""
@@ -293,6 +305,7 @@ def main():
     tk2c, nomes = tickers()
     P = precos(anos_precos)
     L, S = balancos(anos_bal)
+    S = corrige_milhares(S)
     try:
         NTNB = juro_real()
     except Exception as e:
@@ -303,7 +316,7 @@ def main():
         c = tk2c.get(tk)
         if not c:
             base = tk[:4]
-            c = next((cc for t2, cc in tk2c.items() if t2.startswith(base)), None)
+            c = next((cc for t2, cc in tk2c.items() if t2.startswith(base)), None) or CNPJ_EXTRA.get(base)
         if not c:
             print('sem CNPJ para', tk)
             continue
