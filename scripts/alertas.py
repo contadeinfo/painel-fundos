@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Avisos por e-mail: o robô abre uma "issue" no repositório marcando @dono; o GitHub manda e-mail.
 
-Modo 'completo' (depois da atualização dos peers): fundo de referência mudou de quartil, resgate/captação
-forte de peer, resgate forte no fundo de referência, concorrente novo no radar e, de manhã, o resumo diário.
+Modo 'completo' (depois da atualização dos peers): resgate/captação forte de peer, concorrente novo no radar,
+P/L da bolsa mudando de faixa e, de manhã, o resumo diário (peers e mercado).
 Modo 'mercado' (durante o pregão): dólar acima/abaixo de um valor e Ibovespa com variação forte.
 Configuração: alertas.json. Memória do que já foi avisado: data/alertas_estado.json.
 """
@@ -61,25 +61,6 @@ def completo(E):
     fundos = [r for r in P['rows'] if r[0] not in ('IBOV', 'CDI')]
     nome_ref = next((f['nome'] for f in json.load(open(os.path.join(RAIZ, 'fundos.json'), encoding='utf-8')) if f['cnpj'] == REF), None)
     set_row = next((r for r in fundos if r[0] == nome_ref), None)
-    # 1) quartil do fundo de referência
-    if set_row and CFG.get('referencia_mudou_quartil'):
-        for j in CFG['referencia_mudou_quartil']:
-            i = COLS[j]
-            de = sum(1 for r in fundos if r[i] is not None)
-            q = quartil(set_row[i + 1], de)
-            ant = E.setdefault('quartil', {}).get(j)
-            if q and ant and q != ant:
-                melhor = q < ant
-                m = Msg(f"Fundo de referência {'subiu' if melhor else 'caiu'} para o {q}º quartil ({NOMEJ[j]})",
-                        f'Peers de fundos de ações · dados da CVM de {ref}', tom='bom' if melhor else 'alerta', rotulo='aviso')
-                m.kpis([('Quartil agora', f'{q}º', f'antes: {ant}º', VERDE if melhor else VERM),
-                        ('Posição', f'{set_row[i + 1]}º de {de}', NOMEJ[j], None),
-                        ('Retorno na janela', sg(set_row[i]), 'pela cota, líquido de taxas', VERDE if (set_row[i] or 0) >= 0 else VERM)])
-                m.secao('Todas as janelas').tabela(['Janela', 'Retorno', 'Posição', 'Quartil'],
-                        [[NOMEJ[x], sg(set_row[COLS[x]]), f"{set_row[COLS[x] + 1] or '—'}º", f"{quartil(set_row[COLS[x] + 1], sum(1 for r in fundos if r[COLS[x]] is not None)) or '—'}º"] for x in ('dia', 'mes', 'ano', 'm12', 'm24', 'm36')])
-                envia(m)
-            if q:
-                E['quartil'][j] = q
     # 2) captação e resgate do dia (fichas)
     vistos = E.setdefault('fluxo', {})
     for arq in glob.glob(os.path.join(RAIZ, 'data', 'fundos', '*.json')):
@@ -98,9 +79,9 @@ def completo(E):
         k = f"{F['cnpj']}:{d}"
         if k in vistos:
             continue
-        eh_set = F['cnpj'] == REF
-        lim_r = CFG.get('referencia_resgate_pct_pl') if eh_set else CFG.get('resgate_peer_pct_pl')
-        lim_c = None if eh_set else CFG.get('captacao_peer_pct_pl')
+        if F['cnpj'] == REF:      # o fundo de referência não entra nos e-mails
+            continue
+        lim_r, lim_c = CFG.get('resgate_peer_pct_pl'), CFG.get('captacao_peer_pct_pl')
         if (lim_r and pct <= -lim_r) or (lim_c and pct >= lim_c):
             vistos[k] = 1
             saida = pct < 0
@@ -189,20 +170,7 @@ def resumo(P, set_row, fundos):
     bench = {r[0]: r for r in P['rows'] if r[0] in ('IBOV', 'CDI')}
     jan = ('dia', 'mes', 'ano', 'm12', 'm24', 'm36')
     med = lambda i: (lambda v: v[len(v) // 2] if v else None)(sorted(r[i] for r in fundos if r[i] is not None))
-    if set_row:
-        q12 = quartil(set_row[8], sum(1 for r in fundos if r[7] is not None))
-        m.kpis([('Fundo de referência no mês', sg(set_row[3]), f"{set_row[4]}º de {sum(1 for r in fundos if r[3] is not None)} peers", VERDE if (set_row[3] or 0) >= 0 else VERM),
-                ('No ano', sg(set_row[5]), f"Ibovespa {sg(bench.get('IBOV', [None]*20)[5])} · CDI {sg(bench.get('CDI', [None]*20)[5])}", VERDE if (set_row[5] or 0) >= 0 else VERM),
-                ('12 meses', sg(set_row[7]), f'{q12 or "—"}º quartil entre os peers', VERDE if (set_row[7] or 0) >= 0 else VERM),
-                ('Patrimônio', mi(set_row[17]), f'captação no ano {mi(set_row[19])}', None)])
-        g = grafico_barras('resumo_janelas', [NOMEJ[j] for j in jan],
-                           [('Fundo de referência', [set_row[COLS[j]] for j in jan], OURO), ('Mediana dos peers', [med(COLS[j]) for j in jan], '#94a3b8'),
-                            ('Ibovespa', [bench.get('IBOV', [None]*20)[COLS[j]] for j in jan], AZUL), ('CDI', [bench.get('CDI', [None]*20)[COLS[j]] for j in jan], VERDE)])
-        m.secao('Fundo de referência contra os pares').grafico(g, 'Retorno por janela (%), pela cota, líquido de taxas')
-        m.tabela(['Janela', 'Fundo', 'Posição', 'Quartil', 'Ibovespa', 'CDI'],
-                 [[NOMEJ[j], sg(set_row[COLS[j]]), f"{set_row[COLS[j] + 1] or '—'}º de {sum(1 for r in fundos if r[COLS[j]] is not None)}",
-                   f"{quartil(set_row[COLS[j] + 1], sum(1 for r in fundos if r[COLS[j]] is not None)) or '—'}º", sg(bench.get('IBOV', [None]*20)[COLS[j]]), sg(bench.get('CDI', [None]*20)[COLS[j]])] for j in jan])
-    mes = sorted((r for r in fundos if r[3] is not None), key=lambda r: -r[3])
+    mes = sorted((r for r in fundos if r[3] is not None and r is not set_row), key=lambda r: -r[3])
     if mes:
         m.secao('Destaques do mês entre os peers')
         seta = lambda v: '▲' if (v or 0) > 0 else '▼' if (v or 0) < 0 else '•'
