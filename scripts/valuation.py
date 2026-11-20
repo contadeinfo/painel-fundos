@@ -57,16 +57,25 @@ def json_save(nome, obj):
 
 # ---------------- carteira do Ibovespa ----------------
 def carteira_ibov():
-    q = base64.b64encode(json.dumps({"language": "pt-br", "pageNumber": 1, "pageSize": 150, "index": "IBOV", "segment": "1"}).encode()).decode()
+    q = base64.b64encode(json.dumps({"language": "pt-br", "pageNumber": 1, "pageSize": 150, "index": "IBOV", "segment": "2"}).encode()).decode()
     j = json.loads(baixa('https://sistemaswebb3-listados.b3.com.br/indexProxy/indexCall/GetPortfolioDay/' + q))
     out = {}
     for r in j.get('results', []):
         tk = (r.get('cod') or r.get('code') or '').strip().upper()
-        p = num(str(r.get('part') or '0').replace(',', '.'))
+        p = num(str(r.get('part') or '0').replace('.', '').replace(',', '.'))
         if tk:
-            out[tk] = p
+            out[tk] = (p, setor_de(r.get('segment') or ''))
     print('carteira IBOV:', len(out), 'ações; data', (j.get('header') or {}).get('date'))
     return out
+
+
+SETORES = [(r'financ', 'Financeiro'), (r'petr', 'Petróleo e gás'), (r'mat', 'Materiais básicos'), (r'util', 'Energia e saneamento'),
+           (r'cons', 'Consumo e varejo'), (r'bens', 'Indústria e logística'), (r'sa[uú]de', 'Saúde'), (r'comunic|tec', 'Telecom e tecnologia')]
+
+
+def setor_de(seg):
+    x = seg.lower()
+    return next((nome for rx, nome in SETORES if re.search(rx, x.split('/')[0])), 'Outros')
 
 
 # ---------------- tickers por CNPJ (FCA) ----------------
@@ -156,7 +165,10 @@ def lucro_de(linhas):
 def balancos(anos_novos):
     L = json_load('lucros.json', {})     # {cnpj: {AAAA-MM-DD: {'q': lucro_trimestre, 'a': lucro_anual}}}
     S = json_load('acoes.json', {})      # {cnpj: {AAAA-MM-DD: [on, pn]}}
-    feitos = set(json_load('anos_balancos.json', []))
+    PL = json_load('patrimonio.json', {})   # {cnpj: {AAAA-MM-DD: patrimônio líquido dos controladores}}
+    PV = json_load('proventos.json', {})    # {cnpj: {AAAA-MM-DD: dividendos + JCP acumulados no ano (DVA)}}
+    EN = json_load('entregas.json', {})     # {cnpj: {AAAA-MM-DD (fim do período): data de entrega à CVM}}
+    feitos = set(json_load('anos_balancos_v2.json', []))
     hoje = dt.date.today()
     for a in range(ANO0, hoje.year + 1):
         if str(a) in feitos and a not in anos_novos:
@@ -207,14 +219,70 @@ def balancos(anos_novos):
                     on, pn = on * 1000, pn * 1000
                 if on + pn > 0:
                     S.setdefault(c, {})[r['DT_REFER']] = [on, pn]
+            le_extras(z, tipo, PL, PV, EN)
             print(tipo, a, 'ok')
             del zb, z, grupos
         if a < hoje.year - 1:     # anos fechados (o DFP do ano anterior sai em março)
             feitos.add(str(a))
     json_save('lucros.json', L)
     json_save('acoes.json', S)
-    json_save('anos_balancos.json', sorted(feitos))
-    return L, S
+    json_save('patrimonio.json', PL)
+    json_save('proventos.json', PV)
+    json_save('entregas.json', EN)
+    json_save('anos_balancos_v2.json', sorted(feitos))
+    return L, S, PL, PV, EN
+
+
+PL_RX = re.compile(r'^patrim[oô]nio l[ií]quido', re.I)
+NC_RX = re.compile(r'n[aã]o controladores', re.I)
+JCP_RX = re.compile(r'^juros sobre (o )?capital pr[oó]prio', re.I)
+DIV_RX = re.compile(r'^dividendos', re.I)
+
+
+def le_extras(z, tipo, PL, PV, EN):
+    """Patrimônio (BPP), dividendos + JCP (DVA, acumulado no ano) e data de entrega de cada formulário."""
+    ult = lambda r: r.get('ORDEM_EXERC', '').upper() in ('ÚLTIMO', 'ULTIMO')
+    for parte in ('con', 'ind'):
+        tmp = {}
+        for r in ler(z, rf'BPP_{parte}_\d{{4}}'):
+            if not ult(r):
+                continue
+            c, ref, cd = so_digitos(r['CNPJ_CIA']), r['DT_REFER'], r['CD_CONTA']
+            esc = 1000 if (r.get('ESCALA_MOEDA') or '').upper().startswith('MIL') else 1
+            v = num(r.get('VL_CONTA'))
+            if v is None:
+                continue
+            d = tmp.setdefault((c, ref), {})
+            if cd.count('.') == 1 and PL_RX.search(r['DS_CONTA']):
+                d['pl'] = v * esc; d['raiz'] = cd
+            elif cd.count('.') == 2 and NC_RX.search(r['DS_CONTA']):
+                d.setdefault('nc', {})[cd.rsplit('.', 1)[0]] = v * esc
+        for (c, ref), d in tmp.items():
+            if 'pl' not in d or (parte == 'ind' and ref in PL.get(c, {})):
+                continue
+            PL.setdefault(c, {})[ref] = d['pl'] - (d.get('nc') or {}).get(d['raiz'], 0)
+        tmp = {}
+        for r in ler(z, rf'DVA_{parte}_\d{{4}}'):
+            if not ult(r) or not r['CD_CONTA'].startswith('7.'):
+                continue
+            ds = r['DS_CONTA'].strip()
+            if not (JCP_RX.search(ds) or DIV_RX.search(ds)) or r['CD_CONTA'].count('.') != 3:
+                continue
+            c, fim = so_digitos(r['CNPJ_CIA']), r['DT_FIM_EXERC']
+            if not r['DT_INI_EXERC'].endswith('-01-01'):
+                continue
+            esc = 1000 if (r.get('ESCALA_MOEDA') or '').upper().startswith('MIL') else 1
+            k = (c, fim)
+            tmp[k] = tmp.get(k, 0) + (num(r.get('VL_CONTA')) or 0) * esc
+        for (c, fim), v in tmp.items():
+            if parte == 'ind' and fim in PV.get(c, {}):
+                continue
+            PV.setdefault(c, {})[fim] = v
+    for r in ler(z, rf'^(itr|dfp)_cia_aberta_\d{{4}}\.csv$'):
+        c = so_digitos(r['CNPJ_CIA'])
+        atual = EN.setdefault(c, {}).get(r['DT_REFER'])
+        if r.get('DT_RECEB') and (atual is None or r['DT_RECEB'] < atual):   # primeira entrega (não a reapresentação)
+            EN[c][r['DT_REFER']] = r['DT_RECEB']
 
 
 def lucro_12m(Lc, ate):
@@ -304,7 +372,7 @@ def main():
     cart = carteira_ibov()
     tk2c, nomes = tickers()
     P = precos(anos_precos)
-    L, S = balancos(anos_bal)
+    L, S, PLC, PV, EN = balancos(anos_bal)
     S = corrige_milhares(S)
     try:
         NTNB = juro_real()
@@ -312,7 +380,7 @@ def main():
         print('aviso Tesouro', e); NTNB = {}
     # empresas da carteira atual e seus códigos (ON e PN mais negociada)
     emp = {}
-    for tk, peso in cart.items():
+    for tk, (peso, setor) in cart.items():
         c = tk2c.get(tk)
         if not c:
             base = tk[:4]
@@ -320,7 +388,7 @@ def main():
         if not c:
             print('sem CNPJ para', tk)
             continue
-        e = emp.setdefault(c, {'cnpj': c, 'nome': nomes.get(c, ''), 'tks': set(), 'peso': 0})
+        e = emp.setdefault(c, {'cnpj': c, 'nome': nomes.get(c, ''), 'tks': set(), 'peso': 0, 'setor': setor})
         e['tks'].add(tk)
         e['peso'] += peso or 0
     for c, e in emp.items():
@@ -339,12 +407,35 @@ def main():
                 best = x
         return best[0] if best else None
 
+    def disponivel(fim, ref):
+        d = dt.date.fromisoformat(fim)
+        return (d + dt.timedelta(days=90 if d.month == 12 else 45)).isoformat() <= ref
+
+    def pl_contabil(c, ref):
+        ks = [k for k in PLC.get(c, {}) if disponivel(k, ref)]
+        return PLC[c][max(ks)] if ks else None
+
+    def prov_12m(c, ref):
+        D = PV.get(c, {})
+        ks = [k for k in D if disponivel(k, ref)]
+        if not ks:
+            return None
+        f = max(ks)
+        if f.endswith('-12-31'):
+            return D[f]
+        ant_ano, ant_mes = f'{int(f[:4]) - 1}-12-31', f'{int(f[:4]) - 1}{f[4:]}'
+        if ant_ano in D and ant_mes in D:
+            return D[f] + D[ant_ano] - D[ant_mes]
+        return None
+
+    CHAVES = ('ibov', 'ex_petro', 'ex_petro_vale')
     serie, detalhe_ult = [], []
     for m in meses:
         a, mm = int(m[:4]), int(m[5:])
         fim_mes = (dt.date(a + (mm == 12), mm % 12 + 1, 1) - dt.timedelta(days=1)).isoformat()
         ref = min(fim_mes, hoje.isoformat())
-        tot = {'ibov': [0, 0, 0], 'ex_petro': [0, 0, 0], 'ex_petro_vale': [0, 0, 0]}
+        tot = {k: [0, 0, 0] for k in CHAVES}
+        sets, dy, pvp = {}, [0, 0], [0, 0]
         det = []
         for c, e in emp.items():
             sh = acoes_em(S.get(c, {}), ref, hoje)
@@ -360,8 +451,15 @@ def main():
                 if (k == 'ex_petro' and c == PETRO) or (k == 'ex_petro_vale' and c in (PETRO, VALE)):
                     continue
                 tot[k][0] += vm; tot[k][1] += lu; tot[k][2] += 1
-            det.append({'cnpj': c, 'nome': e['nome'], 'tks': sorted(e['tks']), 'vm': round(vm), 'lucro': round(lu), 'base': base_lu,
-                        'pl': round(vm / lu, 2) if lu > 0 else None})
+            x = sets.setdefault(e['setor'], [0, 0, 0]); x[0] += vm; x[1] += lu; x[2] += 1
+            pv, plc = prov_12m(c, ref), pl_contabil(c, ref)
+            if pv is not None and pv >= 0:
+                dy[0] += pv; dy[1] += vm
+            if plc and plc > 0:
+                pvp[0] += vm; pvp[1] += plc
+            det.append({'cnpj': c, 'nome': e['nome'], 'tks': sorted(e['tks']), 'setor': e['setor'], 'vm': round(vm), 'lucro': round(lu), 'base': base_lu,
+                        'pl': round(vm / lu, 2) if lu > 0 else None, 'dy': round(pv / vm * 100, 2) if pv is not None and pv >= 0 else None,
+                        'pvp': round(vm / plc, 2) if plc and plc > 0 else None})
         if tot['ibov'][2] < 25:
             continue
         reg = {'m': m, 'n': tot['ibov'][2]}
@@ -369,36 +467,124 @@ def main():
             reg[k] = round(vm / lu, 2) if lu > 0 else None
             if k == 'ibov':
                 reg['vm'] = round(vm / 1e9, 1); reg['lucro'] = round(lu / 1e9, 1)
+        reg['dy'] = round(dy[0] / dy[1] * 100, 2) if dy[1] > tot['ibov'][0] * .6 else None
+        reg['pvp'] = round(pvp[0] / pvp[1], 2) if pvp[1] and pvp[0] > tot['ibov'][0] * .6 else None
+        reg['set'] = {k: (round(v[0] / v[1], 2) if v[1] > 0 else None) for k, v in sets.items() if v[2] >= 2}
         jr = NTNB.get(m)
         if jr:
             reg['ntnb'] = jr['taxa']
         serie.append(reg)
         detalhe_ult = det
-    def estat(k):
-        xs = [r[k] for r in serie if r.get(k) and 0 < r[k] < 60]
-        if len(xs) < 12:
+
+    def estat_de(xs, atual):
+        xs = [x for x in xs if x is not None and 0 < x < 60]
+        if len(xs) < 12 or atual is None:
             return None
         mu = sum(xs) / len(xs)
         sd = math.sqrt(sum((x - mu) ** 2 for x in xs) / (len(xs) - 1))
-        atual = serie[-1].get(k)
-        pct = sum(1 for x in xs if x <= atual) / len(xs) * 100 if atual else None
+        pct = sum(1 for x in xs if x <= atual) / len(xs) * 100
         q = sorted(xs)
         qt = lambda f: round(q[min(len(q) - 1, int(f * (len(q) - 1) + .5))], 2)
         return {'media': round(mu, 2), 'dp': round(sd, 2), 'min': min(xs), 'max': max(xs), 'atual': atual,
                 'mediana': qt(.5), 'p25': qt(.25), 'p75': qt(.75),
-                'z': round((atual - mu) / sd, 2) if atual and sd else None, 'percentil': round(pct) if pct is not None else None,
+                'z': round((atual - mu) / sd, 2) if sd else None, 'percentil': round(pct),
                 'media_10a': round(sum(xs[-120:]) / len(xs[-120:]), 2)}
+    estat = {k: estat_de([r.get(k) for r in serie], serie[-1].get(k)) for k in CHAVES + ('dy', 'pvp')}
+    setores = {}
+    for st in sorted({k for r in serie for k in r['set']}):
+        e = estat_de([r['set'].get(st) for r in serie], serie[-1]['set'].get(st))
+        if e:
+            e['n'] = sum(1 for d in detalhe_ult if d['setor'] == st)
+            e['vm'] = round(sum(d['vm'] for d in detalhe_ult if d['setor'] == st) / 1e9, 1)
+            setores[st] = e
+
+    # ---- lucro trimestre a trimestre (composição atual) ----
+    def tri_map(Lc):
+        T = {}
+        for fim in sorted(Lc):
+            reg, d = Lc[fim], dt.date.fromisoformat(fim)
+            if 'q' in reg:
+                T[(d.year, (d.month - 1) // 3)] = reg['q']
+            if 'a' in reg and d.month == 12:
+                q = [T.get((d.year, i)) for i in range(3)]
+                if all(x is not None for x in q):
+                    T[(d.year, 3)] = reg['a'] - sum(q)
+        return T
+    TM = {c: tri_map(L.get(c, {})) for c in emp}
+    todos_t = sorted({t for T in TM.values() for t in T})
+    trimestres = []
+    for (y, q) in todos_t[-16:]:
+        base = [c for c in emp if (y, q) in TM[c]]
+        comp = [c for c in base if (y - 1, q) in TM[c]]
+        if len(base) < 25:
+            continue
+        tot_c, ant_c = sum(TM[c][(y, q)] for c in comp), sum(TM[c][(y - 1, q)] for c in comp)
+        semp = [c for c in comp if c != PETRO]
+        tot_s, ant_s = sum(TM[c][(y, q)] for c in semp), sum(TM[c][(y - 1, q)] for c in semp)
+        trimestres.append({'t': f'{q + 1}T{str(y)[2:]}', 'n': len(base), 'lucro': round(sum(TM[c][(y, q)] for c in base) / 1e9, 2),
+                           'lucro_ex_petro': round(sum(TM[c][(y, q)] for c in base if c != PETRO) / 1e9, 2),
+                           'var_aa': round((tot_c / ant_c - 1) * 100, 1) if ant_c > 0 else None,
+                           'var_aa_ex_petro': round((tot_s / ant_s - 1) * 100, 1) if ant_s > 0 else None, 'n_comp': len(comp)})
+    resultados = []
+    for c, e in emp.items():
+        T = TM[c]
+        if not T:
+            continue
+        (y, q) = max(T)
+        atual, ant, tri_ant = T[(y, q)], T.get((y - 1, q)), T.get((y, q - 1) if q else (y - 1, 3))
+        fim = f'{y}-{[3, 6, 9, 12][q]:02d}-{[31, 30, 30, 31][q]}'
+        resultados.append({'tks': sorted(e['tks']), 'nome': e['nome'], 'setor': e['setor'], 't': f'{q + 1}T{str(y)[2:]}', 'fim': fim,
+                           'entregue': EN.get(c, {}).get(fim), 'lucro': round(atual / 1e6, 1), 'lucro_aa': round(ant / 1e6, 1) if ant is not None else None,
+                           'var_aa': round((atual / ant - 1) * 100, 1) if ant and ant > 0 and atual > 0 else None,
+                           'lucro_tri_ant': round(tri_ant / 1e6, 1) if tri_ant is not None else None})
+    resultados.sort(key=lambda r: (r['entregue'] or ''), reverse=True)
+
+    # ---- calendário de resultados (estimado pela data do ano anterior) ----
+    fins = lambda y: [f'{y}-03-31', f'{y}-06-30', f'{y}-09-30', f'{y}-12-31']
+    proximos, recentes = [], []
+    lim_rec = (hoje - dt.timedelta(days=21)).isoformat()
+    for c, e in emp.items():
+        E = EN.get(c, {})
+        entregues = sorted(k for k in E)
+        for k in entregues:
+            if E[k] >= lim_rec:
+                recentes.append({'tks': sorted(e['tks']), 'nome': e['nome'], 'periodo': k, 'data': E[k]})
+        ult = entregues[-1] if entregues else None
+        if not ult:
+            continue
+        y = int(ult[:4]); seq = fins(y) + fins(y + 1)
+        prox = next((f for f in seq if f > ult), None)
+        if not prox:
+            continue
+        ant = E.get(f'{int(prox[:4]) - 1}{prox[4:]}')
+        if ant:
+            d = dt.date.fromisoformat(ant).replace(year=dt.date.fromisoformat(ant).year + 1)
+            while d.weekday() >= 5:
+                d -= dt.timedelta(days=1)
+            base = 'mesma época do ano anterior'
+        else:
+            pd_ = dt.date.fromisoformat(prox); d = pd_ + dt.timedelta(days=90 if pd_.month == 12 else 45); base = 'prazo legal'
+        limite = dt.date.fromisoformat(prox) + dt.timedelta(days=90 if prox.endswith('12-31') else 45)
+        proximos.append({'tks': sorted(e['tks']), 'nome': e['nome'], 'setor': e['setor'], 'periodo': prox, 'previsto': d.isoformat(),
+                         'base': base, 'prazo': limite.isoformat(), 'atrasado': hoje > limite})
+    proximos.sort(key=lambda r: r['previsto'])
+    recentes.sort(key=lambda r: r['data'], reverse=True)
+
     tot_vm = sum(d['vm'] for d in detalhe_ult) or 1
     out = {'gerado_em': dt.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'ultimo_pregao': max((x[2] for t in P.values() for x in t.values()), default=None),
-           'serie': serie, 'estatisticas': {k: estat(k) for k in ('ibov', 'ex_petro', 'ex_petro_vale')},
+           'serie': serie, 'estatisticas': estat, 'setores': setores,
            'empresas': sorted([dict(d, peso_vm=round(d['vm'] / tot_vm * 100, 2)) for d in detalhe_ult], key=lambda d: -d['vm']),
+           'trimestres': trimestres, 'resultados': resultados, 'calendario': {'proximos': proximos, 'recentes': recentes[:40]},
            'carteira_n': len(cart), 'empresas_n': len(detalhe_ult)}
     if serie and serie[-1].get('ntnb') is None and NTNB:
         out['ntnb_atual'] = NTNB[max(NTNB)]
     json.dump(out, open(SAIDA, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     u = serie[-1] if serie else {}
     print('OK valuation:', len(serie), 'meses; último', u)
-    print('estatísticas', out['estatisticas'])
+    print('estatísticas', estat)
+    print('setores', {k: (v['atual'], v['mediana']) for k, v in setores.items()})
+    print('trimestres', trimestres[-4:])
+    print('calendário', proximos[:5])
 
 
 if __name__ == '__main__':
