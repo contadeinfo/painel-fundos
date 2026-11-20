@@ -169,7 +169,7 @@ def balancos(anos_novos):
     PV = json_load('proventos.json', {})    # {cnpj: {AAAA-MM-DD: dividendos + JCP acumulados no ano (DVA)}}
     EN = json_load('entregas.json', {})     # {cnpj: {AAAA-MM-DD (fim do período): data de entrega à CVM}}
     PC = json_load('proventos_caixa.json', {})  # {cnpj: {AAAA-MM-DD: dividendos + JCP pagos acumulados no ano (DFC)}}
-    feitos = set(json_load('anos_balancos_v3.json', []))
+    feitos = set(json_load('anos_balancos_v4.json', []))
     hoje = dt.date.today()
     for a in range(ANO0, hoje.year + 1):
         if str(a) in feitos and a not in anos_novos:
@@ -210,6 +210,8 @@ def balancos(anos_novos):
                     reg = L.setdefault(c, {}).setdefault(fim, {})
                     if tipo == 'ITR' and dias <= 100:
                         reg['q'] = v * esc
+                    elif tipo == 'ITR' and dias > 100:
+                        reg['y'] = v * esc      # acumulado no ano (algumas empresas só preenchem esta coluna)
                     elif tipo == 'DFP' and dias >= 330:
                         reg['a'] = v * esc
             for r in ler(z, r'composicao_capital'):
@@ -231,7 +233,7 @@ def balancos(anos_novos):
     json_save('proventos.json', PV)
     json_save('entregas.json', EN)
     json_save('proventos_caixa.json', PC)
-    json_save('anos_balancos_v3.json', sorted(feitos))
+    json_save('anos_balancos_v4.json', sorted(feitos))
     return L, S, PL, PV, EN, PC
 
 
@@ -305,6 +307,27 @@ def le_extras(z, tipo, PL, PV, EN, PC):
         atual = EN.setdefault(c, {}).get(r['DT_REFER'])
         if r.get('DT_RECEB') and (atual is None or r['DT_RECEB'] < atual):   # primeira entrega (não a reapresentação)
             EN[c][r['DT_REFER']] = r['DT_RECEB']
+
+
+def normaliza_trimestres(L):
+    """Quando o trimestre vem zerado ou vazio mas o acumulado do ano existe, o trimestre = acumulado − acumulado anterior."""
+    for c, D in L.items():
+        for fim in sorted(D):
+            reg = D[fim]
+            if 'y' not in reg or (reg.get('q') not in (None, 0)):
+                continue
+            y, m = int(fim[:4]), int(fim[5:7])
+            ant = {6: f'{y}-03-31', 9: f'{y}-06-30'}.get(m)
+            if not ant or ant not in D:
+                continue
+            ra = D[ant]
+            base = ra.get('y') if m == 9 and ra.get('y') is not None else ra.get('q')
+            if m == 9 and ra.get('y') is None and ra.get('q') is not None:
+                q1 = D.get(f'{y}-03-31', {}).get('q')
+                base = (q1 + ra['q']) if q1 is not None else None
+            if base is not None:
+                reg['q'] = reg['y'] - base
+    return L
 
 
 def lucro_12m(Lc, ate):
@@ -395,6 +418,7 @@ def main():
     tk2c, nomes = tickers()
     P = precos(anos_precos)
     L, S, PLC, PV, EN, PC = balancos(anos_bal)
+    L = normaliza_trimestres(L)
     S = corrige_milhares(S)
     try:
         NTNB = juro_real()
