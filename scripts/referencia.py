@@ -51,6 +51,16 @@ def linhas_ano(a, hoje):
 def ibov_mensal(ini, fim):
     """Fechamento mensal do Ibovespa: B3 (histórico anual do índice); reserva: Banco Central (SGS 7)."""
     out = {}
+    try:   # Yahoo Finance: fechamento mensal desde 1993
+        J = json.loads(baixa('https://query1.finance.yahoo.com/v8/finance/chart/%5EBVSP?range=max&interval=1mo'))['chart']['result'][0]
+        for t, c in zip(J['timestamp'], J['indicators']['quote'][0]['close']):
+            if c:
+                d = dt.datetime.utcfromtimestamp(t) + dt.timedelta(days=2)
+                out[f'{d.year}-{d.month:02d}'] = c
+        print('Ibovespa Yahoo:', len(out), 'meses')
+    except Exception as e:
+        print('aviso Yahoo IBOV', e)
+    yahoo = dict(out)
     # (a B3 não tem uma consulta pública estável do histórico do índice; fica o Banco Central)
     for a in []:
         try:
@@ -63,7 +73,7 @@ def ibov_mensal(ini, fim):
                         out[f'{a}-{m:02d}'] = num(str(v).replace('.', '').replace(',', '.'))  # o último dia que aparece fica
         except Exception as e:
             print('aviso B3 IBOV', a, e)
-    if len(out) < 12:
+    if True:   # Banco Central (SGS 7, até 2019) prevalece onde existe; o Yahoo cobre o resto
         a = ini
         while a <= fim:          # o Banco Central limita a série diária a 10 anos por consulta
             b = min(fim, dt.date(a.year + 5, a.month, 1))
