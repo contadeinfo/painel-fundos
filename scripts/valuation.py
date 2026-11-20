@@ -70,7 +70,7 @@ def carteira_ibov():
 
 
 SETORES = [(r'financ', 'Financeiro'), (r'petr', 'Petróleo e gás'), (r'mat', 'Materiais básicos'), (r'util', 'Energia e saneamento'),
-           (r'cons', 'Consumo e varejo'), (r'bens', 'Indústria e logística'), (r'sa[uú]de', 'Saúde'), (r'comunic|tec', 'Telecom e tecnologia')]
+           (r'cons|divers', 'Consumo e varejo'), (r'bens', 'Indústria e logística'), (r'sa[uú]de', 'Saúde'), (r'comunic|tec', 'Telecom e tecnologia')]
 
 
 def setor_de(seg):
@@ -168,7 +168,8 @@ def balancos(anos_novos):
     PL = json_load('patrimonio.json', {})   # {cnpj: {AAAA-MM-DD: patrimônio líquido dos controladores}}
     PV = json_load('proventos.json', {})    # {cnpj: {AAAA-MM-DD: dividendos + JCP acumulados no ano (DVA)}}
     EN = json_load('entregas.json', {})     # {cnpj: {AAAA-MM-DD (fim do período): data de entrega à CVM}}
-    feitos = set(json_load('anos_balancos_v2.json', []))
+    PC = json_load('proventos_caixa.json', {})  # {cnpj: {AAAA-MM-DD: dividendos + JCP pagos acumulados no ano (DFC)}}
+    feitos = set(json_load('anos_balancos_v3.json', []))
     hoje = dt.date.today()
     for a in range(ANO0, hoje.year + 1):
         if str(a) in feitos and a not in anos_novos:
@@ -219,7 +220,7 @@ def balancos(anos_novos):
                     on, pn = on * 1000, pn * 1000
                 if on + pn > 0:
                     S.setdefault(c, {})[r['DT_REFER']] = [on, pn]
-            le_extras(z, tipo, PL, PV, EN)
+            le_extras(z, tipo, PL, PV, EN, PC)
             print(tipo, a, 'ok')
             del zb, z, grupos
         if a < hoje.year - 1:     # anos fechados (o DFP do ano anterior sai em março)
@@ -229,8 +230,9 @@ def balancos(anos_novos):
     json_save('patrimonio.json', PL)
     json_save('proventos.json', PV)
     json_save('entregas.json', EN)
-    json_save('anos_balancos_v2.json', sorted(feitos))
-    return L, S, PL, PV, EN
+    json_save('proventos_caixa.json', PC)
+    json_save('anos_balancos_v3.json', sorted(feitos))
+    return L, S, PL, PV, EN, PC
 
 
 PL_RX = re.compile(r'^patrim[oô]nio l[ií]quido', re.I)
@@ -239,7 +241,7 @@ JCP_RX = re.compile(r'^juros sobre (o )?capital pr[oó]prio', re.I)
 DIV_RX = re.compile(r'^dividendos', re.I)
 
 
-def le_extras(z, tipo, PL, PV, EN):
+def le_extras(z, tipo, PL, PV, EN, PC):
     """Patrimônio (BPP), dividendos + JCP (DVA, acumulado no ano) e data de entrega de cada formulário."""
     ult = lambda r: r.get('ORDEM_EXERC', '').upper() in ('ÚLTIMO', 'ULTIMO')
     for parte in ('con', 'ind'):
@@ -278,6 +280,22 @@ def le_extras(z, tipo, PL, PV, EN):
             if parte == 'ind' and fim in PV.get(c, {}):
                 continue
             PV.setdefault(c, {})[fim] = v
+    for parte in ('con', 'ind'):
+        tmp = {}
+        for r in ler(z, rf'DFC_M[DI]_{parte}_\d{{4}}'):
+            cd = r['CD_CONTA']
+            if not ult(r) or not cd.startswith('6.03.') or cd.count('.') != 2 or not r['DT_INI_EXERC'].endswith('-01-01'):
+                continue
+            ds = r['DS_CONTA']
+            if not PAGO_RX.search(ds) or NAO_RX.search(ds):
+                continue
+            esc = 1000 if (r.get('ESCALA_MOEDA') or '').upper().startswith('MIL') else 1
+            k = (so_digitos(r['CNPJ_CIA']), r['DT_FIM_EXERC'])
+            tmp[k] = tmp.get(k, 0) + abs(num(r.get('VL_CONTA')) or 0) * esc
+        for (c, fim), v in tmp.items():
+            if parte == 'ind' and fim in PC.get(c, {}):
+                continue
+            PC.setdefault(c, {})[fim] = v
     for r in ler(z, rf'^(itr|dfp)_cia_aberta_\d{{4}}\.csv$'):
         c = so_digitos(r['CNPJ_CIA'])
         atual = EN.setdefault(c, {}).get(r['DT_REFER'])
@@ -372,7 +390,7 @@ def main():
     cart = carteira_ibov()
     tk2c, nomes = tickers()
     P = precos(anos_precos)
-    L, S, PLC, PV, EN = balancos(anos_bal)
+    L, S, PLC, PV, EN, PC = balancos(anos_bal)
     S = corrige_milhares(S)
     try:
         NTNB = juro_real()
@@ -416,7 +434,7 @@ def main():
         return PLC[c][max(ks)] if ks else None
 
     def prov_12m(c, ref):
-        D = PV.get(c, {})
+        D = PC.get(c) or PV.get(c, {})
         ks = [k for k in D if disponivel(k, ref)]
         if not ks:
             return None
