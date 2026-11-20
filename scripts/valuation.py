@@ -382,7 +382,10 @@ def main():
         sd = math.sqrt(sum((x - mu) ** 2 for x in xs) / (len(xs) - 1))
         atual = serie[-1].get(k)
         pct = sum(1 for x in xs if x <= atual) / len(xs) * 100 if atual else None
+        q = sorted(xs)
+        qt = lambda f: round(q[min(len(q) - 1, int(f * (len(q) - 1) + .5))], 2)
         return {'media': round(mu, 2), 'dp': round(sd, 2), 'min': min(xs), 'max': max(xs), 'atual': atual,
+                'mediana': qt(.5), 'p25': qt(.25), 'p75': qt(.75),
                 'z': round((atual - mu) / sd, 2) if atual and sd else None, 'percentil': round(pct) if pct is not None else None,
                 'media_10a': round(sum(xs[-120:]) / len(xs[-120:]), 2)}
     tot_vm = sum(d['vm'] for d in detalhe_ult) or 1
