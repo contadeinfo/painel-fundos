@@ -13,5 +13,6 @@
   "dolar_acima": null,
   "dolar_abaixo": null,
   "ibov_variacao_dia_pct": 3,
-  "novo_concorrente_pl_min": 300000000
+  "novo_concorrente_pl_min": 300000000,
+  "pl_bolsa_faixas": true
 }

@@ -133,12 +133,54 @@ def completo(E):
             m.texto('Para incluir algum nos peers, peça ou edite o arquivo fundos.json do repositório.')
             envia(m)
         E['radar'] = sorted(set(grandes) | conhecidos)
-    # 4) resumo diário (só na rodada da manhã)
+    # 4) P/L da bolsa mudou de faixa em relação à própria história
+    try:
+        valuation_faixa(E)
+    except Exception as e:
+        print('aviso P/L', e)
+    # 5) resumo diário (só na rodada da manhã)
     agora_br = dt.datetime.utcnow() - dt.timedelta(hours=3)
     hoje = agora_br.date().isoformat()
     if CFG.get('resumo_diario') and agora_br.hour < 12 and agora_br.weekday() < 5 and E.get('resumo') != hoje:
         E['resumo'] = hoje
         resumo(P, set_row, fundos)
+
+
+FAIXAS = [(10, 'muito barata'), (25, 'barata'), (75, 'na faixa normal'), (90, 'cara'), (101, 'muito cara')]
+
+
+def valuation_faixa(E):
+    """Avisa quando o P/L do Ibovespa muda de faixa (percentil contra o histórico desde 2012)."""
+    if CFG.get('pl_bolsa_faixas') is False:
+        return
+    arq = os.path.join(RAIZ, 'data', 'valuation.json')
+    if not os.path.exists(arq):
+        return
+    V = json.load(open(arq, encoding='utf-8'))
+    e = (V.get('estatisticas') or {}).get('ibov')
+    if not e or e.get('percentil') is None:
+        return
+    faixa = next(n for lim, n in FAIXAS if e['percentil'] <= lim)
+    antes = E.get('pl_faixa')
+    E['pl_faixa'] = faixa
+    if not antes or antes == faixa:
+        return
+    ex = (V['estatisticas'].get('ex_petro') or {})
+    melhor = [n for _, n in FAIXAS].index(faixa) < [n for _, n in FAIXAS].index(antes)
+    m = Msg(f'P/L do Ibovespa: a bolsa passou de {antes} para {faixa}', 'Comparação com o próprio histórico desde 2012 (lucro dos últimos 12 meses)',
+            tom='bom' if melhor else 'info')
+    m.kpis([('P/L do Ibovespa', fmt(e['atual'], 1) + 'x', f"mediana {fmt(e['mediana'], 1)}x", VERDE if melhor else OURO),
+            ('Sem Petrobras', fmt(ex.get('atual'), 1) + 'x', f"mediana {fmt(ex.get('mediana'), 1)}x", None),
+            ('Mais barato que em', f"{100 - e['percentil']}%", 'dos meses desde 2012', None)])
+    S = V['serie'][-120:]
+    g = grafico_linhas('pl_bolsa', [r['m'][5:] + '/' + r['m'][2:4] for r in S],
+                       [('Ibovespa', [r.get('ibov') if r.get('ibov') and r['ibov'] < 45 else None for r in S], OURO, '-'),
+                        ('Sem Petrobras', [r.get('ex_petro') if r.get('ex_petro') and r['ex_petro'] < 45 else None for r in S], AZUL, '-'),
+                        ('Mediana', [e['mediana']] * len(S), CINZA, '--')], 'P/L agregado nos últimos 10 anos', unidade='x')
+    m.grafico(g, 'P/L agregado mês a mês (composição atual do Ibovespa; CVM e B3)')
+    m.lista([f"Faixas pelo percentil do P/L desde 2012: até 10% = muito barata; até 25% = barata; até 75% = normal; até 90% = cara; acima = muito cara.",
+             'Usa o lucro dos últimos 12 meses como divulgado; anos de lucro muito baixo (2015-16, 2020) puxam a história para cima.'])
+    envia(m)
 
 
 def resumo(P, set_row, fundos):
