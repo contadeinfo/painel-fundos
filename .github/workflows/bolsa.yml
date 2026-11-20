@@ -1,0 +1,28 @@
+name: Bolsa por dentro (fluxo, aluguel, insiders)
+
+on:
+  schedule:
+    - cron: '13 11 * * 1-5'   # seg-sex 8h13 de Brasília (boletim da B3 do dia anterior)
+    - cron: '43 22 * * 1-5'   # seg-sex 19h43 de Brasília
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  bolsa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q playwright && python -m playwright install --with-deps chromium
+      - run: FORCA=${{ github.event_name == 'workflow_dispatch' && '1' || '' }} python scripts/bolsa.py
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "bolsa $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)
