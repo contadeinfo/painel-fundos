@@ -96,7 +96,7 @@ def main():
     dias = []
     for a in range(2000, hoje.year + 1):
         try:
-            dias += linhas_ano(a, hoje)
+            dias += [tuple(x) for x in linhas_ano(a, hoje)]
         except Exception as e:
             print('aviso CVM', a, e)
     if not dias:
