@@ -1,13 +1,20 @@
-import urllib.request, json
-UA={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36','Accept':'*/*'}
-def get(u):
-    try:
-        r=urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=60); return r.read()
-    except Exception as e: return ('ERR '+str(e)[:80]).encode()
-names=['LendingOpenPosition','LendingOpenPositionFile','SecuritiesLendingOpenPosition','OpenPositionsLending','LendingPositions','Lending','LendingTrades','LendingOpenInterest','EmprestimoAtivosPosicaoAberto','BTBPositions','OpenPositions','PositionLimits','DerivativesOpenPosition','EquitiesOpenPosition','OptionsOpenPosition','EconomicIndicatorPrice','LoanOpenPosition','LoanPositions','LendingContracts','SecLendingOpenPosition']
-for n in names:
-    for d in ['2026-11-13','2025-06-10']:
-        b=get(f'https://arquivos.b3.com.br/tabelas/table/{n}/{d}/1')
-        print(n,d,b[:160].decode('utf-8','replace'))
-for n in ['LendingOpenPositionFile','InstrumentsConsolidatedFile','TradeInformationConsolidatedFile']:
-    b=get(f'https://arquivos.b3.com.br/api/download/requestname?fileName={n}&date=2026-11-13'); print(n, b[:300])
+import asyncio
+from playwright.async_api import async_playwright
+async def main():
+    async with async_playwright() as p:
+        b=await p.chromium.launch(); pg=await b.new_page()
+        urls=[]
+        pg.on('request', lambda r: urls.append((r.resource_type, r.url)))
+        for u in ['https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/consultas/outros-servicos/emprestimo-de-ativos/',
+                  'https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/consultas/outros-servicos/emprestimo-de-ativos/posicoes-em-aberto/']:
+            urls.clear()
+            try:
+                await pg.goto(u, timeout=60000); await pg.wait_for_timeout(8000)
+            except Exception as e: print('ERR', e)
+            print('==', u, await pg.title())
+            for t,x in urls:
+                if t in ('xhr','fetch','document') or 'iframe' in t: print(t, x[:220])
+            for f in pg.frames: print('frame', f.url[:200])
+            txt=await pg.inner_text('body'); print(txt[:1500].replace('\n',' | '))
+        await b.close()
+asyncio.run(main())
