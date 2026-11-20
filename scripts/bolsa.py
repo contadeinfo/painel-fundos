@@ -132,7 +132,8 @@ def resumo_aluguel(res, V):
         return None
     d = max(H)
     atual = H[d]
-    ant = H[min(H, key=lambda k: abs((dt.date.fromisoformat(k) - (dt.date.fromisoformat(d) - dt.timedelta(days=30))).days))]
+    k_ant = min(H, key=lambda k: abs((dt.date.fromisoformat(k) - (dt.date.fromisoformat(d) - dt.timedelta(days=30))).days))
+    ant = H[k_ant] if k_ant != d else {}
     # % das ações alugadas: ações de cada classe aproximadas pelo total da empresa (CVM)
     acoes = jload(os.path.join(RAIZ, 'data', 'valuation', 'acoes.json'), {})
     emp = {t: e for e in (V or {}).get('empresas', []) for t in e['tks']}
@@ -160,7 +161,7 @@ def resumo_aluguel(res, V):
     out.sort(key=lambda r: -(r['pct'] or 0))
     tot = sum(v for _, v in atual.values())
     serie = [{'d': k, 'rs_bi': round(sum(v for _, v in H[k].values()) / 1e9, 2)} for k in sorted(H)]
-    return {'data': d, 'comparado_com': ant is not atual and min(H, key=lambda k: abs((dt.date.fromisoformat(k) - (dt.date.fromisoformat(d) - dt.timedelta(days=30))).days)),
+    return {'data': d, 'comparado_com': k_ant if k_ant != d else None,
             'total_bi': round(tot / 1e9, 1), 'acoes': out, 'serie': serie}
 
 
