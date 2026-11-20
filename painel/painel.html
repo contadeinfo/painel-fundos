@@ -1470,6 +1470,50 @@ tr.cx-out td{color:var(--muted);font-style:italic}
 .ct-fiscal{margin-top:10px}
 .fif-man{color:var(--gold,#b08a3e);font-size:11px}
 /* @@/EXTRA-CSS@@ */
+
+/* peers: panorama da indústria */
+.pr-indch{position:relative;height:300px}
+.pr-ind-tops{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:14px;align-items:start}
+#view-relatorio-peers .ua-wide{margin-bottom:14px}
+
+#mkValor .va-h{font-family:var(--serif);font-size:17px;font-weight:600;margin:22px 0 10px}
+.va-cal-h{font-size:13px;margin:14px 0 8px;text-transform:capitalize}.va-cal-h small{font-weight:400;color:var(--muted);text-transform:none;margin-left:6px}
+.va-cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.va-cal-i{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:var(--surface);display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:baseline}
+.va-cal-i .d{font-family:var(--mono);font-size:12px;color:var(--gold,#b08a3e);grid-row:span 2}
+.va-cal-i b{font-size:12.5px}.va-cal-i small{font-size:10.5px;color:var(--muted)}
+.va-cal-i.atr{border-color:#b3261e}
+.va-chips{display:flex;flex-wrap:wrap;gap:6px}.va-chip{font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:var(--surface)}
+#mkValor td.pos,#mkBolsa .pos{color:#0e7f57}#mkBolsa .neg,#mkValor td.neg{color:#b3261e}
+#mkBolsa .va-kpis{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin:6px 0 4px}
+#mkBolsa .ua-two{align-items:start}
+#mkBolsa .ua-dg{margin:8px 0 14px;line-height:1.55}
+
+/* aba do fundo */
+.fif-links{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.fif-link{font-size:12.5px;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--surface)}
+.fif-link.pri{background:var(--gold,#b08a3e);color:#fff;border-color:transparent;font-weight:600}
+#view-set-fif .cx-seg{margin:4px 0 8px}
+#view-set-fif .ua-two{align-items:start}
+.fif-ind th{text-align:left}.fif-ind td,.fif-ind th{font-size:12px}
+.fif-ind tr.sep td,.fif-ind tr.sep th{border-top:2px solid var(--line)}
+.fif-heat td,.fif-heat th{font-size:11.5px;text-align:right;padding:5px 5px!important}
+.fif-heat td.a{background:rgba(14,127,87,.13)}.fif-heat td.b{background:rgba(179,38,30,.11)}
+.fif-heat td.y{font-weight:700;border-left:2px solid var(--line)}
+#view-set-fif td.up,#view-set-fif b.up{color:#0e7f57}#view-set-fif td.down,#view-set-fif b.down{color:#b3261e}
+/* @@SEM-ROLAGEM@@ tudo à vista: sem barras de rolagem em tabelas e listas (telas a partir de 760px) */
+@media (min-width:760px){
+  .tbl-scroll,.mk .tbl-scroll,.b3-scroll,.ct-scroll,.pr-rad-wrap,.os-brfeed,.cx-tbl,#mkValor .b3-scroll,.b3-scroll[style]{overflow:visible!important;max-height:none!important}
+  .b3-tbl,.mk table,table{max-width:100%}
+  .b3-tbl th,.b3-tbl td{white-space:normal;padding-left:6px!important;padding-right:6px!important}
+  .b3-tbl td{overflow-wrap:anywhere}
+  #view-fii .b3-tbl{font-size:11.5px}
+  #view-fii .b3-tbl td.fi-nm{max-width:190px;white-space:normal;overflow:visible;text-overflow:clip;font-size:11px}
+  .pr-rad td:first-child,.pr-rad th:first-child{min-width:160px}
+  .pr-tb th:nth-child(2),.pr-tb td.pr-n{min-width:150px}
+  #tb-ag td:nth-child(3){min-width:160px}
+  .ua-hum td:nth-child(4){min-width:140px}
+}
 .disc{margin:0;font-size:12.5px;line-height:1.45;color:var(--muted);max-width:640px}.disc b{color:var(--fg)}.disc-full{margin-top:18px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:12.5px;line-height:1.55;color:var(--muted)}.disc-full h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--fg);margin:0 0 8px}.disc-full p{margin:0 0 8px}.disc-full p:last-child{margin:0}.b3-disc{margin:0 0 16px;padding:12px 14px;border:1px solid var(--warn);border-left-width:4px;border-radius:8px;background:color-mix(in srgb,var(--warn) 9%,var(--surface));font-size:13px;line-height:1.5;color:var(--fg)}.b3-dnote{margin:16px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}</style>
 
 <div class="app">
@@ -1659,11 +1703,48 @@ tr.cx-out td{color:var(--muted);font-style:italic}
     <section class="card"><div class="head"><div class="name">Maiores empresas do índice</div><span class="b3-liq">pelo valor de mercado · P/L de cada uma no último mês</span></div>
       <div class="b3-scroll"><table class="b3-tbl" id="tb-va"><thead><tr><th>Empresa</th><th>Valor de mercado</th><th>% do total</th><th>Lucro 12m</th><th>P/L</th></tr></thead><tbody><tr><td colspan="5">Carregando…</td></tr></tbody></table></div></section>
   </div>
+  <h3 class="va-h">Por setor</h3>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">P/L de cada setor, hoje e na mediana histórica</div><span class="b3-liq">composição atual do Ibovespa · desde 2012</span></div><div class="cx-ch" id="vaSetBox" style="height:320px"><canvas id="ch-vas" aria-label="P/L por setor contra a mediana histórica"></canvas></div></section>
+    <section class="card"><div class="head"><div class="name">Setores: barato ou caro contra a própria história</div><span class="b3-liq">ordenado do mais barato ao mais caro</span></div><div class="b3-scroll"><table class="b3-tbl pf-num" id="tb-vas"><thead><tr><th>Setor</th><th>Empresas</th><th>Valor de mercado</th><th>P/L hoje</th><th>Mediana</th><th>Leitura</th></tr></thead><tbody><tr><td colspan="6">Carregando…</td></tr></tbody></table></div></section>
+  </div>
+  <h3 class="va-h">Dividendos e valor patrimonial</h3>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Dividend yield do Ibovespa</div><span class="b3-liq">dividendos + JCP pagos em 12 meses ÷ valor de mercado · %</span></div><div class="cx-ch" style="height:260px"><canvas id="ch-vady" aria-label="Dividend yield do Ibovespa"></canvas></div><p class="ua-dg" id="vaDgDy"></p></section>
+    <section class="card"><div class="head"><div class="name">Preço sobre valor patrimonial (P/VP)</div><span class="b3-liq">valor de mercado ÷ patrimônio líquido dos controladores</span></div><div class="cx-ch" style="height:260px"><canvas id="ch-vapvp" aria-label="P/VP do Ibovespa"></canvas></div><p class="ua-dg" id="vaDgPvp"></p></section>
+  </div>
+  <h3 class="va-h">Lucro das empresas, trimestre a trimestre</h3>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Lucro somado do Ibovespa por trimestre</div><span class="b3-liq">R$ bilhões · barras = com e sem Petrobras · linha = variação sobre o mesmo trimestre do ano anterior</span></div><div class="cx-ch" style="height:300px"><canvas id="ch-vatri" aria-label="Lucro trimestral do Ibovespa"></canvas></div><p class="ua-dg" id="vaDgTri"></p></section>
+    <section class="card"><div class="head"><div class="name">Últimos resultados divulgados</div><span class="b3-liq">lucro do trimestre (R$ milhões) contra o mesmo trimestre do ano anterior</span></div><div class="b3-scroll"><table class="b3-tbl pf-num" id="tb-varesu"><thead><tr><th>Empresa</th><th>Trimestre</th><th>Divulgado</th><th>Lucro</th><th>Ano anterior</th><th>Var.</th></tr></thead><tbody><tr><td colspan="6">Carregando…</td></tr></tbody></table></div></section>
+  </div>
+  <section class="card ua-wide"><div class="head"><div class="name">Calendário de resultados</div><span class="b3-liq" id="vaCalSub">próximas divulgações das empresas do Ibovespa</span></div><div id="vaCal"><p class="upd">Carregando…</p></div></section>
   <div class="fn"><b>Notas de leitura</b><ul>
     <li><span class="fn-t s">Fonte</span> CVM (dados abertos: ITR e DFP das companhias, com o lucro de cada trimestre e a quantidade de ações; FCA, com os códigos de negociação), B3 (arquivo oficial de cotações históricas COTAHIST e carteira teórica do Ibovespa) e Tesouro Transparente (taxas do Tesouro IPCA+).</li>
     <li><span class="fn-t a">Atualiza sozinho</span> robô no GitHub em todo dia útil às 20h25 (depois que a B3 publica as cotações do dia); os balanços da CVM são relidos toda segunda-feira. O ponto do mês corrente usa o último pregão disponível.</li>
-    <li><span class="fn-t e">Estimado / calculado</span> P/L agregado = soma do valor de mercado ÷ soma do lucro líquido dos últimos 12 meses atribuído aos controladores (empresas com prejuízo entram com lucro negativo, como nos índices de mercado). Valor de mercado = ações ordinárias × preço da ON + preferenciais × preço da PN (sem ações em tesouraria). Lucro do 4º trimestre = lucro anual (DFP) − três primeiros trimestres. Cada balanço só entra no cálculo 45 dias depois do fim do trimestre (90 dias para o anual), como estaria disponível na época. Prêmio = 100 ÷ P/L − taxa do Tesouro IPCA+ com vencimento mais próximo de 10 anos, no último dia disponível de cada mês. "Mais barato que em X% dos meses" compara o P/L atual com todos os meses desde 2012; a mediana e os quartis são menos afetados que a média pelos anos de lucro muito baixo.</li>
+    <li><span class="fn-t e">Estimado / calculado</span> P/L agregado = soma do valor de mercado ÷ soma do lucro líquido dos últimos 12 meses atribuído aos controladores (empresas com prejuízo entram com lucro negativo, como nos índices de mercado). Valor de mercado = ações ordinárias × preço da ON + preferenciais × preço da PN (sem ações em tesouraria). Lucro do 4º trimestre = lucro anual (DFP) − três primeiros trimestres. Cada balanço só entra no cálculo 45 dias depois do fim do trimestre (90 dias para o anual), como estaria disponível na época. P/L por setor: setores da classificação da B3 (Financeiro inclui bancos, seguradoras, holdings e shoppings; Consumo e varejo inclui educação e locação de veículos), mesma conta do índice só com as empresas do setor; setores com poucas empresas oscilam muito. Dividend yield = dividendos e juros sobre capital próprio pagos aos acionistas nos últimos 12 meses (demonstração do fluxo de caixa; se a empresa não separa a linha, usa os declarados na DVA) ÷ valor de mercado. P/VP = valor de mercado ÷ patrimônio líquido atribuído aos controladores do último balanço disponível. Lucro trimestral: soma do lucro dos controladores das empresas com balanço no trimestre; a variação anual compara só empresas com os dois trimestres. Calendário: a data prevista é a da divulgação do mesmo trimestre no ano anterior (ajustada para dia útil) ou, sem histórico, o prazo legal (45 dias após o trimestre; 3 meses após o ano); a data real aparece assim que o formulário chega à CVM. Prêmio = 100 ÷ P/L − taxa do Tesouro IPCA+ com vencimento mais próximo de 10 anos, no último dia disponível de cada mês. "Mais barato que em X% dos meses" compara o P/L atual com todos os meses desde 2012; a mediana e os quartis são menos afetados que a média pelos anos de lucro muito baixo.</li>
     <li><span class="fn-t w">Atenção</span> usa a composição <b>atual</b> do Ibovespa em toda a história (as empresas que saíram do índice não entram, e as que entraram depois só aparecem a partir de quando têm cotação e balanço): é um retrato de "como estas empresas eram precificadas", não o P/L oficial do índice em cada data. Não pondera pela carteira teórica (pondera pelo valor de mercado total). Resultados não recorrentes (baixas contábeis, ganhos extraordinários) entram como divulgados e podem distorcer meses isolados: em 2015-2016 (prejuízos de Petrobras e Vale) e em 2020 (pandemia) o lucro caiu tanto que o P/L passou de 45x; no gráfico, esses meses aparecem no teto de 45x e ficam fora da mediana só quando passam de 60x. Valores diferentes dos publicados por corretoras e pela Bloomberg (que costumam usar lucro projetado ou ajustado) são esperados.</li></ul></div>
+</section>
+<section id="mkBolsa">
+  <div class="sec-h"><h2>Quem está comprando e vendendo a bolsa</h2><span class="mk-desc">Saldo de compras e vendas de cada tipo de investidor na B3, ações mais alugadas (apostas na queda e operações estruturadas) e o que controladores e diretores fizeram com as ações das próprias empresas.</span><span class="status" id="st-bo">carregando…</span></div>
+  <div class="b3d-grid va-kpis" id="boKpis"></div>
+  <p class="ua-dg" id="boDg"></p>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Investidor estrangeiro, dia a dia</div><span class="b3-liq">R$ milhões · barras = saldo do dia · linha = acumulado no ano</span></div><div class="cx-ch" style="height:300px"><canvas id="ch-bof" aria-label="Fluxo diário do investidor estrangeiro"></canvas></div></section>
+    <section class="card"><div class="head"><div class="name">Acumulado no ano por tipo de investidor</div><span class="b3-liq">R$ bilhões · soma dos saldos diários desde 1º de janeiro</span></div><div class="cx-ch" style="height:300px"><canvas id="ch-boa" aria-label="Fluxo acumulado no ano por tipo de investidor"></canvas></div></section>
+  </div>
+  <section class="card ua-wide"><div class="head"><div class="name">Saldo por tipo de investidor</div><span class="b3-liq">R$ milhões · positivo = comprou mais do que vendeu</span></div><table class="b3-tbl pf-num" id="tb-bof"><thead></thead><tbody><tr><td>Carregando…</td></tr></tbody></table></section>
+  <div class="ua-two">
+    <section class="card"><div class="head"><div class="name">Ações mais alugadas do Ibovespa</div><span class="b3-liq" id="boAlSub">% das ações da classe emprestadas · posição em aberto na B3</span></div><table class="b3-tbl pf-num" id="tb-boal"><thead><tr><th>Ação</th><th>% alugado</th><th>Valor alugado</th><th>Var. em 30 dias</th></tr></thead><tbody><tr><td colspan="4">Carregando…</td></tr></tbody></table><div class="cx-ch" style="height:170px;margin-top:10px"><canvas id="ch-boal" aria-label="Total de ações alugadas na B3"></canvas></div></section>
+    <section class="card"><div class="head"><div class="name">Insiders: controladores, diretores e conselheiros</div><span class="b3-liq">compras e vendas à vista das ações da própria empresa · R$ milhões</span></div>
+      <div class="cx-seg" id="boInsSel" role="group" aria-label="Empresas"><button type="button" data-f="ibov" aria-pressed="true">Só Ibovespa</button><button type="button" data-f="todas" aria-pressed="false">Todas as companhias</button></div>
+      <table class="b3-tbl pf-num" id="tb-boins" style="margin-top:10px"><thead><tr><th>Mês</th><th>Empresa</th><th>Compras</th><th>Vendas</th><th>Saldo</th><th>Quem</th></tr></thead><tbody><tr><td colspan="6">Carregando…</td></tr></tbody></table></section>
+  </div>
+  <div class="fn"><b>Notas de leitura</b><ul>
+    <li><span class="fn-t s">Fonte</span> fluxo por tipo de investidor: B3, compilado por Dados de Mercado (dadosdemercado.com.br/fluxo). Aluguel: Boletim Diário da B3 (tabela de posições em aberto de empréstimo de ativos). Insiders: CVM, formulário consolidado de valores mobiliários negociados e detidos (art. 11 da Resolução CVM 44), dados abertos.</li>
+    <li><span class="fn-t a">Atualiza sozinho</span> robô no GitHub em todo dia útil às 8h13 e 19h43. A B3 publica o fluxo com cerca de 2 dias úteis de atraso e o aluguel com 1 dia; as companhias entregam o formulário de insiders até 10 dias depois do fim de cada mês (relido às segundas-feiras).</li>
+    <li><span class="fn-t e">Estimado / calculado</span> acumulados = soma dos saldos diários no período. % alugado = quantidade emprestada ÷ total de ações da classe (ON ou PN) informado à CVM, sem tirar as ações em tesouraria; para units, o percentual não é calculado. Insiders: soma das compras e vendas à vista do mês por empresa, de todos os cargos, só quando passam de R$ 1 milhão; não inclui planos de remuneração, empréstimos, doações e subscrições.</li>
+    <li><span class="fn-t w">Atenção</span> ação alugada não é sempre aposta na queda: parte do aluguel serve a operações de arbitragem e estruturadas. O fluxo de dadosdemercado.com.br é um site de terceiros; se mudar o formato, a última leitura fica guardada. O formulário de insiders é mensal e consolidado: não mostra o dia nem o nome de quem negociou.</li></ul></div>
 </section>
 <section id="mkComex">
   <div class="sec-h"><h2>Comércio exterior · o que o Brasil vende e compra</h2><span class="mk-desc">Exportações e importações de bens por país e por produto, em dólares (valor FOB).</span><span class="status" id="st-cx">carregando…</span></div>
@@ -5786,7 +5867,7 @@ window.addEventListener("hashchange",rota); rota();
   const cor = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const NOME = {ibov: 'Ibovespa', ex_petro: 'Sem Petrobras', ex_petro_vale: 'Sem Petrobras e Vale'};
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
-  let V = null, ser = 'ibov', per = 0, ch = null, chP = null, ini = false;
+  let V = null, ser = 'ibov', per = 0, ch = null, chP = null, chS = null, chD = null, chV = null, chT = null, ini = false;
   const estat = (xs, lo = 0) => { xs = xs.filter(x => x != null && x > lo && x < 60); if (xs.length < 6) return null; const q = [...xs].sort((a, b) => a - b), qt = f => q[Math.min(q.length - 1, Math.round(f * (q.length - 1)))]; const mu = xs.reduce((a, b) => a + b, 0) / xs.length; return {mu, med: qt(.5), p25: qt(.25), p75: qt(.75)}; };
   const bi = v => v == null ? '—' : (Math.abs(v) >= 1000 ? nb(v / 1000, 2) + ' tri' : nb(v, 0) + ' bi');
   function leitura(p){ if (p == null) return ['—', '']; if (p <= 20) return ['bem abaixo do histórico', 'pos']; if (p <= 40) return ['abaixo do histórico', 'pos']; if (p < 60) return ['perto do histórico', '']; if (p < 80) return ['acima do histórico', 'neg']; return ['bem acima do histórico', 'neg']; }
@@ -5798,6 +5879,8 @@ window.addEventListener("hashchange",rota); rota();
     const prs = S.filter(r => r.ibov > 0 && r.ntnb != null).map(r => 100 / r.ibov - r.ntnb), ep = estat(prs, -50);
     $i('vaKpis').innerHTML = ['ibov', 'ex_petro', 'ex_petro_vale'].map(card).join('') +
       `<div class="b3d-k"><span>Lucro ÷ preço do Ibovespa</span><b>${nb(ey, 2)}%</b><small>retorno implícito do lucro, ao ano</small></div>` +
+      (E.dy ? `<div class="b3d-k"><span>Dividend yield do Ibovespa</span><b>${nb(E.dy.atual, 2)}%</b><small>mediana ${nb(E.dy.mediana, 2)}% · maior que em ${E.dy.percentil}% dos meses</small></div>` : '') +
+      (E.pvp ? `<div class="b3d-k"><span>P/VP do Ibovespa</span><b>${nb(E.pvp.atual, 2)}x</b><small>mediana ${nb(E.pvp.mediana, 2)}x · <em class="${leitura(E.pvp.percentil)[1]}">${leitura(E.pvp.percentil)[0]}</em></small></div>` : '') +
       `<div class="b3d-k"><span>Prêmio sobre o Tesouro IPCA+</span><b>${pr == null ? '—' : (pr > 0 ? '+' : '') + nb(pr, 2) + ' p.p.'}</b><small>juro real ${nb(nt, 2)}% · mediana histórica ${ep ? nb(ep.med, 2) + ' p.p.' : '—'}</small></div>`;
     const ei = E.ibov || {}, ex = E.ex_petro || {};
     const desc = (e) => e.atual == null ? '' : `${nb(e.atual)}x o lucro dos últimos 12 meses, contra mediana de ${nb(e.mediana)}x desde ${S[0].m.slice(0, 4)} e de ${nb(e.media_10a)}x na média dos últimos 10 anos (mais barato que em ${100 - (e.percentil ?? 0)}% dos meses)`;
@@ -5835,13 +5918,66 @@ window.addEventListener("hashchange",rota); rota();
     if (chP) { chP.data = dataP; chP.options = optP; chP.update(); } else chP = new Chart($i('ch-vap'), {type: 'line', data: dataP, options: optP});
     $i('vaDgP').textContent = P.length ? `Quanto maior o prêmio, mais a bolsa paga acima da renda fixa real. Último: ${nb(pv[pv.length - 1], 2)} p.p.; média do período mostrado: ${nb(mp, 2)} p.p.` : 'Sem dados do Tesouro para o período.';
   }
+
+  const tema = () => ({fg: cor('--muted'), line: cor('--line'), gold: cor('--gold') || '#b08a3e', azul: cor('--mk1') || '#1d4f91', verde: '#0e7f57', verm: '#b3261e'});
+  const eixo = (fg, line, fmt) => ({x: {ticks: {color: fg, maxRotation: 0, autoSkip: true, maxTicksLimit: 10}, grid: {display: false}}, y: {ticks: {color: fg, callback: fmt}, grid: {color: line}}});
+  function mk(old, id, cfg){ if (old) { old.data = cfg.data; old.options = cfg.options; old.update(); return old; } return new Chart($i(id), cfg); }
+  const dBR = d => d ? d.slice(8, 10) + '/' + d.slice(5, 7) + '/' + d.slice(0, 4) : '—';
+  const tri = f => { const m = +f.slice(5, 7); return (m === 12 ? '4T' : m === 9 ? '3T' : m === 6 ? '2T' : '1T') + f.slice(2, 4); };
+  function setores(){
+    const T = tema(), S = Object.entries(V.setores || {}).filter(([, e]) => e.atual).sort((a, b) => a[1].atual / a[1].mediana - b[1].atual / b[1].mediana);
+    if (!S.length) return;
+    $i('vaSetBox').style.height = Math.max(260, S.length * 38 + 60) + 'px';
+    chS = mk(chS, 'ch-vas', {type: 'bar', data: {labels: S.map(x => x[0]), datasets: [
+      {label: 'P/L hoje', data: S.map(x => x[1].atual), backgroundColor: T.gold, borderRadius: 3},
+      {label: 'Mediana desde 2012', data: S.map(x => x[1].mediana), backgroundColor: 'rgba(120,120,120,.45)', borderRadius: 3}]},
+      options: {indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {color: T.fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.dataset.label}: ${nb(c.parsed.x)}x`}}},
+        scales: {x: {ticks: {color: T.fg, callback: v => v + 'x'}, grid: {color: T.line}}, y: {ticks: {color: T.fg}, grid: {display: false}}}}});
+    $i('tb-vas').querySelector('tbody').innerHTML = S.map(([k, e]) => { const [t, c] = leitura(e.percentil); return `<tr><th>${esc(k)}</th><td>${e.n}</td><td>R$ ${bi(e.vm)}</td><td>${nb(e.atual)}x</td><td>${nb(e.mediana)}x</td><td><em class="${c}" style="font-style:normal;font-weight:600">${t}</em><small style="display:block;opacity:.7">mais barato que em ${100 - e.percentil}% dos meses</small></td></tr>`; }).join('');
+  }
+  function dyPvp(){
+    const T = tema(), S0 = V.serie, S = per ? S0.slice(-per) : S0, E = V.estatisticas || {};
+    const linha = (k, cor_, nome, un, old, id) => { const xs = S.map(r => r[k] ?? null), e = E[k]; const ds = [{label: nome, data: xs, borderColor: cor_, backgroundColor: cor_, borderWidth: 2, pointRadius: 0, tension: .2, spanGaps: true}];
+      if (e) ds.push({label: 'Mediana', data: S.map(() => e.mediana), borderColor: T.fg, borderDash: [5, 4], borderWidth: 1.2, pointRadius: 0});
+      return mk(old, id, {type: 'line', data: {labels: S.map(r => lb(r.m)), datasets: ds}, options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false},
+        plugins: {legend: {labels: {color: T.fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.dataset.label}: ${nb(c.parsed.y, 2)}${un}`}}}, scales: eixo(T.fg, T.line, v => nb(v, un === 'x' ? 1 : 0) + un)}}); };
+    if (S.some(r => r.dy != null)) chD = linha('dy', T.verde, 'Dividend yield', '%', chD, 'ch-vady');
+    if (S.some(r => r.pvp != null)) chV = linha('pvp', T.azul, 'P/VP', 'x', chV, 'ch-vapvp');
+    const u = V.serie[V.serie.length - 1], nt = u.ntnb ?? (V.ntnb_atual || {}).taxa;
+    if (E.dy) $i('vaDgDy').textContent = `Hoje ${nb(E.dy.atual, 2)}% ao ano em dividendos, contra mediana de ${nb(E.dy.mediana, 2)}% desde 2012 (maior que em ${E.dy.percentil}% dos meses). Para comparar: o Tesouro IPCA+ paga ${nb(nt, 2)}% acima da inflação, e o dividendo tende a crescer com o lucro.`;
+    if (E.pvp) $i('vaDgPvp').textContent = `Hoje ${nb(E.pvp.atual, 2)}x o patrimônio, contra mediana de ${nb(E.pvp.mediana, 2)}x (mais barato que em ${100 - E.pvp.percentil}% dos meses). Abaixo de 1x, a bolsa valeria menos que o patrimônio contábil das empresas.`;
+  }
+  function trimestres(){
+    const T = tema(), Q = V.trimestres || []; if (!Q.length) return;
+    chT = mk(chT, 'ch-vatri', {type: 'bar', data: {labels: Q.map(q => q.t), datasets: [
+      {label: 'Lucro do Ibovespa (R$ bi)', data: Q.map(q => q.lucro), backgroundColor: T.gold, borderRadius: 2, yAxisID: 'y', order: 2},
+      {label: 'Sem Petrobras (R$ bi)', data: Q.map(q => q.lucro_ex_petro), backgroundColor: T.azul, borderRadius: 2, yAxisID: 'y', order: 2},
+      {type: 'line', label: 'Variação anual sem Petrobras (%)', data: Q.map(q => q.var_aa_ex_petro), borderColor: T.verde, backgroundColor: T.verde, borderWidth: 2, pointRadius: 2.5, yAxisID: 'y2', order: 1}]},
+      options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {labels: {color: T.fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => c.dataset.yAxisID === 'y2' ? ` ${c.dataset.label}: ${c.parsed.y > 0 ? '+' : ''}${nb(c.parsed.y)}%` : ` ${c.dataset.label}: R$ ${nb(c.parsed.y)} bi`}}},
+        scales: {x: {ticks: {color: T.fg}, grid: {display: false}}, y: {ticks: {color: T.fg, callback: v => v + ' bi'}, grid: {color: T.line}}, y2: {position: 'right', ticks: {color: T.verde, callback: v => v + '%'}, grid: {display: false}}}}});
+    const u = Q[Q.length - 1], a = Q[Q.length - 2];
+    $i('vaDgTri').textContent = `${u.t}: R$ ${nb(u.lucro)} bi somando ${u.n} empresas (R$ ${nb(u.lucro_ex_petro)} bi sem Petrobras). Contra o mesmo trimestre do ano anterior: ${u.var_aa == null ? '—' : (u.var_aa > 0 ? '+' : '') + nb(u.var_aa, 1) + '%'} no total e ${u.var_aa_ex_petro == null ? '—' : (u.var_aa_ex_petro > 0 ? '+' : '') + nb(u.var_aa_ex_petro, 1) + '%'} sem Petrobras.${u.n < (a ? a.n : 0) ? ' O trimestre mais recente ainda pode estar incompleto (nem todas as empresas divulgaram).' : ''}`;
+    const R = (V.resultados || []).slice(0, 30), mi_ = v => v == null ? '—' : (Math.abs(v) >= 1000 ? nb(v / 1000, 2) + ' bi' : nb(v, 0) + ' mi');
+    $i('tb-varesu').querySelector('tbody').innerHTML = R.map(r => `<tr><td>${esc(r.tks.join(', '))}<small style="display:block;opacity:.7">${esc(r.nome || r.setor)}</small></td><td>${r.t}</td><td>${dBR(r.entregue).slice(0, 5)}</td><td class="${r.lucro < 0 ? 'neg' : ''}">${mi_(r.lucro)}</td><td>${mi_(r.lucro_aa)}</td><td class="${r.var_aa == null ? '' : r.var_aa >= 0 ? 'pos' : 'neg'}">${r.var_aa == null ? (r.lucro_aa != null && r.lucro_aa < 0 && r.lucro > 0 ? 'virou lucro' : r.lucro < 0 ? 'prejuízo' : '—') : (r.var_aa > 0 ? '+' : '') + nb(r.var_aa, 1) + '%'}</td></tr>`).join('');
+  }
+  function calendario(){
+    const C = V.calendario || {}, P = C.proximos || [], R = C.recentes || [];
+    const hoje = new Date().toISOString().slice(0, 10);
+    const porMes = {}; P.forEach(x => { const k = x.previsto.slice(0, 7); (porMes[k] = porMes[k] || []).push(x); });
+    const MESN = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    let h = '';
+    if (R.length) h += `<h4 class="va-cal-h">Divulgaram nas últimas 3 semanas</h4><div class="va-chips">${R.map(x => `<span class="va-chip"><b>${esc(x.tks.join(', '))}</b> ${tri(x.periodo)} · ${dBR(x.data)}</span>`).join('')}</div>`;
+    h += Object.keys(porMes).sort().map(k => `<h4 class="va-cal-h">${MESN[+k.slice(5) - 1]} de ${k.slice(0, 4)} <small>${porMes[k].length} empresa(s)</small></h4><div class="va-cal">${porMes[k].map(x => `<div class="va-cal-i${x.atrasado ? ' atr' : ''}"><span class="d">${dBR(x.previsto).slice(0, 5)}</span><b>${esc(x.tks.join(', '))}</b><small>${tri(x.periodo)} · ${x.atrasado ? 'prazo vencido em ' + dBR(x.prazo) : x.base === 'prazo legal' ? 'prazo legal' : 'estimada'}</small></div>`).join('')}</div>`).join('');
+    $i('vaCal').innerHTML = h || '<p class="upd">Sem dados.</p>';
+    $i('vaCalSub').textContent = `${P.length} empresas do Ibovespa · data estimada pela divulgação do mesmo trimestre no ano anterior`;
+  }
   function tabela(){
     const E = (V.empresas || []).slice(0, 25);
     $i('tb-va').querySelector('tbody').innerHTML = E.map(e => `<tr><td>${esc(e.tks.join(', '))}<small style="display:block;opacity:.7">${esc(e.nome)}</small></td><td>R$ ${bi(e.vm / 1e9)}</td><td>${nb(e.peso_vm)}%</td><td class="${e.lucro < 0 ? 'neg' : ''}">R$ ${bi(e.lucro / 1e9)}</td><td>${e.pl == null ? 'prejuízo' : nb(e.pl) + 'x'}</td></tr>`).join('') || '<tr><td colspan="5">Sem dados.</td></tr>';
   }
   function desenha(){
     if (!V || !V.serie || !V.serie.length) return;
-    kpis(); grafico(); tabela();
+    kpis(); grafico(); tabela(); [setores, dyPvp, trimestres, calendario].forEach(f => { try { f(); } catch (e) { console.warn('valuation', f.name, e); } });
     const u = V.serie[V.serie.length - 1], d = V.ultimo_pregao;
     $i('st-val').textContent = `${V.empresas_n} de ${V.carteira_n} ações do índice · cotações até ${d ? d.slice(6) + '/' + d.slice(4, 6) + '/' + d.slice(0, 4) : lb(u.m)}`;
   }
@@ -5852,10 +5988,87 @@ window.addEventListener("hashchange",rota); rota();
   function inicia(){
     if (!$i('mkValor') || ini) return; ini = true;
     $i('vaSer').addEventListener('click', e => { const b = e.target.closest('[data-s]'); if (!b) return; ser = b.dataset.s; $i('vaSer').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); grafico(); });
-    $i('vaPer').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b) return; per = +b.dataset.p; $i('vaPer').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); grafico(); });
+    $i('vaPer').addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b) return; per = +b.dataset.p; $i('vaPer').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); grafico(); dyPvp(); });
     carrega();
   }
   const rota = () => { if ((location.hash || '').replace('#', '') === 'mercado') setTimeout(inicia, 400); };
+  window.addEventListener('hashchange', rota); rota();
+})();
+</script>
+<script>(function(){ /* @@BOLSA@@ fluxo, aluguel e insiders, vindos do robô do GitHub */
+  const RAW = 'https://raw.githubusercontent.com/contadeinfo/painel-fundos/';
+  const $i = id => document.getElementById(id);
+  const nb = (v, d = 1) => v == null || !isFinite(v) ? '—' : v.toLocaleString('pt-BR', {minimumFractionDigits: d, maximumFractionDigits: d});
+  const sn = (v, d = 0) => v == null || !isFinite(v) ? '—' : (v > 0 ? '+' : v < 0 ? '−' : '') + nb(Math.abs(v), d);
+  const cls = v => v == null ? '' : v > 0 ? 'pos' : v < 0 ? 'neg' : '';
+  const cor = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const dBR = d => d ? d.slice(8, 10) + '/' + d.slice(5, 7) + '/' + d.slice(0, 4) : '—';
+  const MES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const lbm = m => MES[+m.slice(5, 7) - 1] + '/' + m.slice(2, 4);
+  let B = null, chF = null, chA = null, chL = null, filtro = 'ibov', ini = false;
+  function mk(old, id, cfg){ if (old) { old.data = cfg.data; old.options = cfg.options; old.update(); return old; } return new Chart($i(id), cfg); }
+  function fluxo(){
+    const F = B.fluxo; if (!F || !F.dias.length) return;
+    const fg = cor('--muted'), line = cor('--line'), gold = cor('--gold') || '#b08a3e', azul = cor('--mk1') || '#1d4f91';
+    const D = F.dias, ult = D[D.length - 1], ano = ult[0].slice(0, 4), mes = ult[0].slice(0, 7);
+    const soma = (f, i) => D.filter(f).reduce((t, r) => t + (r[i] || 0), 0);
+    const per = [['Último dia (' + dBR(ult[0]).slice(0, 5) + ')', r => r[0] === ult[0]], ['5 dias', r => D.indexOf(r) >= D.length - 5], ['No mês', r => r[0].startsWith(mes)], ['No ano', r => r[0].startsWith(ano)], ['Últimos 12 meses (até ' + D.length + ' dias)', r => true]];
+    $i('tb-bof').querySelector('thead').innerHTML = `<tr><th>Período</th>${F.colunas.map(c => `<th>${c}</th>`).join('')}</tr>`;
+    $i('tb-bof').querySelector('tbody').innerHTML = per.map(([t, f]) => `<tr><th>${t}</th>${F.colunas.map((c, i) => { const v = soma(f, i + 1); return `<td class="${cls(v)}">${sn(v)}</td>`; }).join('')}</tr>`).join('');
+    const est = (f) => soma(f, 1);
+    const k = (t, v, sub) => `<div class="b3d-k"><span>${t}</span><b class="${cls(v)}">${v == null ? '—' : sn(v / 1000, 2) + ' bi'}</b><small>${sub}</small></div>`;
+    let h = k('Estrangeiro no ano', est(per[3][1]), 'saldo na B3 desde 1º/jan') + k('Estrangeiro no mês', est(per[2][1]), lbm(mes)) + k('Estrangeiro em 5 dias', est(per[1][1]), 'até ' + dBR(ult[0]));
+    h += k('Pessoa física no ano', soma(per[3][1], 3), 'saldo desde 1º/jan') + k('Institucional no ano', soma(per[3][1], 2), 'fundos, previdência e seguradoras');
+    const AL = B.aluguel; if (AL) h += `<div class="b3d-k"><span>Ações alugadas na B3</span><b>R$ ${nb(AL.total_bi, 1)} bi</b><small>posição em aberto em ${dBR(AL.data)}</small></div>`;
+    $i('boKpis').innerHTML = h;
+    const ea = est(per[3][1]), em = est(per[2][1]);
+    $i('boDg').innerHTML = `<b>Leitura automática:</b> o investidor estrangeiro ${ea >= 0 ? 'colocou' : 'tirou'} R$ ${nb(Math.abs(ea) / 1000, 1)} bi da bolsa no ano e ${em >= 0 ? 'colocou' : 'tirou'} R$ ${nb(Math.abs(em) / 1000, 1)} bi em ${lbm(mes)}. Quem ficou do outro lado no ano: ${F.colunas.slice(1).map((c, i) => `${c.toLowerCase()} ${sn(soma(per[3][1], i + 2) / 1000, 1)} bi`).join(', ')}.`;
+    const ult90 = D.slice(-90); let acc = 0; const ac = {}; D.forEach(r => { if (r[0].startsWith(ano)) { acc += r[1] || 0; ac[r[0]] = acc; } });
+    chF = mk(chF, 'ch-bof', {type: 'bar', data: {labels: ult90.map(r => dBR(r[0]).slice(0, 5)), datasets: [
+      {label: 'Saldo do dia', data: ult90.map(r => r[1]), backgroundColor: ult90.map(r => (r[1] || 0) >= 0 ? 'rgba(14,127,87,.75)' : 'rgba(179,38,30,.75)'), yAxisID: 'y', order: 2},
+      {type: 'line', label: 'Acumulado no ano', data: ult90.map(r => ac[r[0]] ?? null), borderColor: gold, backgroundColor: gold, borderWidth: 2, pointRadius: 0, yAxisID: 'y2', order: 1}]},
+      options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {labels: {color: fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.dataset.label}: R$ ${sn(c.parsed.y)} mi`}}},
+        scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true, maxTicksLimit: 9}, grid: {display: false}}, y: {ticks: {color: fg}, grid: {color: line}}, y2: {position: 'right', ticks: {color: gold}, grid: {display: false}}}}});
+    const DA = D.filter(r => r[0].startsWith(ano)), cs = [gold, azul, '#0e7f57', '#7b5ea7', fg];
+    chA = mk(chA, 'ch-boa', {type: 'line', data: {labels: DA.map(r => dBR(r[0]).slice(0, 5)), datasets: F.colunas.map((c, i) => { let a = 0; return {label: c, data: DA.map(r => +((a += r[i + 1] || 0) / 1000).toFixed(2)), borderColor: cs[i], backgroundColor: cs[i], borderWidth: i ? 1.5 : 2.4, pointRadius: 0, tension: .15}; })},
+      options: {responsive: true, maintainAspectRatio: false, interaction: {mode: 'index', intersect: false}, plugins: {legend: {labels: {color: fg, boxWidth: 12}}, tooltip: {callbacks: {label: c => ` ${c.dataset.label}: R$ ${sn(c.parsed.y, 2)} bi`}}},
+        scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true, maxTicksLimit: 9}, grid: {display: false}}, y: {ticks: {color: fg, callback: v => v + ' bi'}, grid: {color: line}}}}});
+  }
+  function aluguel(){
+    const AL = B.aluguel, tb = $i('tb-boal').querySelector('tbody');
+    if (!AL) { tb.innerHTML = '<tr><td colspan="4">Ainda sem leitura do boletim da B3.</td></tr>'; return; }
+    $i('boAlSub').textContent = `% das ações da classe emprestadas · posição em aberto em ${dBR(AL.data)}`;
+    tb.innerHTML = AL.acoes.filter(a => a.pct != null).slice(0, 20).map(a => `<tr><td><b>${a.tk}</b><small style="display:block;opacity:.7">${esc(a.nome)}</small></td><td><span class="he-bar"><i style="width:${Math.min(100, a.pct / 15 * 100)}%"></i></span>${nb(a.pct, 1)}%</td><td>R$ ${a.rs >= 1e9 ? nb(a.rs / 1e9, 2) + ' bi' : nb(a.rs / 1e6, 0) + ' mi'}</td><td class="${cls(a.var_30d == null ? null : -a.var_30d)}">${a.var_30d == null ? '—' : sn(a.var_30d, 1) + '%'}</td></tr>`).join('');
+    const S = AL.serie || [];
+    if (S.length > 1) { const fg = cor('--muted'), line = cor('--line'), azul = cor('--mk1') || '#1d4f91';
+      chL = mk(chL, 'ch-boal', {type: 'line', data: {labels: S.map(x => dBR(x.d).slice(0, 5)), datasets: [{label: 'Total alugado na B3 (R$ bi)', data: S.map(x => x.rs_bi), borderColor: azul, backgroundColor: azul, borderWidth: 2, pointRadius: 0, tension: .2}]},
+        options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {labels: {color: fg, boxWidth: 12}}}, scales: {x: {ticks: {color: fg, maxRotation: 0, autoSkip: true, maxTicksLimit: 8}, grid: {display: false}}, y: {ticks: {color: fg, callback: v => v + ' bi'}, grid: {color: line}}}}}); }
+    else $i('ch-boal').parentElement.innerHTML = '<p class="upd">O gráfico do total alugado começa a se formar com as próximas leituras diárias.</p>';
+  }
+  function insiders(){
+    const I = B.insiders, tb = $i('tb-boins').querySelector('tbody');
+    if (!I) { tb.innerHTML = '<tr><td colspan="6">Sem dados.</td></tr>'; return; }
+    const meses = I.meses.slice(-2);
+    const L = I.movimentos.filter(x => meses.includes(x.mes) && (filtro === 'todas' || x.ibov)).sort((a, b) => b.mes.localeCompare(a.mes) || Math.abs(b.liquido) - Math.abs(a.liquido)).slice(0, 30);
+    const mi = v => nb(v / 1e6, 1);
+    tb.innerHTML = L.map(x => `<tr><td>${lbm(x.mes)}</td><td><b>${esc(x.tks.join(', ') || '')}</b><small style="display:block;opacity:.7">${esc(x.nome)}</small></td><td>${mi(x.compra)}</td><td>${mi(x.venda)}</td><td class="${cls(x.liquido)}">${sn(x.liquido / 1e6, 1)}</td><td><small>${Object.entries(x.cargos).map(([c, [cp, vd]]) => `${c}: ${cp > vd ? 'comprou' : 'vendeu'}`).join(' · ')}</small></td></tr>`).join('') || '<tr><td colspan="6">Nenhuma negociação acima de R$ 1 milhão nesses meses.</td></tr>';
+  }
+  function desenha(){
+    [fluxo, aluguel, insiders].forEach(f => { try { f(); } catch (e) { console.warn('bolsa', f.name, e); } });
+    const D = (B.fluxo || {}).dias || [];
+    $i('st-bo').textContent = `fluxo até ${D.length ? dBR(D[D.length - 1][0]) : '—'}${B.aluguel ? ' · aluguel de ' + dBR(B.aluguel.data) : ''}${B.insiders ? ' · insiders até ' + lbm(B.insiders.meses.slice(-1)[0]) : ''}`;
+  }
+  async function carrega(){
+    try { const r = await fetch(RAW + 'main/data/bolsa.json?t=' + Math.floor(Date.now() / 9e5), {cache: 'no-store'}); if (!r.ok) throw 0; B = await r.json(); desenha(); }
+    catch (e) { $i('st-bo').textContent = 'não carregou (robô do GitHub fora do ar ou sem internet)'; }
+  }
+  function inicia(){
+    if (!$i('mkBolsa') || ini) return; ini = true;
+    $i('boInsSel').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; filtro = b.dataset.f; $i('boInsSel').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); if (B) insiders(); });
+    carrega();
+  }
+  const rota = () => { if ((location.hash || '').replace('#', '') === 'mercado') setTimeout(inicia, 450); };
   window.addEventListener('hashchange', rota); rota();
 })();
 </script>
