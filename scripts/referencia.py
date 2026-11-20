@@ -51,7 +51,8 @@ def linhas_ano(a, hoje):
 def ibov_mensal(ini, fim):
     """Fechamento mensal do Ibovespa: B3 (histórico anual do índice); reserva: Banco Central (SGS 7)."""
     out = {}
-    for a in range(ini.year, fim.year + 1):
+    # (a B3 não tem uma consulta pública estável do histórico do índice; fica o Banco Central)
+    for a in []:
         try:
             q = base64.b64encode(json.dumps({"index": "IBOV", "language": "pt-br", "year": str(a)}).encode()).decode()
             j = json.loads(baixa('https://sistemaswebb3-listados.b3.com.br/indexStatisticsProxy/IndexCall/GetYearlyHistory/' + q))
@@ -63,13 +64,17 @@ def ibov_mensal(ini, fim):
         except Exception as e:
             print('aviso B3 IBOV', a, e)
     if len(out) < 12:
-        try:
-            j = json.loads(baixa(f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.7/dados?formato=json&dataInicial={ini:%d/%m/%Y}&dataFinal={fim:%d/%m/%Y}'))
-            for x in j:
-                d = dt.datetime.strptime(x['data'], '%d/%m/%Y')
-                out[f'{d.year}-{d.month:02d}'] = float(x['valor'])
-        except Exception as e:
-            print('aviso BCB IBOV', e)
+        a = ini
+        while a <= fim:          # o Banco Central limita a série diária a 10 anos por consulta
+            b = min(fim, dt.date(a.year + 5, a.month, 1))
+            try:
+                j = json.loads(baixa(f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.7/dados?formato=json&dataInicial={a:%d/%m/%Y}&dataFinal={b:%d/%m/%Y}'))
+                for x in j:
+                    d = dt.datetime.strptime(x['data'], '%d/%m/%Y')
+                    out[f'{d.year}-{d.month:02d}'] = float(x['valor'])
+            except Exception as e:
+                print('aviso BCB IBOV', a, e)
+            a = b + dt.timedelta(days=1)
     print('Ibovespa:', len(out), 'meses')
     return out
 
