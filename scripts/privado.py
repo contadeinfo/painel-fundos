@@ -117,8 +117,17 @@ def fechar():
             os.remove(os.path.join(PASTA, f))
     for f, b in novos.items():
         q = os.path.join(PASTA, f)
-        if not os.path.exists(q) or open(q, 'rb').read() != b:
-            open(q, 'wb').write(b)
+        if os.path.exists(q):
+            velho = open(q, 'rb').read()
+            if velho == b:
+                continue
+            try:   # mesmo conteúdo cifrado de outro jeito (outra versão do gzip): mantém o arquivo e evita conflito
+                rel = 'i' if f == 'i.bin' else next(r for r in lista if nome_bin(r) == f)
+                if decifra(rel, velho) == gzip.decompress(AES.decrypt(b[:12], b[12:], rel.encode())):
+                    continue
+            except Exception:
+                pass
+        open(q, 'wb').write(b)
     for d in sorted(glob.glob(os.path.join(RAIZ, 'data', '**'), recursive=True), reverse=True):   # pastas que ficaram vazias
         if os.path.isdir(d) and not os.listdir(d):
             os.rmdir(d)
