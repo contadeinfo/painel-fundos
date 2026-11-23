@@ -1,4 +1,4 @@
-name: Histórico do fundo de referência (CVM)
+name: Histórico privado (CVM)
 
 on:
   schedule:

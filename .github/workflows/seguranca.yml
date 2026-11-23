@@ -1,0 +1,48 @@
+name: Verificação diária
+
+on:
+  schedule:
+    - cron: '41 9 * * *'      # 06:41 de Brasília, todo dia
+  push:
+    branches: [main]
+    paths: ['.github/**', 'scripts/**', 'fundos.json', 'alertas.json']
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  actions: read
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: seguranca
+  cancel-in-progress: false
+
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    env:
+      PAINEL_CHAVE: ${{ secrets.PAINEL_CHAVE }}
+      PRIVADO_JSON: ${{ secrets.PRIVADO_JSON }}
+      SEGURANCA_TOKEN: ${{ secrets.SEGURANCA_TOKEN }}
+      GITHUB_TOKEN: ${{ github.token }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Abre dados privados
+        run: pip install -q cryptography && python scripts/privado.py abrir
+      - name: Verifica
+        run: python scripts/seguranca.py
+      - name: Fecha dados privados (nada sai sem passar por aqui)
+        run: python scripts/privado.py fechar
+      - name: Publica
+        run: |
+          git config user.name  "robo-vigia"
+          git config user.email "robo-vigia@users.noreply.github.com"
+          git add -A data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "verificação $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)

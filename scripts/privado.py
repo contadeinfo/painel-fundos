@@ -22,9 +22,10 @@ if not SENHA or not CFG:
 
 CHAVE = hashlib.pbkdf2_hmac('sha256', SENHA.encode(), SAL, 200_000, 32)
 AES = AESGCM(CHAVE)
-TERMOS = [t for t in CFG.get('termos', []) if t]
+_VIG = os.path.join(RAIZ, 'data', 'vigia.json')   # termos extras guardados cifrados (lista do vigia)
+TERMOS = [t for t in CFG.get('termos', []) + (json.load(open(_VIG, encoding='utf-8')).get('termos', []) if os.path.exists(_VIG) else []) if t]
 RX = re.compile('|'.join([re.escape(t) for t in TERMOS] + CFG.get('regex', [])), re.I)
-INTEIROS = [os.path.normpath(p) for p in CFG.get('inteiros', [])]   # arquivos/pastas 100% privados (glob)
+INTEIROS = [os.path.normpath(p) for p in CFG.get('inteiros', []) + ['data/seguranca.json', 'data/vigia.json']]   # arquivos/pastas 100% privados (glob)
 
 
 def nome_bin(rel):
