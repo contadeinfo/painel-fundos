@@ -1,0 +1,55 @@
+name: Atualiza peers (CVM)
+
+on:
+  schedule:
+    - cron: '17 10 * * 1-6'   # 07:17 de Brasília, segunda a sábado
+    - cron: '47 22 * * 1-5'   # 19:47 de Brasília (pega o informe do dia, quando já saiu)
+  workflow_dispatch: {}        # botão "Run workflow" para rodar na hora
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: atualiza
+  cancel-in-progress: false
+
+jobs:
+  atualiza:
+    runs-on: ubuntu-latest
+    env:
+      PAINEL_CHAVE: ${{ secrets.PAINEL_CHAVE }}
+      PRIVADO_JSON: ${{ secrets.PRIVADO_JSON }}
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Abre dados privados
+        run: pip install -q cryptography && python scripts/privado.py abrir
+      - name: Baixa CVM e calcula
+        run: python scripts/atualiza.py
+      - name: Panorama da indústria e radar de concorrentes
+        run: python scripts/industria.py || echo "aviso - indústria falhou"
+      - name: Focus
+        run: python scripts/focus.py || echo "aviso - Focus falhou"
+      - name: Histórico próprio
+        run: python scripts/historico.py || echo "aviso - histórico falhou"
+      - name: Avisos por e-mail
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: |
+          pip install -q matplotlib
+          python scripts/alertas.py completo || echo "aviso - alertas falharam"
+      - name: Fecha dados privados (nada sai sem passar por aqui)
+        run: python scripts/privado.py fechar
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add -A data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "dados $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)

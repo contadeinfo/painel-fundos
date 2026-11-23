@@ -1,0 +1,26 @@
+name: Fundos imobiliários (CVM)
+
+on:
+  schedule:
+    - cron: '37 10 * * 1-6'   # 7h37 de Brasília (a CVM recebe informes de FII ao longo do mês)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  fii:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/fii.py
+      - name: Publica
+        run: |
+          git config user.name  "robo-fii"
+          git config user.email "robo-fii@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -q -m "fii $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)

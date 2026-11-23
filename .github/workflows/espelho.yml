@@ -1,0 +1,41 @@
+name: Espelho das fontes do painel
+
+on:
+  schedule:
+    - cron: '7 10-23 * * 1-5'      # dias úteis, 7h às 21h de Brasília: rodadas de ~50 min, passada a cada 10 min
+    - cron: '7 0 * * 2-6'          # 21h07 de Brasília (dias úteis): última passada do dia
+    - cron: '7 11,20 * * 0,6'      # fim de semana: 8h07 e 17h07
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: espelho
+  cancel-in-progress: true
+
+jobs:
+  espelho:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Navegador
+        run: |
+          pip install -q playwright==1.47.0
+          python -m playwright install --with-deps chromium > /dev/null
+      - name: Prepara o ramo de publicação
+        run: |
+          git config --global user.name  "robo-espelho"
+          git config --global user.email "robo-espelho@users.noreply.github.com"
+          R="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}"
+          if git ls-remote --exit-code --heads origin espelho >/dev/null; then
+            git clone -q --depth 1 --branch espelho "$R" _esp
+          else
+            mkdir _esp && cd _esp && git init -q && git checkout -q --orphan espelho && git remote add origin "$R"
+          fi
+      - name: Visita o painel e guarda as respostas
+        run: python scripts/espelho.py

@@ -1,0 +1,36 @@
+name: Cotações (a cada minuto)
+
+on:
+  schedule:
+    - cron: '*/30 12-21 * * 1-5'   # dias úteis, 9h às 19h de Brasília: rodadas de ~40 min, busca a cada minuto
+    - cron: '41 * * * *'           # fora disso: uma foto por hora (bitcoin, Ásia, fim de semana)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cotacoes
+  cancel-in-progress: true
+
+jobs:
+  cotacoes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepara o ramo de publicação
+        run: |
+          git config --global user.name  "robo-cotacoes"
+          git config --global user.email "robo-cotacoes@users.noreply.github.com"
+          url=$(git remote get-url origin)
+          if git ls-remote --exit-code --heads origin cotacoes >/dev/null; then
+            git clone -q --depth 1 --branch cotacoes "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" _pub
+          else
+            mkdir _pub && cd _pub && git init -q && git checkout -q --orphan cotacoes && git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}"
+          fi
+      - name: Busca e publica
+        run: python scripts/cotacoes.py

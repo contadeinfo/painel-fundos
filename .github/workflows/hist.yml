@@ -1,0 +1,26 @@
+name: Histórico longo das cotações
+
+on:
+  schedule:
+    - cron: '37 21 * * 1-5'   # seg-sex 18h37 de Brasília
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  hist:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/hist_cotacoes.py
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "histórico das cotações $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)

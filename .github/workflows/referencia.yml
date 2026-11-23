@@ -1,0 +1,33 @@
+name: Histórico do fundo de referência (CVM)
+
+on:
+  schedule:
+    - cron: '52 22 * * 1-5'   # seg-sex 19h52 de Brasília
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  referencia:
+    runs-on: ubuntu-latest
+    env:
+      PAINEL_CHAVE: ${{ secrets.PAINEL_CHAVE }}
+      PRIVADO_JSON: ${{ secrets.PRIVADO_JSON }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Abre dados privados
+        run: pip install -q cryptography && python scripts/privado.py abrir
+      - run: python scripts/referencia.py
+      - name: Fecha dados privados (nada sai sem passar por aqui)
+        run: python scripts/privado.py fechar
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add -A data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "referência $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)

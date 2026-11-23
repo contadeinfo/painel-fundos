@@ -1,0 +1,33 @@
+name: Carteira dos peers (CDA da CVM)
+
+on:
+  schedule:
+    - cron: '23 9 * * 1'     # toda segunda, 6h23 de Brasília (a CVM publica a CDA uma vez por mês)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  carteiras:
+    runs-on: ubuntu-latest
+    env:
+      PAINEL_CHAVE: ${{ secrets.PAINEL_CHAVE }}
+      PRIVADO_JSON: ${{ secrets.PRIVADO_JSON }}
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Abre dados privados
+        run: pip install -q cryptography && python scripts/privado.py abrir
+      - run: python scripts/carteiras.py
+      - name: Fecha dados privados (nada sai sem passar por aqui)
+        run: python scripts/privado.py fechar
+      - name: Publica
+        run: |
+          git config user.name  "robo-peers"
+          git config user.email "robo-peers@users.noreply.github.com"
+          git add -A data
+          git diff --cached --quiet && echo "sem mudanças" || (git commit -m "carteiras $(date -u +%F)" && for i in 1 2 3 4; do git pull --rebase -q && git push && break; sleep $((i*7)); done)
