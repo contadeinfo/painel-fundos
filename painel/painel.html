@@ -1536,6 +1536,20 @@ tr.cx-out td{color:var(--muted);font-style:italic}
 .ap-grid input,.ap-grid textarea{font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
 .ap-grid textarea{font-family:var(--mono);font-size:12.5px;resize:vertical}
 #apMes{font:inherit;font-size:13px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.sg-banner{display:flex;gap:14px;align-items:center;padding:16px 20px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin:0 0 16px}
+.sg-banner b{display:block;font:600 20px var(--serif);color:var(--fg)}.sg-banner small{color:var(--muted)}
+.sg-dot{width:16px;height:16px;border-radius:50%;background:var(--muted);flex:none}
+.sg-ok .sg-dot,.sg-i.ok .sg-dot{background:var(--up)}.sg-atencao .sg-dot,.sg-i.atencao .sg-dot{background:var(--warn)}.sg-alerta .sg-dot,.sg-i.alerta .sg-dot{background:var(--down)}.sg-i.info .sg-dot{background:var(--muted)}
+.sg-alerta{border-color:var(--down)}
+.sg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:0 0 16px}
+.sg-i{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px}
+.sg-i h3{display:flex;gap:9px;align-items:center;margin:0 0 4px;font:600 14.5px var(--sans);color:var(--fg)}.sg-i h3 .sg-dot{width:11px;height:11px}
+.sg-i p{margin:0 0 6px;color:var(--fg);font-size:13.5px}.sg-i details{font-size:12.5px;color:var(--muted)}.sg-i summary{cursor:pointer}
+.sg-ul{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--fg)}.sg-ul li{margin:3px 0}.sg-i .sg-ul{color:var(--muted)}
+.sg-hist{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px}.sg-hist span{width:12px;height:12px;border-radius:2px;background:var(--line)}
+.sg-hist .ok{background:var(--up)}.sg-hist .atencao{background:var(--warn)}.sg-hist .alerta{background:var(--down)}
+.sg-check{display:grid;gap:8px;margin-top:8px}.sg-check label{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--fg);padding:8px 10px;border:1px solid var(--line);border-radius:9px}
+.sg-check label.vencido{border-color:var(--warn)}.sg-check small{display:block;color:var(--muted)}.sg-check input{margin-top:3px}
 /* @@SEM-ROLAGEM@@ tudo à vista: sem barras de rolagem em tabelas e listas (telas a partir de 760px) */
 @media (min-width:760px){
   .tbl-scroll,.mk .tbl-scroll,.b3-scroll,.ct-scroll,.pr-rad-wrap,.os-brfeed,.cx-tbl,#mkValor .b3-scroll,.b3-scroll[style]{overflow:visible!important;max-height:none!important}
@@ -1648,6 +1662,7 @@ tr.cx-out td{color:var(--muted);font-style:italic}
 <section class="disc-full" aria-labelledby="discT"><h2 id="discT">Isenção de responsabilidade</h2><p>Este painel tem finalidade exclusivamente informativa e educacional. Nada aqui constitui recomendação, oferta ou solicitação de compra ou venda de valores mobiliários, nem consultoria de investimentos, jurídica, contábil ou tributária.</p><p>Os dados vêm de fontes públicas e de terceiros (Banco Central, IBGE, Tesouro Nacional, ANBIMA, B3, Yahoo Finance, TradingView, Fundamentus, agências de notícias e outras), são exibidos sem garantia de exatidão, completude ou atualidade e podem conter atrasos, falhas ou erros. Diagnósticos e textos automáticos são gerados a partir desses números e podem não refletir a realidade.</p><p>Rentabilidade passada não é garantia de rentabilidade futura. Investimentos envolvem riscos, inclusive de perda do capital. Antes de investir, verifique as informações nas fontes oficiais e consulte um profissional habilitado. O uso deste material é de inteira responsabilidade de quem o utiliza.</p></section>
   </div>
 </section>
+
 
 
 
