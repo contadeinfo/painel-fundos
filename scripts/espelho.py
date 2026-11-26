@@ -44,6 +44,19 @@ def fnv(s):
     return format(h, '08x')
 
 
+ERRO_RX = re.compile(rb'<title>\s*(?:5\d\d|4\d\d|Service (?:Temporarily )?Unavailable|Bad Gateway|Gateway Time-?out|Access Denied|Attention Required|Just a moment|Error)', re.I)
+API_JSON = ('api-comexstat.mdic.gov.br', 'api.bcb.gov.br', 'olinda.bcb.gov.br', 'apisidra.ibge.gov.br', 'query1.finance.yahoo.com', 'query2.finance.yahoo.com',
+            'cotacao.b3.com.br', 'economia.awesomeapi.com.br', 'scanner.tradingview.com', 'data.anbima.com.br', 'api.gdeltproject.org')
+
+
+def pagina_de_erro(url, corpo):
+    """Não guarda respostas que são página de erro (ex.: 503 embrulhado com 200 por um intermediário)."""
+    ini = corpo[:600].lstrip()
+    if any(h in url for h in API_JSON) and ini[:1] == b'<':
+        return True
+    return bool(ERRO_RX.search(corpo[:3000]))
+
+
 def chave(metodo, url, corpo):
     return f'{metodo} {normaliza(url)}' + (f'\n{corpo}' if corpo else '')
 
@@ -91,7 +104,7 @@ async def ciclo(pw, indice):
             hd = {k: v for k, v in resp.headers.items() if k.lower() not in ('content-encoding', 'content-length', 'transfer-encoding')}
             hd['access-control-allow-origin'] = '*'
             await route.fulfill(status=resp.status, headers=hd, body=corpo)
-            if resp.status == 200 and corpo and len(corpo) < MAX_BYTES and not (via and 'jina' in u):
+            if resp.status == 200 and corpo and len(corpo) < MAX_BYTES and not (via and 'jina' in u) and not pagina_de_erro(orig, corpo):
                 k = chave(r.method, orig, r.post_data or '')
                 h = fnv(k)
                 ct = resp.headers.get('content-type', 'application/octet-stream')
@@ -130,7 +143,7 @@ async def ciclo(pw, indice):
 
 def publica(indice, primeiro):
     agora = int(time.time())
-    for h in [h for h, v in indice.items() if agora - v['at'] > 3 * 86400]:   # some o que não aparece há 3 dias
+    for h in [h for h, v in indice.items() if agora - v['at'] > 14 * 86400]:   # some o que não aparece há 14 dias (cobre fontes fora do ar por vários dias)
         indice.pop(h)
         try:
             os.remove(os.path.join(PASTA, 'f', h))
@@ -155,6 +168,14 @@ async def main():
         old = json.load(open(os.path.join(PASTA, 'indice.json')))['i']
         ch = json.load(open(os.path.join(PASTA, 'chaves.json')))
         indice = {h: {**v, 'k': ch.get(h, [''])[0], 'n': ch.get(h, ['', 0])[1]} for h, v in old.items()}
+        for h in list(indice):   # limpa páginas de erro guardadas antes desta correção
+            try:
+                corpo = open(os.path.join(PASTA, 'f', h), 'rb').read()
+            except FileNotFoundError:
+                corpo = b''
+            url = indice[h]['k'].split(' ', 1)[-1].split('\n')[0]
+            if not corpo or pagina_de_erro(url, corpo):
+                indice.pop(h)
     except Exception:
         pass
     servidor()
