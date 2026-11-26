@@ -22,7 +22,7 @@ TV = {
     '^STOXX50E': 'TVC:SX5E', '^FTSE': 'TVC:UKX', '^N225': 'TVC:NI225', '^VIX': 'CBOE:VIX',
     'BRL=X': 'FX_IDC:USDBRL', 'EURBRL=X': 'FX_IDC:EURBRL', 'DX-Y.NYB': 'TVC:DXY',
     'BZ=F': 'ICEEUR:BRN1!', 'CL=F': 'NYMEX:CL1!', 'GC=F': 'COMEX:GC1!', 'BTC-USD': 'BITSTAMP:BTCUSD',
-    'EWZ': 'AMEX:EWZ', '^TNX': 'TVC:US10Y', '^FVX': 'TVC:US05Y', '^IRX': 'TVC:US03MY', '^TYX': 'TVC:US30Y',
+    'EWZ': 'AMEX:EWZ', '^GDAXI': 'TVC:DEU40', '^HSI': 'TVC:HSI', 'SI=F': 'COMEX:SI1!', 'ZS=F': 'CBOT:ZS1!', '^TNX': 'TVC:US10Y', '^FVX': 'TVC:US05Y', '^IRX': 'TVC:US03MY', '^TYX': 'TVC:US30Y',
     'CLP=X': 'FX_IDC:USDCLP', 'COP=X': 'FX_IDC:USDCOP', 'IDR=X': 'FX_IDC:USDIDR', 'INR=X': 'FX_IDC:USDINR',
     'MXN=X': 'FX_IDC:USDMXN', 'TRY=X': 'FX_IDC:USDTRY', 'ZAR=X': 'FX_IDC:USDZAR',
 }
@@ -31,7 +31,7 @@ for s in SIMB:
         TV[s] = 'BMFBOVESPA:' + s[:-3]
 MERCADO = lambda t: ('brazil' if t.startswith('BMFBOVESPA') else 'forex' if t.startswith('FX_IDC') else
                      'crypto' if t.startswith('BITSTAMP') else 'cfd' if t.startswith('TVC') else
-                     'futures' if t.split(':')[0] in ('ICEEUR', 'NYMEX', 'COMEX') else 'america')
+                     'futures' if t.split(':')[0] in ('ICEEUR', 'NYMEX', 'COMEX', 'CBOT') else 'america')
 COLS = ['close', 'change', 'change_abs', 'high', 'low', 'volume', 'update_mode', 'currency']
 SERIE = lambda s: not s.endswith('.SA')   # gráfico do dia só para os cartões (ações da B3 só precisam do preço)
 

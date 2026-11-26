@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from atualiza import baixa, RAIZ  # noqa: E402
 
 SIMBOLOS = ['^BVSP', '^GSPC', '^IXIC', '^DJI', '^STOXX50E', '^FTSE', '^N225', '^VIX', 'BRL=X', 'EURBRL=X', 'BTC-USD', 'DX-Y.NYB',
-            'EWZ', 'GC=F', 'BZ=F', 'CL=F', 'SI=F', 'HG=F', 'TIO=F', '^TNX', 'IFIX.SA', 'SMAL11.SA', 'BOVA11.SA']
+            'EWZ', 'GC=F', 'BZ=F', 'CL=F', 'SI=F', 'HG=F', 'TIO=F', '^TNX', 'IFIX.SA', 'SMAL11.SA', 'BOVA11.SA', '^GDAXI', '^HSI', 'ZS=F']
 PASTA = os.path.join(RAIZ, 'data', 'hist')
 nome = lambda s: re.sub(r'[^A-Za-z0-9]+', '_', s).strip('_')
 
