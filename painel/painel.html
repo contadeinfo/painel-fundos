@@ -1586,7 +1586,8 @@ html[data-visual="terminal"] #vfx{display:block}
 .tk-it{display:inline-flex;align-items:center;gap:6px;padding:0 22px;color:var(--brand-ink);text-decoration:none;border-right:1px solid var(--brand-line)}
 .tk-it b{color:var(--gold,#c9a45a);font-weight:600}.tk-it small{color:var(--brand-muted);font-size:11px}
 a.tk-it:hover{text-decoration:underline}
-@media (prefers-reduced-motion: reduce){.tk-track{animation:none}.tk-vp{overflow-x:auto}}
+.tk-vp{overflow:hidden!important;scrollbar-width:none}.tk-vp::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: reduce){.tk-track{animation:tkAnda var(--tk-dur,120s) linear infinite!important}}
 @media (max-width:760px){.tk-lbl{padding:0 9px;font-size:10px}}
 .view.home>.tk-bar{margin:0 0 18px;border-radius:10px;overflow:hidden}
 @media print{.tk-bar{display:none}}
@@ -1644,7 +1645,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo home-by">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
     <p class="home-eyebrow">Mercado, economia e geopolítica</p>
@@ -1737,7 +1738,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
   <p class="mk-aviso" id="mkAviso" hidden>Os dados de mercado vêm de sites externos, que o claude.ai bloqueia. Para ver as cotações, abra o <b>arquivo do Painel de Mercado</b> no seu computador.</p>
@@ -1938,7 +1939,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
   <section class="card ct-slider">
@@ -2067,7 +2068,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
   <p class="mk-aviso" id="nwAviso" hidden>As notícias vêm de sites externos, que o claude.ai bloqueia. Para ver o feed, abra o <b>arquivo do Painel de Mercado</b> no seu computador.</p>
@@ -2101,7 +2102,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
   <p class="mk-aviso" id="osAviso" hidden>Os dados vêm de fontes externas, que o claude.ai bloqueia. Para ver o radar, abra o <b>arquivo do Painel de Mercado</b> no seu computador.</p>
@@ -2201,7 +2202,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
   <div class="b3-disc" role="note"><b>Atenção:</b> as cotações, indicadores e o consenso de analistas desta aba vêm de fontes de terceiros (Yahoo Finance, TradingView, Fundamentus e outras) e podem estar atrasados ou incorretos. <b>Verifique as informações</b> no site da B3, nos documentos da própria companhia (CVM / RI) e com seu assessor. <b>Nada aqui é recomendação de investimento</b>, de compra ou de venda de qualquer ação.</div>
@@ -2244,7 +2245,7 @@ a.tk-it:hover{text-decoration:underline}
   <section class="intro intro-solo">
     <div class="byline">
       <p class="disc"><b>Aviso:</b> conteúdo apenas informativo, com dados de fontes públicas e de terceiros. Não é recomendação de investimento. Confira as informações nas fontes oficiais antes de qualquer decisão.</p>
-      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">26/11/2026</span></div>
+      <div class="updated"><span class="up-label">Última atualização do modelo</span><span class="up-date">27/11/2026</span></div>
     </div>
   </section>
   <div class="b3-disc" role="note"><b>Atenção:</b> cotações, rendimentos, P/VP, vacância e demais indicadores desta aba vêm de fontes de terceiros (Fundamentus, TradingView, Yahoo Finance e outras) e podem estar atrasados ou incorretos. <b>Verifique as informações</b> nos relatórios gerenciais e informes do próprio fundo, no site da B3 / CVM e com seu assessor. Rendimento passado não garante rendimento futuro. <b>Nada aqui é recomendação de investimento</b>, de compra ou de venda de qualquer cota.</div>
